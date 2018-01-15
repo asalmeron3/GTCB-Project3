@@ -13,7 +13,8 @@
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(bodyParser.json());
 	// Serve up static assets
-	app.use(express.static("client/build"));
+	// app.use(express.static("client/build"));
+	app.use(express.static("public"));
 	// Add routes, both API and view
 	app.use(routes);
 //-------------------------------------------------------//
@@ -22,7 +23,7 @@
 	mongoose.Promise = global.Promise;
 	// Connect to the Mongo DB
 	mongoose.connect(
-	  process.env.MONGODB_URI || "mongodb://localhost/user",
+	  process.env.MONGODB_URI || "mongodb://localhost/GoVoRep",
 	  {
 	    useMongoClient: true
 	  }
