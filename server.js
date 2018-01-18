@@ -3,6 +3,8 @@
 	const bodyParser = require("body-parser");
 	const mongoose = require("mongoose");
 	const routes = require("./routes");
+	const passport = require('passport');
+	const authRoutes = require('./routes/auth-routes');
 //-------------------------------------------//	
 
 	const app = express();
@@ -17,6 +19,7 @@
 	app.use(express.static("public"));
 	// Add routes, both API and view
 	app.use(routes);
+	app.use('/auth', authRoutes);
 //-------------------------------------------------------//
 
 //------------ Set up promises with mongoose -----------//
