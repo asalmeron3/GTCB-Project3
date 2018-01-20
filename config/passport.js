@@ -7,7 +7,7 @@ const strategy = new Auth0Strategy({
     domain: 'gtcbproject3.auth0.com',
     clientID: keys.oauth.clientID,
     clientSecret: keys.oauth.clientSecret,
-    callbackURL:  '/callback'
+    callbackURL:  'http://localhost:300 0/auth/github/callback'
   },
   function(accessToken, refreshToken, extraParams, profile, done) {
     // accessToken is the token to call Auth0 API (not needed in the most cases)

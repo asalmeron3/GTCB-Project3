@@ -6,7 +6,7 @@ const Header = () =>
     <div className="container-fluid">
       <div className="navbar-header">
         <div className="ui left floated huge header">
-        GovRep
+        GoVoRep
         </div>
         <a href="/auth/login" className="ui basic button right floated header" >
         SignUp/Signin
