@@ -4,14 +4,17 @@ import * as d3 from 'd3';
 import './Map.css';
 
 class Map extends Component{
-    state = {
-        usData: null,
-        usCongress: null
-    }
+    constructor() {
+        super() 
+            this.state = {
+                usData: null,
+                usCongress: null
+              }
+      }
     componentWillMount (){
         d3.queue()
-        .defer(d3.json, "us.json")
-        .defer(d3.json, "us-congress-113.json")
+        .defer(d3.json, "%PUBLIC_URL%/us.json")
+        .defer(d3.json, "%PUBLIC_URL%/us-congress-113.json")
         .await((error, usData, usCongress) => {
             this.setState({ usData, usCongress});
         })
@@ -31,17 +34,17 @@ class Map extends Component{
         const us = this.state.usData, 
               congress = this.state.usCongress;
 
-              svg.append("defs").append("path")
+        svg.append("defs").append("path")
               .attr("id", "land")
               .datum(topojson.feature(us, us.objects.land))
               .attr("d", path);
     
-           svg.append("clipPath")
+        svg.append("clipPath")
               .attr("id", "clip-land")
               .append("use")
               .attr("xlink:href", "#land");
     
-           svg.append("g")
+        svg.append("g")
               .attr("class", "districts")
               .attr("clip-path", "url(#clip-land)")
               .selectAll("path")
@@ -51,12 +54,12 @@ class Map extends Component{
               .append("title")
               .text(function(d) { return d.id; });
     
-           svg.append("path")
+        svg.append("path")
               .attr("class", "district-boundaries")
               .datum(topojson.mesh(congress, congress.objects.districts, function(a, b) { return a !== b && (a.id / 1000 | 0) === (b.id / 1000 | 0); }))
               .attr("d", path);
     
-           svg.append("path")
+        svg.append("path")
               .attr("class", "state-boundaries")
               .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
               .attr("d", path);
@@ -68,8 +71,9 @@ class Map extends Component{
         if (!usData || !usCongress){
             return null;
         }
-        return <g ref="anchor" />;
+        return <svg ref="anchor" width="900" height="600"/>;
     }
+
 }
 
 export default Map;

@@ -8,7 +8,7 @@ const Header = () =>
         <div className="ui left floated huge header">
         GoVoRep
         </div>
-        <a href="/auth/login" className="ui basic button right floated header" >
+        <a href="/login" className="ui basic button right floated header" >
         SignUp/Signin
         </a>
         <div className="ui clearing divider"></div>

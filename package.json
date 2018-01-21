@@ -8,6 +8,7 @@
     "body-parser": "^1.18.2",
     "d3": "^4.12.2",
     "express": "^4.16.2",
+    "mapbox-gl": "^0.43.0",
     "mongoose": "^4.13.9",
     "passport": "^0.4.0",
     "passport-auth0": "^0.6.1",
@@ -20,7 +21,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":  "concurrently \"node server.js\" \"cd ./client && npm start\"",
+    "start": "concurrently \"node server.js\" \"cd ./client && npm start\"",
     "seed": "node scripts/seedUser.js"
   },
   "repository": {

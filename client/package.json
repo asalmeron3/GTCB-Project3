@@ -1,20 +1,23 @@
-
 {
-    "name": "client",
-    "version": "0.1.0",
-    "private": true,
-    "dependencies": {
-      "react": "^16.2.0",
-      "react-dom": "^16.2.0",
-      "react-scripts": "1.1.0",
-      "semantic-ui-css": "^2.2.12",
-      "semantic-ui-react": "^0.77.2"
-    },
-    "scripts": {
-      "start": "react-scripts start",
-      "build": "react-scripts build",
-      "test": "react-scripts test --env=jsdom",
-      "eject": "react-scripts eject"
-    },
-    "proxy": "http://localhost:3000"
-  }
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "immutable": "^3.8.2",
+    "r-dom": "^2.4.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-map-gl": "^3.2.0",
+    "react-scripts": "1.1.0",
+    "semantic-ui-css": "^2.2.12",
+    "semantic-ui-react": "^0.77.2",
+    "topojson-server": "^3.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:3000"
+}
