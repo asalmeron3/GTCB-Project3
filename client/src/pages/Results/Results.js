@@ -2,25 +2,26 @@ import React, { Component } from "react";
 import { Row, Container, Col } from "../../components/Results";
 import Card from "../../components/Results";
 import HeaderExampleBlock from "../../components/Results";
+import API from "../../utils/API";
+import { Grid } from 'semantic-ui-react';
 
-const query = "https://www.googleapis.com/civicinfo/v2/representatives?address=30228&levels=country&roles=legislatorUpperBody&roles=legislatorLowerBody&key=AIzaSyA7DKuMXwSBV5QJqF2SLBYjf_8rZyNqCu4";
+const query = "540%20Old%20Highway%203%20Hampton%20GA";
 
 class Results extends Component {
- constructor(){
-   super();
-   this.state = {
-     person: [],
-   };
- }
-
-  componentDidMount() {
-    this.getResponse();
+  constructor(props){
+    super(props);
+    this.state = {
+      govReps: []
+  }
   }
 
-  getResponse = () => {
-    fetch(query)
-    .then(results => this.setState({ person: results.data}))
-    .catch(err => console.log(err));
+  componentDidMount() {
+    API.search(query)
+    .then((res) => {
+      this.setState({govReps: res.data.officials});
+    }).catch((error) => {
+      console.log(error);
+    })
   }
 
   
@@ -28,20 +29,23 @@ class Results extends Component {
   render() {
     return (
         <Container fluid>
-        <Row>
           <HeaderExampleBlock />
-          {this.state.person.map(p => (
-            <Card
-            name={p.officials.name}
-            party={p.officials.party}
-            urls={p.officials.party}
-            photoUrl = {p.officials.photoUrl}
-            channels_type = {p.officials.channels.type}
-            channels_id = {p.officials.channels.id}
-            />
-          ))}
-         
-        </Row>
+          <Grid divided="vertically">
+            <Grid.Row columns={3}>
+              <Grid.Column>
+                {this.state.govReps.map(govRep =>(
+                  <Card
+                  name={govRep.name}
+                  party={govRep.party}
+                  urls={govRep.urls}
+                  photoUrl = {govRep.photoUrl}
+                  facebook = {govRep.channels[0].id}
+                  twitter = {govRep.channels[1].id}
+                  />
+                ))}
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
       </Container>
     );
   }
