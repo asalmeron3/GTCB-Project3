@@ -1,35 +1,37 @@
 {
-  "name": "gtcb-project3",
-  "version": "1.0.0",
-  "description": "GoVoRep - an app that lists the user's government representatives based on their location",
-  "main": "server.js",
-  "dependencies": {
-    "bcrypt": "^1.0.3",
-    "body-parser": "^1.18.2",
-    "express": "^4.16.2",
-    "mongoose": "^4.13.9",
-    "passport": "^0.4.0",
-    "passport-auth0": "^0.6.1",
-    "path": "^0.12.7",
-    "react-geolocation": "^1.0.3",
-    "react-router-dom": "^4.2.2"
-  },
-  "devDependencies": {
-    "concurrently": "^3.5.1"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"node server.js\" \"cd ./client/client && npm start\"",
-    "seed": "node scripts/seedUser.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/asalmeron3/GTCB-Project3.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/asalmeron3/GTCB-Project3/issues"
-  },
-  "homepage": "https://github.com/asalmeron3/GTCB-Project3#readme"
+"name": "gtcb-project3",
+"version": "1.0.0",
+"description": "GoVoRep - an app that lists the user's government representatives based on their location",
+"main": "server.js",
+"dependencies": {
+"bcrypt": "^1.0.3",
+"body-parser": "^1.18.2",
+"d3": "^4.12.2",
+"express": "^4.16.2",
+"mapbox-gl": "^0.43.0",
+"mongoose": "^4.13.9",
+"passport": "^0.4.0",
+"passport-auth0": "^0.6.1",
+"path": "^0.12.7",
+"react-geolocation": "^1.0.3",
+"topojson": "^3.0.2"
+},
+"devDependencies": {
+"concurrently": "^3.5.1"
+},
+"scripts": {
+"test": "echo \"Error: no test specified\" && exit 1",
+"start": "concurrently \"node server.js\" \"cd ./client && npm start\"",
+"seed": "node scripts/seedUser.js"
+},
+"repository": {
+"type": "git",
+"url": "git+https://github.com/asalmeron3/GTCB-Project3.git"
+},
+"author": "",
+"license": "ISC",
+"bugs": {
+"url": "https://github.com/asalmeron3/GTCB-Project3/issues"
+},
+"homepage": "https://github.com/asalmeron3/GTCB-Project3#readme"
 }
