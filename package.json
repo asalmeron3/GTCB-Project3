@@ -10,6 +10,7 @@
     "express": "^4.16.2",
     "mapbox-gl": "^0.43.0",
     "mongoose": "^4.13.9",
+    "newsapi": "^2.1.0",
     "passport": "^0.4.0",
     "passport-auth0": "^0.6.1",
     "path": "^0.12.7",
@@ -17,7 +18,8 @@
     "react-dom": "^16.2.0",
     "react-geolocation": "^1.0.3",
     "semantic-ui-react": "^0.77.2",
-    "topojson": "^3.0.2"
+    "topojson": "^3.0.2",
+    "twitter": "^1.7.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
