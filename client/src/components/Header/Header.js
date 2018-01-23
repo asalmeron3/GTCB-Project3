@@ -18,7 +18,7 @@ const Header = () =>
       
     </div>
   </nav>;
-
+/
  // <div>
  //  <Menu fixed='top' inverted>
  //    <Container>
