@@ -1,14 +1,14 @@
 import React from "react";
 import './Header.css';
 
-const Header = () =>
+const Header = props =>
   <nav className="navbar navbar-inverse navbar-top">
     <div className="container-fluid">
       <div className="navbar-header">
         <div className="ui left floated huge header">
         GoVoRep
         </div>
-        <a href="/login" className="ui basic button right floated header" >
+        <a href="#" onClick={props.login} className="ui basic button right floated header" >
         SignUp/Signin
         </a>
         <div className="ui clearing divider"></div>
