@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import SignUp from "../../components/SignUp";
+import API from "../../utils/API";
+
 
 class Login extends Component {
   // Setting our component's initial state
@@ -34,16 +36,35 @@ class Login extends Component {
 
   handleLogin = event => {
     event.preventDefault();
+    var info = {
+      name: this.state.name,
+      email: this.state.Lemail,
+      password : this.state.Lpassword
+    };
+    console.log(info);
+
   };
 
   handleSignUp = event => {
     event.preventDefault();
+    // fetch("/api/user/signup", {
+    //   method: "post",
+    //   headers: {'Content-Type':'application/json'},
+    //   body: {
+    //   "name": this.state.name,
+    //   "email": this.state.Semail,
+    //   "password":this.state.sPwd1
+    //    }
+    //  });
+    // };
     var info = {
-      name: this.name,
-      email: this.email,
-      pwd : this.sPwd1 + " " + this.sPwd2
-    }
-    console.log(info);
+      name: this.state.name,
+      email: this.state.Semail,
+      password : this.state.sPwd1
+    };
+    API.addUser(info)
+      .then(res => console.log("added the user?"))
+      .catch(err => console.log(info + " at login.js . error: " + err ));
   };
   render() {
   	return(
@@ -53,6 +74,7 @@ class Login extends Component {
         handleLEmailChange = {this.handleLEmailChange}
         handleLPasswordChange = {this.handleLPasswordChange}
         handleNameChange = {this.handleNameChange}
+        handleSEmailChange = {this.handleSEmailChange}
         handlesPwd1 = {this.handlesPwd1}
         handlesPwd2 = {this.handlesPwd2}
       />

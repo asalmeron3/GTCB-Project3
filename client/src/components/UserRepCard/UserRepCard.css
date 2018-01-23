@@ -1,0 +1,11 @@
+.UserRepCard {
+    width: 15vw;
+    background: gray;
+    margin:auto;
+    margin-bottom: 20px;
+}
+.ui.small.image{
+	padding-top: 10px;
+	display: block;
+	margin: auto;
+}

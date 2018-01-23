@@ -1,0 +1,14 @@
+.UserCard {
+    width: 15vw;
+    background: blue;
+    margin:auto;
+    padding-bottom: 5px;
+}
+.ui.small.image{
+	padding-top: 10px;
+	display: block;
+	margin: auto;
+}
+.p {
+	margin-bottom: 5px;
+}
