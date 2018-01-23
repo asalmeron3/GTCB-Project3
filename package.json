@@ -16,6 +16,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-geolocation": "^1.0.3",
+    "semantic-ui-react": "^0.77.2",
     "topojson": "^3.0.2"
   },
   "devDependencies": {
