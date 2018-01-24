@@ -1,17 +1,17 @@
 //-------------- Imports ----------------------//
 	import React from "react"
 	import "./UserBillsSection.css"
-	import { Grid } from 'semantic-ui-react'
+	import { Grid,Segment } from 'semantic-ui-react'
 //--------------------------------------------//
 
 //-------------- UserPageRepCard Div -----------------//
 	var userBillsSection = props =>
 		<Grid>
 			<Grid.Column width={15}>
-				<div className = "UserBillsSection">
+				<Segment style={{background:"lightblue"}}>
 				<h2> Bills of Interest </h2>
 					{props.children}
-				</div>
+				</Segment>
 			</Grid.Column>
 		</Grid>
 			

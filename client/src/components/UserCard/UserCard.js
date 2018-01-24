@@ -1,14 +1,23 @@
 //-------------- Imports ----------------------//
 	import React from "react"
 	import "./UserCard.css"
-	import { Image } from 'semantic-ui-react'
+	import { Card, Image } from 'semantic-ui-react'
 //--------------------------------------------//
 
 //-------------- UserPageRepCard Div -----------------//
 	var userCard = props =>
 		<div className = "UserCard">
-			<Image src={props.imageSource} size='small' circular />			
-			<h4> {props.Name}</h4>
-			<p> {props.District}</p>
+			<Card>
+
+				<div className = "cardDiv">
+					<Image src={props.imageSource} size='small' circular />
+				</div>
+				
+				<Card.Content>
+					<Card.Header> {props.Name}</Card.Header>
+					<Card.Meta> {props.Meta} </Card.Meta>
+				 	<Card.Description> {props.District}</Card.Description>
+			 	</Card.Content>
+			 </Card>
 		</div>
 	export default userCard;

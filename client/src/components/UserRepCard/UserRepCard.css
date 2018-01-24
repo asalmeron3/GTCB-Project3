@@ -9,3 +9,9 @@
 	display: block;
 	margin: auto;
 }
+.RepCardDiv{
+	background: gray;
+}
+.UserRepCard{
+	background: lightgray;
+}

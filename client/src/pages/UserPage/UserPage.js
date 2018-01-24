@@ -14,13 +14,14 @@ class userPage extends Component {
 	};
 	render(){
 		return (
-		<div>
+		<div style={{background:"lavender"}}>
 			<Grid>
 			<Grid.Row width={12}>
 				<UserCard
 						imageSource = "https://avatars0.githubusercontent.com/u/27255697?s=400&u=ed3a2731302e7cc0a83956c2248e17be0ff9b7d1&v=4"
 						Name = "User Arturo Salmeron"
 						District = "Atlanta - District ???"
+						Meta = "Senator"
 					
 				/>
 			</Grid.Row>

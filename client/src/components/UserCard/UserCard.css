@@ -1,6 +1,5 @@
 .UserCard {
     width: 15vw;
-    background: blue;
     margin:auto;
     padding-bottom: 5px;
 }
@@ -11,4 +10,7 @@
 }
 .p {
 	margin-bottom: 5px;
+}
+.cardDiv{
+	background: lightgray;
 }
