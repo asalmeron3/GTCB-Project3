@@ -1,6 +1,8 @@
 import React from "react";
 import './Header.css';
 import {Container, Divider, Dropdown, Grid, Image, List, Menu, Segment,Icon,Button} from 'semantic-ui-react';
+
+
 const Header = () =>
   <div>
   <nav className="navbar navbar-inverse navbar-top">
@@ -21,7 +23,6 @@ const Header = () =>
             <Grid.Column><Button><a href="/UserPage">User Page</a></Button></Grid.Column>
           </Grid.Row>
         </Grid>
-        
         <div className="ui clearing divider"></div>
       </div>
       

@@ -6,4 +6,6 @@ export default {
   	console.log(userData + " at api.js");
     return axios.post("/signup", userData);
   }
+
 };
+

@@ -1,79 +1,84 @@
 import React, { Component } from "react";
-import * as topojson from 'topojson';
-import * as d3 from 'd3';
-import './Map.css';
+import MapGL from 'react-map-gl';
 
-class Map extends Component{
-    constructor() {
-        super() 
-            this.state = {
-                usData: null,
-                usCongress: null
-              }
-      }
-    componentWillMount (){
-        d3.queue()
-        .defer(d3.json, "%PUBLIC_URL%/us.json")
-        .defer(d3.json, "%PUBLIC_URL%/us-congress-113.json")
-        .await((error, usData, usCongress) => {
-            this.setState({ usData, usCongress});
-        })
+const MAPBOX_TOKEN = 'pk.eyJ1IjoibGluYWNsYXJrIiwiYSI6ImNqY28wb3M2MTB5aDkzNG54NmkzaHRkZ24ifQ.Q-2Qyz2AfFUHY4J_-a0shA';
+class Map extends Component {
 
-    }
-
-    componentDidUpdate(){
-        //render example D3
-        const svg = d3.select(this.refs.anchor),
-        {width, height } = this.props;
-
-        const projection = d3.geoAlbers()
-                             .scale(1280)
-                             .translate([width/2, height/2]);
-        const path = d3.geoPath(projection);
-
-        const us = this.state.usData, 
-              congress = this.state.usCongress;
-
-        svg.append("defs").append("path")
-              .attr("id", "land")
-              .datum(topojson.feature(us, us.objects.land))
-              .attr("d", path);
-    
-        svg.append("clipPath")
-              .attr("id", "clip-land")
-              .append("use")
-              .attr("xlink:href", "#land");
-    
-        svg.append("g")
-              .attr("class", "districts")
-              .attr("clip-path", "url(#clip-land)")
-              .selectAll("path")
-              .data(topojson.feature(congress, congress.objects.districts).features)
-              .enter().append("path")
-              .attr("d", path)
-              .append("title")
-              .text(function(d) { return d.id; });
-    
-        svg.append("path")
-              .attr("class", "district-boundaries")
-              .datum(topojson.mesh(congress, congress.objects.districts, function(a, b) { return a !== b && (a.id / 1000 | 0) === (b.id / 1000 | 0); }))
-              .attr("d", path);
-    
-        svg.append("path")
-              .attr("class", "state-boundaries")
-              .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-              .attr("d", path);
-    }
-
-    render() {
-        const { usData, usCongress} = this.state;
-
-        if (!usData || !usCongress){
-            return null;
+    state = {
+        viewport: {
+          latitude: 40,
+          longitude: -100,
+          zoom: 3,
+          bearing: 0,
+          pitch: 0,
+          width: 500,
+          height: 500
         }
-        return <svg ref="anchor" width="900" height="600"/>;
+      };
+    
+      componentDidMount() {
+        window.addEventListener('resize', this._resize);
+        this._resize();
+      }
+    
+      componentWillUnmount() {
+        window.removeEventListener('resize', this._resize);
+      }
+    
+      _resize = () => {
+        this.setState({
+          viewport: {
+            ...this.state.viewport,
+            width: this.props.width || window.innerWidth,
+            height: this.props.height || window.innerHeight
+          }
+        });
+      };
+    
+      _onViewportChange = viewport => this.setState({viewport});
+    
+      _onHover = event => {
+        const {features, srcEvent: {offsetX, offsetY}} = event;
+        const hoveredFeature = features && features.find(f => f.layer.id === 'data');
+    
+        this.setState({hoveredFeature, x: offsetX, y: offsetY});
+      };
+    
+      _renderTooltip() {
+        const {hoveredFeature, year, x, y} = this.state;
+    
+        return hoveredFeature && (
+          <div className="tooltip" style={{left: x, top: y}}>
+            <div>State: {hoveredFeature.properties.name}</div>
+            <div>Median Household Income: {hoveredFeature.properties.value}</div>
+            <div>Percentile: {hoveredFeature.properties.percentile / 8 * 100}</div>
+          </div>
+        );
+      }
+    
+      render() {
+    
+        const {viewport, mapStyle} = this.state;
+    
+        return (
+          <div className="ui centered two column grid">
+            <div className="column">
+                <MapGL
+                {...viewport}
+                mapStyle={mapStyle}
+                onViewportChange={this._onViewportChange}
+                mapboxApiAccessToken={MAPBOX_TOKEN}
+                onHover={this._onHover} >
+        
+                {this._renderTooltip()}
+        
+                </MapGL>
+            </div>
+          </div>
+        );
+      }
+
     }
 
-}
 
 export default Map;
