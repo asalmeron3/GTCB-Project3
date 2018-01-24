@@ -7,7 +7,7 @@
 
 //-------------- Sign-up Log-In Div -----------------//
 	var SignUp = props =>
-		<Modal trigger={<Button> Log In / Sign Up </Button>}>
+		<Modal trigger={<Button content = "standard" size= 'massive'> Log In / Sign Up </Button>}>
 		<Modal.Header> Login or Create an Account</Modal.Header>
 		<Modal.Content>
 		<Grid>

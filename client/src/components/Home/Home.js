@@ -1,14 +1,22 @@
 //-------------- Imports ----------------------//
 	import React from "react"
 	import "./Home.css"
-	import { Image } from 'semantic-ui-react'
+	import { Image,Button } from 'semantic-ui-react'
 	import imgGVR from "./GoVoRep.png"
+	import Login from "../../pages/Login";
 //--------------------------------------------//
 
 //-------------- UserPageRepCard Div -----------------//
 	var home = props =>
-		<div className = "Home">
-			<Image src={imgGVR} />			
+		<div className = "wrapper">
+			<div className = "imgDiv">
+				<Image src={imgGVR} className="myImage" />
+			</div>
 
+			<div className = "buttonDiv">
+				
+				<Login/>		
+
+			</div>
 		</div>
 	export default home;

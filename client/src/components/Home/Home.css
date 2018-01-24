@@ -1,4 +1,23 @@
-.Home {
-    width:100%;
-    height: 100%;
+
+.wrapper{	
+	margin-top:auto ;
+	margin-bottom: auto;
+	display: block;
+	position: relative;
+	max-height: 100%;
+	height: auto;
+}
+.imgDiv{
+	z-index: -100;
+	margin-top:auto ;
+	margin-bottom: auto;
+	display: block;
+	position: relative;
+	height: auto;
+
+}
+.buttonDiv{
+	z-index: 10;
+	margin-top: -25%;
+
 }

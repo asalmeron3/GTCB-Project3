@@ -37,7 +37,6 @@ class Login extends Component {
   handleLogin = event => {
     event.preventDefault();
     var info = {
-      name: this.state.name,
       email: this.state.Lemail,
       password : this.state.Lpassword
     };
