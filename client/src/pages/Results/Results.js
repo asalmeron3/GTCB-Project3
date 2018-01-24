@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Row, Container, Col } from "../../components/Results";
 import Card from "../../components/Results";
 import HeaderExampleBlock from "../../components/Results";
-import API from "../../utils/API";
+import addyAPI from "../../utils/API";
 import { Grid } from 'semantic-ui-react';
 
 const query = "540%20Old%20Highway%203%20Hampton%20GA";
@@ -16,7 +16,7 @@ class Results extends Component {
   }
 
   componentDidMount() {
-    API.search(query)
+    addyAPI.search(query)
     .then((res) => {
       this.setState({govReps: res.data.officials});
     }).catch((error) => {
