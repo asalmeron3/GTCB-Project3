@@ -4,7 +4,13 @@
 	const passport = require('passport');
 //-----------------------------------------//
 
-
+// const env = {
+//   AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
+//   clientSecret: process.env.AUTH0_CLIENT_SECRET,
+//   AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
+//   AUTH0_CALLBACK_URL:
+//     process.env.AUTH0_CALLBACK_URL || 'http://localhost:3000/callback'
+// };
 // ---------------Routes ---------------//
 	
 	// Match the route with user/signup
