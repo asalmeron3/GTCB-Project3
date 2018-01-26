@@ -4,6 +4,7 @@
   "description": "GoVoRep - an app that lists the user's government representatives based on their location",
   "main": "server.js",
   "dependencies": {
+    "axios": "^0.17.1",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "d3": "^4.12.2",
@@ -16,6 +17,9 @@
     "passport-auth0": "^0.6.1",
     "path": "^0.12.7",
     "react": "^16.2.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-axios": "^2.0.0",
     "react-dom": "^16.2.0",
     "react-geolocation": "^1.0.3",
     "semantic-ui-react": "^0.77.2",
