@@ -7,7 +7,7 @@ router.use("/api", apiRoutes);
 
 // If no API routes are hit, send the React app
 router.use(function(req, res) {
-  res.redirect(req.session.returnTo ||"/");
+  res.redirect("/");
   // res.json("Thank you");
 });
 
