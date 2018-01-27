@@ -34,6 +34,8 @@ class App extends Component {
         <Route exact path = "/UserPage" component = {UserPage} />;
         <Route exact path = "/" component = {Home} />;
         <Route exact path = "/Landing" component = {LandingPage} />;
+        <Route exact path = "/Results" component = {Results} />;
+
         </Switch>
 
         </div>

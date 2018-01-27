@@ -6,7 +6,7 @@
 
 //-------------- UserPageRepCard Div -----------------//
 	var userRep = props =>
-	<Grid.Column width={4}>
+	<Grid.Column>
 		<div className = "UserRepCard">
 			<Card>
 				<div className = "RepCardDiv">

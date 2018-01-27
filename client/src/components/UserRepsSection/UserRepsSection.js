@@ -11,12 +11,10 @@
 				<h2> Your Senators and Representative</h2>	
 
 				<Grid>
-					<Grid.Row width = {12}>
+					<Grid.Row columns = {3}>
 					
 						{props.children}
-						<Grid.Column width={4}>
-							
-						</Grid.Column>
+						
 					
 					</Grid.Row>
 				</Grid>
