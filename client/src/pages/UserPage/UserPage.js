@@ -8,6 +8,8 @@ import {Grid} from 'semantic-ui-react';
 import API from "../../utils/API";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer/Footer";
+import {Modal,Button} from 'semantic-ui-react';
+import RepModal from "../RepModal";
 const query = "540%20Old%20Highway%203%20Hampton%20GA";
 
 class userPage extends Component {
@@ -48,6 +50,7 @@ class userPage extends Component {
 			<Grid.Column width={12}>
 				<UserRepsSection>
 					{this.state.govReps.map(govRep =>(
+						<Modal trigger={<Button>
 						<UserRepCard
 						  name={govRep.name}
 		                  party={govRep.party}
@@ -55,7 +58,9 @@ class userPage extends Component {
 		                  photoUrl = {govRep.photoUrl}
 		                  facebook = {govRep.channels[0].id}
 		                  twitter = {govRep.channels[1].id}
-	                    />
+	                    /></Button>}>
+	                    <Modal.Content> <RepModal/></Modal.Content>
+	                    </Modal>
                     ))}
 						
 				</UserRepsSection>

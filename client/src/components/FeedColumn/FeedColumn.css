@@ -1,0 +1,11 @@
+.ui.column{
+	max-height: 300px;
+}
+
+.ui.segment{
+	height: 100%;
+}
+.scrollingDiv{
+	height: 300px;
+    overflow-y: auto;
+}

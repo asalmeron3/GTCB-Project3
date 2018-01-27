@@ -1,18 +1,23 @@
 //-------------- Imports ----------------------//
 	import React from "react"
-	import "./UserBillsSection.css"
+	import "./FeedColumn.css"
 	import { Grid,Segment } from 'semantic-ui-react'
 //--------------------------------------------//
 
 //-------------- UserPageRepCard Div -----------------//
-	var userBillsSection = props =>
-		<Grid>
-			<Grid.Column width={16}>
-				<Segment style={{background:"lightblue"}}>
-				<h2> Bills of Interest </h2>
-					{props.children}
-				</Segment>
-			</Grid.Column>
-		</Grid>
+	var FeedColumn = props =>
+			<Grid.Column>
 			
-	export default userBillsSection;
+				
+				<Segment  style={{background:"lightblue"}}>
+				<h2> {props.FeedName} </h2>
+				<div className = "scrollingDiv">
+					{props.children}
+				</div>
+				</Segment>
+				
+			</Grid.Column>
+
+
+			
+	export default FeedColumn;

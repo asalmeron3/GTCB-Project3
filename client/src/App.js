@@ -3,6 +3,7 @@ import Header from "./components/Header";
 //import Map from "./components/Map";
 import Location from "./components/Location";
 import Results from "./pages/Results";
+import RepModal from "./pages/RepModal";
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
@@ -35,6 +36,7 @@ class App extends Component {
         <Route exact path = "/" component = {Home} />;
         <Route exact path = "/Landing" component = {LandingPage} />;
         <Route exact path = "/Results" component = {Results} />;
+        <Route exact path = "/RepModal" component = {RepModal} />;
 
         </Switch>
 
