@@ -1,21 +1,24 @@
-const passport = require('passport');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+
+//load up the user model
 const User = require('../models/user');
-const Auth0Strategy = require('passport-auth0');
-const keys = require('./keys');
+const config = require('../config/database');
 
-const strategy = new Auth0Strategy({
-    domain: 'gtcbproject3.auth0.com',
-    clientID: keys.oauth.clientID,
-    clientSecret: keys.oauth.clientSecret,
-    callbackURL:  'http://localhost:3000/auth/github/callback'
-  },
-  function(accessToken, refreshToken, extraParams, profile, done) {
-    // accessToken is the token to call Auth0 API (not needed in the most cases)
-    // extraParams.id_token has the JSON Web Token
-    // profile has all the information from the user
-    console.log(profile);
-    return done(null, profile);
-  }
-);
-
-passport.use(strategy);
+module.exports = function(passport) {
+  var opts = {};
+  opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme();
+  opts.secretOrKey = config.secret;
+  passport.use(new JwtStrategy(opts, function(jwt_payload, done){
+    User.findOne({id: jwt_payload.id}, function(err, user){
+      if(err) {
+        return done(err, false);
+      }
+      if(user){
+        done(null, user);
+      } else {
+        done(null, false);
+      }
+    });
+  }));
+};

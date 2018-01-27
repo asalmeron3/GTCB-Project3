@@ -10,5 +10,10 @@ export default {
   },
   search: function(query) {
 	return axios.get(BASEURL + query + APIKEY);
+  },
+  updateAddress: function(userLocation) {
+    return axios.post("/api/auth/location", userLocation);
   }
+
 };
+
