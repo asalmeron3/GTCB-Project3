@@ -6,6 +6,9 @@ export default {
   	console.log(userData + " at api.js");
     return axios.post("/api/user/signup", userData);
   }
+  updateAddress: function(userLocation) {
+    return axios.post("/api/auth/location", userLocation);
+  }
 
 };
 

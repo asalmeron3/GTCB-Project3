@@ -7,6 +7,8 @@
 	const passport = require('passport');
 	const authRoutes = require('./routes/api/auth-routes');
 	// const proxy = require('http-proxy-middleware');
+	const morgan = require('morgan');
+	const config = require('./config/database');
 
 //-------------------------------------------//	
 
@@ -25,7 +27,7 @@
 	app.use('/',routes);
 	app.use('/auth', authRoutes);
 	// app.use('/', proxy({target: 'localhost:3002', changeOrigin: true}));
-
+	app.use(passport.initialize());
 //-------------------------------------------------------//
 
 //------------ Set up promises with mongoose -----------//
