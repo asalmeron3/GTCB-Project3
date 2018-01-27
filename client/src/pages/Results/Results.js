@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { Row, Container, Col } from "../../components/Results";
-import Card from "../../components/Results";
-import HeaderExampleBlock from "../../components/Results";
-import addyAPI from "../../utils/API";
+import Card from "../../components/Results"; import HeaderExampleBlock from "../../components/Results";
+import API from "../../utils/API";
 import { Grid } from 'semantic-ui-react';
 
 const query = "540%20Old%20Highway%203%20Hampton%20GA";
@@ -16,7 +15,7 @@ class Results extends Component {
   }
 
   componentDidMount() {
-    addyAPI.search(query)
+    API.search(query)
     .then((res) => {
       this.setState({govReps: res.data.officials});
     }).catch((error) => {
@@ -28,11 +27,8 @@ class Results extends Component {
 
   render() {
     return (
-        <Container fluid>
-          <HeaderExampleBlock />
-          <Grid divided="vertically">
+          <Grid>
             <Grid.Row columns={3}>
-              <Grid.Column>
                 {this.state.govReps.map(govRep =>(
                   <Card
                   name={govRep.name}
@@ -43,10 +39,8 @@ class Results extends Component {
                   twitter = {govRep.channels[1].id}
                   />
                 ))}
-              </Grid.Column>
             </Grid.Row>
           </Grid>
-      </Container>
     );
   }
 }

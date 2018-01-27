@@ -1,60 +1,60 @@
 import React, { Component } from "react";
-import UserRepCard from "../../components/UserRepCard";
+import UserRepCard from "../../components/Results";
 import UserBills from "../../components/UserBills";
 import UserRepsSection from "../../components/UserRepsSection";
 import UserBillsSection from "../../components/UserBillsSection";
 import UserCard from "../../components/UserCard";
 import {Grid} from 'semantic-ui-react';
 import API from "../../utils/API";
+const query = "540%20Old%20Highway%203%20Hampton%20GA";
 
 class userPage extends Component {
 	//Setting initial state
-	state: {
-		testing:""
-	};
+
+	constructor(props){
+	    super(props);
+	    this.state = {
+	      govReps: []
+	  }
+  }
+
+  componentDidMount() {
+    API.search(query)
+    .then((res) => {
+      this.setState({govReps: res.data.officials});
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
+
 	render(){
 		return (
 		<div style={{background:"lavender"}}>
 			<Grid>
-			<Grid.Row width={12}>
+			<Grid.Row width={16}>
 				<UserCard
 						imageSource = "https://avatars0.githubusercontent.com/u/27255697?s=400&u=ed3a2731302e7cc0a83956c2248e17be0ff9b7d1&v=4"
-						Name = "User Arturo Salmeron"
+						Name = "Arturo Salmeron"
 						District = "Atlanta - District ???"
-						Meta = "Senator"
+						Meta = "User"
 					
 				/>
 			</Grid.Row>
 
-			<Grid.Row width={14}>
+			<Grid.Row width={16}>
 			<Grid.Column width={12}>
 				<UserRepsSection>
-
-					<UserRepCard
-						imageSource = "https://avatars0.githubusercontent.com/u/27255697?s=400&u=ed3a2731302e7cc0a83956c2248e17be0ff9b7d1&v=4"
-						repName = "Senator Testing"
-						repInfo = " A brief bio should go here. But this is just going to be a bunch of typing that I use for testing out how the card looks"
-					/>
-					<UserRepCard
-						imageSource = "https://avatars0.githubusercontent.com/u/27255697?s=400&u=ed3a2731302e7cc0a83956c2248e17be0ff9b7d1&v=4"
-						repName = "Senator Testing"
-						repInfo = " A brief bio should go here. But this is just going to be a bunch of typing that I use for testing out how the card looks"
-					/>
-					<UserRepCard
-						imageSource = "https://avatars0.githubusercontent.com/u/27255697?s=400&u=ed3a2731302e7cc0a83956c2248e17be0ff9b7d1&v=4"
-						repName = "Senator Testing"
-						repInfo = " A brief bio should go here. But this is just going to be a bunch of typing that I use for testing out how the card looks"
-					/>
-					<UserRepCard
-						imageSource = "https://avatars0.githubusercontent.com/u/27255697?s=400&u=ed3a2731302e7cc0a83956c2248e17be0ff9b7d1&v=4"
-						repName = "Senator Testing"
-						repInfo = " A brief bio should go here. But this is just going to be a bunch of typing that I use for testing out how the card looks"
-					/>
-					<UserRepCard
-						imageSource = "https://avatars0.githubusercontent.com/u/27255697?s=400&u=ed3a2731302e7cc0a83956c2248e17be0ff9b7d1&v=4"
-						repName = "Senator Testing"
-						repInfo = " A brief bio should go here. But this is just going to be a bunch of typing that I use for testing out how the card looks"
-					/>
+					{this.state.govReps.map(govRep =>(
+						<UserRepCard
+						  name={govRep.name}
+		                  party={govRep.party}
+		                  urls={govRep.urls}
+		                  photoUrl = {govRep.photoUrl}
+		                  facebook = {govRep.channels[0].id}
+		                  twitter = {govRep.channels[1].id}
+	                    />
+                    ))}
+						
 				</UserRepsSection>
 			</Grid.Column>
 			

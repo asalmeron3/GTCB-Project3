@@ -1,9 +1,16 @@
 import React from 'react';
-import { Card, Icon, Image } from 'semantic-ui-react';
-
+import { Card, Icon, Image,Grid } from 'semantic-ui-react';
+import "./card.css";
 const CardExample = props => (
-  <Card raised>
-    <Image src={props.photoUrl} />
+  <Grid.Column width= {4}>
+  <Card>
+    <div className = "wrapper" style = {{background:"lightgray"}}>
+    <div className = "squareFrame">
+      <div className = "imageContainer1">
+      <Image src={props.photoUrl} className = "repImg"/>
+      </div>
+    </div>
+    </div>
     <Card.Content>
       <Card.Header>
        {props.name}
@@ -26,6 +33,7 @@ const CardExample = props => (
       </a>
     </Card.Content>
   </Card>
+  </Grid.Column>
 )
 
 export default CardExample;
