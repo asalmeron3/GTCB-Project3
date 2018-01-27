@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import API from "../../utils/API";
 import './Location.css';
 
 
@@ -18,6 +19,7 @@ class Location extends Component {
     handleSubmit(event) {
       console.log(this.state.value);
       event.preventDefault();
+      const newLocal = API.updateAddress(this.state.value);
     }
   
     render() {
