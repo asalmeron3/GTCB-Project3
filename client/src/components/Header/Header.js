@@ -9,20 +9,13 @@ const Header = () =>
     <div className="container-fluid">
       <div className="navbar-header">
         <div className="ui left floated huge header" style = {{margin: "11px"}}>
-          <a href="/" className="navbar-brand">
+          <a href="/UserPage" className="navbar-brand">
             GoVoRep
           </a>
         </div>
         <div className="ui right floated header" style = {{margin: "15px"}} >
-        Logout Coming Soon
+        <Button><a href="/">Logout</a></Button>
         </div>
-        <Grid style = {{margin: "auto"}}>
-          <Grid.Row columns={3}>
-            <Grid.Column><Button><a href="/">Home Page</a></Button></Grid.Column>
-            <Grid.Column><Button><a href="/Landing">Landing Page</a></Button></Grid.Column>
-            <Grid.Column><Button><a href="/UserPage">User Page</a></Button></Grid.Column>
-          </Grid.Row>
-        </Grid>
         <div className="ui clearing divider"></div>
       </div>
       

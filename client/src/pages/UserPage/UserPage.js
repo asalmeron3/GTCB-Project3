@@ -6,6 +6,8 @@ import UserBillsSection from "../../components/UserBillsSection";
 import UserCard from "../../components/UserCard";
 import {Grid} from 'semantic-ui-react';
 import API from "../../utils/API";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer/Footer";
 const query = "540%20Old%20Highway%203%20Hampton%20GA";
 
 class userPage extends Component {
@@ -29,7 +31,8 @@ class userPage extends Component {
 
 	render(){
 		return (
-		<div style={{background:"lavender"}}>
+		<div>
+		<Header />
 			<Grid>
 			<Grid.Row width={16}>
 				<UserCard
@@ -76,7 +79,7 @@ class userPage extends Component {
 			</Grid.Column>
 			</Grid.Row>
 			</Grid>
-			
+		<Footer />
 		</div>
 		)
 	}
