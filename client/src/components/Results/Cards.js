@@ -2,10 +2,10 @@ import React from 'react';
 import { Card, Icon, Image,Grid } from 'semantic-ui-react';
 import "./card.css";
 const CardExample = props => (
-  <Grid.Column width= {4}>
-  <Card>
-    <div className = "wrapper" style = {{background:"lightgray"}}>
-    <div className = "squareFrame">
+  <Grid.Column>
+  <Card onClick={props.handleOpen}>
+    <div className = "wrapper" style = {{background:props.theColor}}>
+    <div className = "squareFrame" style = {{background:props.theColor}}>
       <div className = "imageContainer1">
       <Image src={props.photoUrl} className = "repImg"/>
       </div>

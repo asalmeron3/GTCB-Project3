@@ -1,5 +1,4 @@
 .squareFrame{
-  background: #fff;
   display: inline-block;
   vertical-align: top;
   width: 130px;
@@ -24,3 +23,14 @@
     position: absolute;
 
 }*/
+.ui.card{
+  min-width: 145px;
+}
+.App{
+  background-image: url(http://blogs.reuters.com/great-debate/files/2013/08/mlk-march-on-dc-1024x788.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+html{
+  height:100%;
+}

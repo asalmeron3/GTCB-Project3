@@ -6,13 +6,13 @@
 
 //-------------- UserPageRepCard Div -----------------//
 	var userBillsSection = props =>
-		<Grid>
-			<Grid.Column width={16}>
-				<Segment style={{background:"lightblue"}}>
+		// <Grid>
+			<Grid.Column className= "colUBS">
+				<Segment style={{background:"#006286"}}>
 				<h2> Bills of Interest </h2>
 					{props.children}
 				</Segment>
 			</Grid.Column>
-		</Grid>
+		// </Grid>
 			
 	export default userBillsSection;

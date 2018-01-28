@@ -6,9 +6,10 @@
 
 //-------------- UserPageRepCard Div -----------------//
 	var userRepsSection = props =>
-			<Segment style={{background:"lightcoral"}}>
+			// <Segment className="other">
+			<Grid.Column >
 
-				<h2> Your Senators and Representative</h2>	
+				<h2> Your Senators and Representatives</h2>	
 
 				<Grid>
 					<Grid.Row columns = {3}>
@@ -18,5 +19,6 @@
 					
 					</Grid.Row>
 				</Grid>
-			</Segment>
+			</Grid.Column>
+			// </Segment>
 	export default userRepsSection;

@@ -7,12 +7,16 @@ import {Grid} from 'semantic-ui-react';
 import API from "../../utils/API";
 
 
-class RepProfileModal extends Component{
-	render(){
-		return(
+var RepProfileModal = props =>
 			<div>
-				<RepProfileSection>
-					<UserRepCard/>
+				<RepProfileSection
+					RepNameTopModal = {props.RepNameTopModal}
+				>
+					<UserRepCard
+						photoUrl = {props.photoUrl}
+						name = {props.name}
+						party = {props.party}
+					/>
 									
 					<FeedColumn
 						FeedName = "Recent Bills">
@@ -63,8 +67,6 @@ class RepProfileModal extends Component{
 				</FeedColumn>
 				</RepProfileSection>
 			</div>
-			)
-	}
-}
+
 
 export default RepProfileModal;

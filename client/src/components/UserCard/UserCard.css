@@ -1,5 +1,4 @@
 .UserCard {
-    width: 15vw;
     margin:auto;
     padding-bottom: 5px;
 }
@@ -12,5 +11,5 @@
 	margin-bottom: 5px;
 }
 .cardDiv{
-	background: lightgray;
+	background: #006286;
 }

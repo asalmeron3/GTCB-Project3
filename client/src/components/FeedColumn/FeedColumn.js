@@ -9,7 +9,7 @@
 			<Grid.Column>
 			
 				
-				<Segment  style={{background:"lightblue"}}>
+				<Segment  style={{background:"#006286"}}>
 				<h2> {props.FeedName} </h2>
 				<div className = "scrollingDiv">
 					{props.children}

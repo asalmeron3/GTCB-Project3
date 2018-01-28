@@ -1,6 +1,6 @@
 .UserRepCard {
     width: 15vw;
-    background: gray;
+    background: #006286;
     margin:auto;
     margin-bottom: 20px;
     margin-top: 20px;
@@ -11,8 +11,8 @@
 	margin: auto;
 }
 .RepCardDiv{
-	background: gray;
+	background: #006286;
 }
 .UserRepCard{
-	background: lightgray;
+	background: #006286;
 }
