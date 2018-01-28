@@ -19,7 +19,9 @@ class userPage extends Component {
   	modalOpen: false,
   	modalName: "",
   	modalImage: "",
-  	modalParty:"" }
+  	modalParty:"",
+  	popUpMsg: "Click to Add"
+  }
 
   handleOpen = (card,e) => {
   	this.setState({ modalOpen: true });
@@ -34,6 +36,9 @@ class userPage extends Component {
 
   handleClose = () => this.setState({ modalOpen: false })
 
+  addToUserPage = (bill) =>{
+  	console.log(bill);
+  }
 
 	constructor(props){
 	    super(props);
@@ -77,10 +82,10 @@ class userPage extends Component {
        			>
             <Modal.Content> 
             	<RepModal
-								photoUrl = {this.state.modalImage}
-								RepNameTopModal = {this.state.modalName}
-								party = {this.state.modalParty}
-								name = {this.state.modalName}
+					photoUrl = {this.state.modalImage}
+					RepNameTopModal = {this.state.modalName}
+					party = {this.state.modalParty}
+					name = {this.state.modalName}
             	/>
             </Modal.Content>
             </Modal>
@@ -109,14 +114,18 @@ class userPage extends Component {
 					<UserBills
 						billTitle = "BillTest #001"
 						billDescription = "This is a test for the UserBills Component"
+						popupMsg = "Click to Remove"
 					/>
 					<UserBills
 						billTitle = "BillTest #002"
 						billDescription = "This test #2 for the UserBills Component"
+						popupMsg = "Click to Remove"
 					/>
 					<UserBills
 						billTitle = "BillTest #003"
 						billDescription = "This is the third test for the UserBills Component"
+
+						popupMsg = "Click to Remove"
 					/>
 				</UserBillsSection>
 			</Grid.Column>

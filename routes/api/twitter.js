@@ -11,7 +11,7 @@ const twitter = new twitterAPI({
 });
 
 const params = {
-	//how can i get id of rep...? 
+	how can i get id of rep...? 
 	q = @id,
 	count: 10,
   	result_type: 'recent',
@@ -37,7 +37,7 @@ twitter.get('search/tweets', params, function(err, data, response) {
 
 
 <Request
-  instance={axios.create({})} /* custom instance of axios - optional */
+  instance={axios.create({})}  custom instance of axios - optional 
   method="get" /* get, delete, head, post, put and patch - required */
   url="https://api.twitter.com/1.1/search/tweets.json?q=realDonaldTrump&result_type=recent&count=10" /*  url endpoint to be requested - required */
   data={} /* post data - optional */

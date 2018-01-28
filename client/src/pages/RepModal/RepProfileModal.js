@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import UserRepCard from "../../components/Results";
 import UserBills from "../../components/UserBills";
+import NewsAndTweetCard from "../../components/NewsAndTweetCards";
 import RepProfileSection from "../../components/RepProfileSection";
 import FeedColumn from "../../components/FeedColumn";
-import {Grid} from 'semantic-ui-react';
+import {Grid,Popup,Row} from 'semantic-ui-react';
 import API from "../../utils/API";
 
 
@@ -20,49 +21,52 @@ var RepProfileModal = props =>
 									
 					<FeedColumn
 						FeedName = "Recent Bills">
-					<UserBills
-						billTitle = "Recent Bill Status Section #001"
-						billDescription = "This is a test for the UserBills Component"
-					/>
-					<UserBills
-						billTitle = "Recent Bill Status Section #002"
-						billDescription = "This test #2 for the UserBills Component"
-					/>
-					<UserBills
-						billTitle = "Recent Bill Status Section #003"
-						billDescription = "This is the third test for the UserBills Component"
-					/>
+						
+							<UserBills
+								billTitle = "Recent Bill Status Section #001"
+								billDescription = "This is a test for the UserBills Component"
+								popupMsg = "Click to Save"
+							/>
+
+						
+							<UserBills
+								billTitle = "Recent Bill Status Section #001"
+								billDescription = "This is a test for the UserBills Component"
+								popupMsg = "Click to Save"
+							/>
+						
+							<UserBills
+								billTitle = "Recent Bill Status Section #001"
+								billDescription = "This is a test for the UserBills Component"
+								popupMsg = "Click to Save"
+							/>
 				</FeedColumn>
 
 				<FeedColumn
 					FeedName = "Latest News">
-					<UserBills
-						billTitle = "News #001"
-						billDescription = "This is a test for the UserBills Component"
-					/>
-					<UserBills
-						billTitle = "News #002"
-						billDescription = "This test #2 for the UserBills Component"
-					/>
-					<UserBills
-						billTitle = "News #003"
-						billDescription = "This is the third test for the UserBills Component"
+					<NewsAndTweetCard
+						billTitle = "Recent Bill Status Section #001"
+						billDescription = "This is a test for the NewsAndTweetCard Component"
+					/><NewsAndTweetCard
+						billTitle = "Recent Bill Status Section #001"
+						billDescription = "This is a test for the NewsAndTweetCard Component"
+					/><NewsAndTweetCard
+						billTitle = "Recent Bill Status Section #001"
+						billDescription = "This is a test for the NewsAndTweetCard Component"
 					/>
 				</FeedColumn>
 
 				<FeedColumn
 					FeedName = "Latest Tweets">
-					<UserBills
-						billTitle = "Twitter #001"
-						billDescription = "This is a test for the UserBills Component"
-					/>
-					<UserBills
-						billTitle = "Twitter #002"
-						billDescription = "This test #2 for the UserBills Component"
-					/>
-					<UserBills
-						billTitle = "Twitter #003"
-						billDescription = "This is the third test for the UserBills Component"
+					<NewsAndTweetCard
+						billTitle = "Recent Bill Status Section #001"
+						billDescription = "This is a test for the NewsAndTweetCard Component"
+					/><NewsAndTweetCard
+						billTitle = "Recent Bill Status Section #001"
+						billDescription = "This is a test for the NewsAndTweetCard Component"
+					/><NewsAndTweetCard
+						billTitle = "Recent Bill Status Section #001"
+						billDescription = "This is a test for the NewsAndTweetCard Component"
 					/>
 				</FeedColumn>
 				</RepProfileSection>
