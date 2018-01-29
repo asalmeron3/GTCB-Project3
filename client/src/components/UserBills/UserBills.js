@@ -10,7 +10,7 @@
 			<Popup 
 				content = {props.popupMsg}
 				trigger = {
-					<Card>
+					<Card onClick={props.addToUserPage}>
 				      <Card.Content>
 				        <Card.Header>{props.billTitle}</Card.Header>
 				        <Card.Description>{props.billDescription}</Card.Description>

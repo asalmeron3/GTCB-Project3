@@ -10,7 +10,7 @@ class landingPage extends Component {
 
 	render() {
 		return(
-			<div>
+			<div className = "landingPageDiv">
 				<Header/>
 				<div>
 					<Grid>
