@@ -4,8 +4,6 @@ var axios = require('axios')
 //serach bill w/publisher
 const memberid = "W000802"
 
-
-
 axios({
   method: 'Get',
   url: 'https://api.propublica.org/congress/v1/members/W000802/bills/introduced.json',
@@ -17,7 +15,6 @@ axios({
 
    for (var i = 0; i <response.data.results.length; i++){
     console.log(response.data.results[i])
-
    }
 
   })
