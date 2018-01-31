@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Divider, Dropdown, Grid, Header, Image, List, Menu, Segment } from 'semantic-ui-react'
 const Footer = () => (
 
-<div>
+<Grid Container>
  <Segment
       vertical
       style={{ margin: '5em 0em 0em', padding: '1em 0em' }}
@@ -19,7 +19,7 @@ const Footer = () => (
         </div>
       </Container>
     </Segment>
-  </div>
+  </Grid>
 
 	)
 

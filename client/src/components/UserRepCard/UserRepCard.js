@@ -6,9 +6,9 @@
 
 //-------------- UserPageRepCard Div -----------------//
 	var userRep = props =>
-	<Grid.Column>
-		<div className = "UserRepCard">
-			<Card>
+	
+		
+			<Card className="theRepCard">
 				<div className = "RepCardDiv">
 					<Image src={props.imageSource} size='small' circular />			
 				</div>
@@ -19,7 +19,7 @@
 				 	<Card.Description> {props.repInfo}</Card.Description>
 			 	</Card.Content>
 			 </Card>
-		</div>
-	</Grid.Column>
+		
+	
 
 	export default userRep;

@@ -87,10 +87,13 @@ class userPage extends Component {
 
 	render(){
 		return (
+		
 		<div className = "userPageDiv">
 		<Header />
-			<Grid >
-			<Grid.Row width={16}>
+			
+			<Grid.Column style ={{height:"100%"}}>
+			<Grid centered padded>
+				
 				<UserCard
 					imageSource = "https://avatars0.githubusercontent.com/u/27255697?s=400&u=ed3a2731302e7cc0a83956c2248e17be0ff9b7d1&v=4"
 					Name = "Arturo Salmeron"
@@ -98,19 +101,63 @@ class userPage extends Component {
 					Meta = "User"
 					
 				/>
-			</Grid.Row>
+				
+			</Grid>
 
-			<Grid.Row width={16}>
-			<Grid.Column width={12}>
-				<UserRepsSection>
+				
+			<Grid verticalAlign="middle" container>
+				<Grid.Column mobile={8} tablet={12} computer={12} largeScreen={12} wideScreen={12}>
+					<UserRepsSection>
+	            
+	            
+			            {this.state.govReps.map(govRep =>{
+			            	let boundItemClick = this.handleOpen.bind(this, govRep);
+			            	return (
+			              <UserRepCard
+			              	key = {govRep.id}
+							name={govRep.name}
+				            party={govRep.party}
+				            theColor = {govRep.party==="Republican"? "#cc3b49" : "#006286"}
+				            urls={govRep.urls}
+				            photoUrl = {govRep.photoUrl}
+				            facebook = {govRep.channels[0].id}
+				            twitter = {govRep.channels[1].id}
+				            handleOpen = {boundItemClick}
+			              /> )
+			            })}
+						
+					</UserRepsSection>
+				</Grid.Column >
+				<Grid.Column mobile={8} tablet={4} computer={4} largeScreen={4} wideScreen={4}>
+					<UserBillsSection>
+						{this.state.UserSavedBills.map(oneSavedBill =>{
+				            	
+				            	let bindFuncToBill = this.checkForUserPage.bind(this, oneSavedBill);
+				            	
+				            	return (
+					              <UserBills
+					              	key = {oneSavedBill.id}
+									billTitle={oneSavedBill.name}
+						            billDescription={oneSavedBill.desc}
+						            addToUserPage = {bindFuncToBill}
+						            popupMsg = "Click to Remove"
+					              /> )
+				            })}
+
+					</UserBillsSection>
+				</Grid.Column>
 					
-					<Modal 
-					open={this.state.modalOpen}
-       				onClose={this.handleClose}
-       				size = "large"
-       			>
-            <Modal.Content> 
-	            <div>
+				
+			</Grid>
+			
+			<Modal 
+				open={this.state.modalOpen}
+   				onClose={this.handleClose}
+   				size = "large"
+   			>
+			<Modal.Content> 
+			<Modal.Description>
+	            <div stackable>
 					<RepProfileSection
 						RepNameTopModal = {this.state.modalName}
 
@@ -166,49 +213,11 @@ class userPage extends Component {
 					
 					</RepProfileSection>
 				</div>
+				</Modal.Description>
             </Modal.Content>
             </Modal>
-            
-            {this.state.govReps.map(govRep =>{
-            	let boundItemClick = this.handleOpen.bind(this, govRep);
-            	return (
-              <UserRepCard
-              	key = {govRep.id}
-				name={govRep.name}
-	            party={govRep.party}
-	            theColor = {govRep.party==="Republican"? "#cc3b49" : "#006286"}
-	            urls={govRep.urls}
-	            photoUrl = {govRep.photoUrl}
-	            facebook = {govRep.channels[0].id}
-	            twitter = {govRep.channels[1].id}
-	            handleOpen = {boundItemClick}
-              /> )
-            })}
-
-				</UserRepsSection>
-			</Grid.Column>
-			
-			<Grid.Column width = {4}>
-				<UserBillsSection>
-					{this.state.UserSavedBills.map(oneSavedBill =>{
-			            	
-			            	let bindFuncToBill = this.checkForUserPage.bind(this, oneSavedBill);
-			            	
-			            	return (
-				              <UserBills
-				              	key = {oneSavedBill.id}
-								billTitle={oneSavedBill.name}
-					            billDescription={oneSavedBill.desc}
-					            addToUserPage = {bindFuncToBill}
-					            popupMsg = "Click to Remove"
-				              /> )
-			            })}
-
-				</UserBillsSection>
-			</Grid.Column>
-			</Grid.Row>
-			</Grid>
-		<Footer />
+        </Grid.Column>
+    
 		</div>
 		)
 	}

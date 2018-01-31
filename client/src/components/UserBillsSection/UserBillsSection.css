@@ -1,6 +1,8 @@
-.colUBS{
-	min-width: 145px;
-}
+
 h2{
 	color:white;
+}
+.scrollingDiv{
+	height: 300px;
+    overflow-y: auto;
 }

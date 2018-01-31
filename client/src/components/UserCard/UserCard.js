@@ -1,12 +1,12 @@
 //-------------- Imports ----------------------//
 	import React from "react"
 	import "./UserCard.css"
-	import { Card, Image } from 'semantic-ui-react'
+	import { Card, Image, Grid, Column} from 'semantic-ui-react'
 //--------------------------------------------//
 
 //-------------- UserPageRepCard Div -----------------//
 	var userCard = props =>
-		<div className = "UserCard">
+		
 			<Card>
 
 				<div className = "cardDiv">
@@ -19,5 +19,5 @@
 				 	<Card.Description> {props.District}</Card.Description>
 			 	</Card.Content>
 			 </Card>
-		</div>
+		
 	export default userCard;

@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Location from "./components/Location";
 import Results from "./pages/Results";
 import RepModal from "./pages/RepModal";
+import Footer from "./components/Footer/Footer";
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
@@ -39,7 +40,7 @@ class App extends Component {
         <Route exact path = "/RepModal" component = {RepModal} />;
 
         </Switch>
-
+        <Footer/>
         </div>
       </Router>
 

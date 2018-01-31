@@ -16,3 +16,6 @@
 .UserRepCard{
 	background: #006286;
 }
+.theRepCard{
+	max-height: 100%;
+}

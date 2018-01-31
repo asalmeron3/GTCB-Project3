@@ -7,7 +7,7 @@
 //-------------- UserPageRepCard Div -----------------//
 	var FeedColumn = props =>
 			<Grid.Column>
-			
+				<div>
 				
 				<Segment  style={{background:"#006286"}}>
 				<h2> {props.FeedName} </h2>
@@ -15,7 +15,7 @@
 					{props.children}
 				</div>
 				</Segment>
-				
+				</div>
 			</Grid.Column>
 
 

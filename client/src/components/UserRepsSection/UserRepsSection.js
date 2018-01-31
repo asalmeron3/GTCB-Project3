@@ -7,18 +7,15 @@
 //-------------- UserPageRepCard Div -----------------//
 	var userRepsSection = props =>
 			// <Segment className="other">
-			<Grid.Column >
+			
+				
+				<div>
+				<h2> Your Representatives</h2>
+				<Grid container horizontalAlign = "middle" doubling stackable columns = {3}>
 
-				<h2> Your Senators and Representatives</h2>	
-
-				<Grid>
-					<Grid.Row columns = {3}>
-					
 						{props.children}
-						
-					
-					</Grid.Row>
+
 				</Grid>
-			</Grid.Column>
-			// </Segment>
+				</div>
+			
 	export default userRepsSection;

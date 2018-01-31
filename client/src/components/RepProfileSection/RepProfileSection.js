@@ -12,13 +12,12 @@
 
 				<h2> {props.RepNameTopModal}</h2>	
 
-				<Grid>
-					<Grid.Row columns = {4}>
+				<Grid container horizontalAlign = "middle" doubling stackable columns = {4}>
+					
 					
 						{props.children}
 						
 					
-					</Grid.Row>
 				</Grid>
 			</Segment>
 	export default RepProfileSection;
