@@ -11,7 +11,8 @@ import API from "../../utils/API";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer/Footer";
 import {Grid,Modal,Button,Row} from 'semantic-ui-react';
-import RepModal from "../RepModal";
+import RepModal from "../RepModal"; 
+import {getarticles, getbills, getsenate, gethouse, gettweets} from '../routes/api/dashboard.js'
 const query = "540%20Old%20Highway%203%20Hampton%20GA";
 
 class userPage extends Component {
@@ -24,6 +25,7 @@ class userPage extends Component {
   	modalParty:"",
   	
   }
+
 
   handleOpen = (card,e) => {
   	this.setState({ modalOpen: true });
@@ -70,6 +72,45 @@ class userPage extends Component {
 	      UserSavedBills:[]
 	    }
 	}
+
+
+
+  fetchbills(){
+
+  	getbills()
+  		.then((res) => {
+  			this.setState({ListOfBills:res.data.results.bills})
+  		})
+  		.catch((error) => {
+  			console.log(error)
+  		})
+  }
+
+  fetcharticles() {
+
+  	getarticles()
+  		.then((res) => {
+  			this.setState({newsArticles:res.data.article})
+
+  		})
+  		.catch((error) => {
+  			console.log(error)
+  		})
+  }
+
+  fetchhouse() {
+
+  }
+
+  fetchsenate() {
+
+  }
+
+  fetchtweets() {
+
+  }
+
+
 
   componentDidMount() {
     API.search(query)
@@ -177,8 +218,8 @@ class userPage extends Component {
 			            	return (
 				              <UserBills
 				              	key = {oneBillAtATime.id}
-								billTitle={oneBillAtATime.name}
-					            billDescription={oneBillAtATime.desc}
+								billTitle={oneBillAtATime.short_title}
+					            billDescription={oneBillAtATime.summary}
 					            addToUserPage = {bindFuncToBill}
 					            popupMsg = "Click to Save"
 				              /> )
@@ -192,8 +233,8 @@ class userPage extends Component {
 			            	return (
 				              <NewsAndTweetCard
 				              	key = {oneArticle.id}
-								billTitle={oneArticle.name}
-					            billDescription={oneArticle.desc}
+								billTitle={oneArticle.title}
+					            billDescription={oneArticle.description}
 				              /> )
 			            })}
 					</FeedColumn>
