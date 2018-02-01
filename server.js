@@ -15,8 +15,6 @@
 	const app = express();
 	const PORT = process.env.PORT || 3002;
 
-
-
 // ------ Configure body parser for AJAX requests--------//
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(bodyParser.json());
@@ -40,9 +38,11 @@
 	);
 //----------------------------------------------------//
 
+var twit = new twitter(config/twitter.twitter)
 
 //--------------- Start the API server ---------------//
 	app.listen(PORT, function() {
 	  console.log(`🌎  ==> GoVoRep Server on PORT ${PORT}!`);
 	});
 // --------------------------------------------------//
+
