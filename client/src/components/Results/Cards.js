@@ -1,9 +1,9 @@
 import React from 'react';
-import { Card, Icon, Image,Grid } from 'semantic-ui-react';
+import { Card, Icon, Image,Grid,Segment } from 'semantic-ui-react';
 import "./card.css";
 const CardExample = props => (
-  <Grid.Column>
-  <Card onClick={props.handleOpen}>
+  <Grid.Column mobile={16} tablet={8} computer={5} largeScreen={5} wideScreen={5}>
+  <Card onClick={props.handleOpen} style = {{margin:"10px"}} className="resultCard">
     <div className = "wrapper" style = {{background:props.theColor}}>
     <div className = "squareFrame" style = {{background:props.theColor}}>
       <div className = "imageContainer1">

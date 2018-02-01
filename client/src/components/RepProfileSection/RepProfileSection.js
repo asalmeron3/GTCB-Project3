@@ -3,21 +3,19 @@
 	import "./RepProfileSection.css"
 	import "../Results";
 
-	import { Grid,Segment } from 'semantic-ui-react'
+	import { Grid,Segment,Container } from 'semantic-ui-react'
 //--------------------------------------------//
 
 //-------------- UserPageRepCard Div -----------------//
 	var RepProfileSection = props =>
-			<Segment style={{background:"#cc3b49"}}>
-
-				<h2> {props.RepNameTopModal}</h2>	
-
-				<Grid container horizontalAlign = "middle" doubling stackable columns = {4}>
-					
-					
+		<Container>
+				<div><h1 className="headerUserRepSec"> {props.RepNameTopModal}</h1></div>
+				<Grid stackable>
+				<Grid.Row verticalAlign="middle" container stretched columns ={4}>
+				
 						{props.children}
-						
-					
+
+				</Grid.Row>
 				</Grid>
-			</Segment>
+		</Container>
 	export default RepProfileSection;

@@ -5,7 +5,7 @@
 	const mongoose = require("mongoose");
 	const routes = require("./routes");
 	const passport = require('passport');
-	const authRoutes = require('./routes/api/auth-routes');
+	// const authRoutes = require('./routes/api/auth-routes');
 	// const proxy = require('http-proxy-middleware');
 	const morgan = require('morgan');
 	const config = require('./config/database');
@@ -24,7 +24,7 @@
 	app.use(express.static(path.join(__dirname, '/build')));
 	// Add routes, both API and view
 	app.use('/',routes);
-	app.use('/auth', authRoutes);
+	// app.use('/auth', routes);
 	// app.use('/', proxy({target: 'localhost:3002', changeOrigin: true}));
 	app.use(passport.initialize());
 //-------------------------------------------------------//

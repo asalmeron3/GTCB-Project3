@@ -67,7 +67,10 @@ class userPage extends Component {
 	      ListOfBills:[],
 	      newsArticles: [],
 	      tweets:[],
-	      UserSavedBills:[]
+	      UserSavedBills:[],
+	      UserPic:"",
+	      UserLocation:"",
+	      Name: "",
 	    }
 	}
 
@@ -83,6 +86,14 @@ class userPage extends Component {
     }).catch((error) => {
       console.log(error);
     })
+  //   API.getAddressAndPic()
+  //   .then((res)=>{
+  //   	this.setState({UserPic:res.data.picURL});
+  //   	this.setState({UserLocation:res.data.location});
+  // 	this.setState({Name:res.data.name});
+  //   	}).catch((error) => {
+  //	console.log(error)})
+    
   }
 
 	render(){
@@ -157,16 +168,19 @@ class userPage extends Component {
    			>
 			<Modal.Content> 
 			<Modal.Description>
-	            <div stackable>
 					<RepProfileSection
 						RepNameTopModal = {this.state.modalName}
 
 					>
+					<Grid.Column>
 					<UserRepCard
 						photoUrl = {this.state.modalImage}
 						party = {this.state.modalParty}
 						name = {this.state.modalName}
+						theColor = {this.state.modalParty==="Republican"? "#cc3b49" : "#006286"}
 					/>
+					</Grid.Column>
+					<Grid.Column>
 	            	<FeedColumn
 						FeedName = "Recent Bills">
 						
@@ -184,6 +198,8 @@ class userPage extends Component {
 				              /> )
 			            })}
 					</FeedColumn>
+					</Grid.Column>
+					<Grid.Column>
 					<FeedColumn
 						FeedName = "Recent News">
 						
@@ -197,6 +213,8 @@ class userPage extends Component {
 				              /> )
 			            })}
 					</FeedColumn>
+					</Grid.Column>
+					<Grid.Column>
 					<FeedColumn
 						FeedName = "Recent Tweets">
 						
@@ -210,9 +228,9 @@ class userPage extends Component {
 				              /> )
 			            })}
 					</FeedColumn>
+					</Grid.Column>
 					
 					</RepProfileSection>
-				</div>
 				</Modal.Description>
             </Modal.Content>
             </Modal>

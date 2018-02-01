@@ -5,14 +5,23 @@ const APIKEY = "&key=AIzaSyA7DKuMXwSBV5QJqF2SLBYjf_8rZyNqCu4";
 export default {
   // Saves a user to the database
   addUser: function(userData) {
-  	console.log(userData + " at api.js");
-    return axios.post("/api/user/signup", userData);
+  	// console.log(userData + " at api.js");
+    return axios.post("/api/auth/signup", userData);
   },
   search: function(query) {
 	return axios.get(BASEURL + query + APIKEY);
   },
   updateAddress: function(userLocation) {
     return axios.post("/api/auth/location", userLocation);
+  },
+  loginUser: function(userLogin){
+    return axios.post("/api/auth/login",userLogin);
+  },
+  getAddressAndPic: function(){
+    return axios.get("/api/auth/location");
+  },
+  addPic: function(picURL){
+    return axios.post("/api/auth/pic", picURL);
   }
 
 };

@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import Location from "../../components/Location";
 import {Grid} from 'semantic-ui-react';
 import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-
 const MAPBOX_TOKEN = 'pk.eyJ1IjoibGluYWNsYXJrIiwiYSI6ImNqY28wb3M2MTB5aDkzNG54NmkzaHRkZ24ifQ.Q-2Qyz2AfFUHY4J_-a0shA';
 
 class landingPage extends Component {
@@ -23,7 +21,6 @@ class landingPage extends Component {
 						</Grid.Row>
 					</Grid>
 				</div>
-				<Footer />
 			</div>
 
 

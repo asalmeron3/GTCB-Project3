@@ -11,12 +11,14 @@
 		<div className = "wrapper">
 			<div className = "imgDiv">
 				<Image src={imgGVR} className="myImage" />
+				
 			</div>
 
 			<div className = "buttonDiv">
-				
+			
 				<Login/>		
 
 			</div>
+		
 		</div>
 	export default home;

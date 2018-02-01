@@ -6,6 +6,6 @@
 .h4 {
 	margin-top: 5px;
 }
-.ui.card{
-	width: 100%;
+.billCard{
+	min-width: 100%;
 }

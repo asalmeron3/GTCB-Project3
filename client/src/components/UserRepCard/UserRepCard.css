@@ -1,5 +1,4 @@
 .UserRepCard {
-    width: 15vw;
     background: #006286;
     margin:auto;
     margin-bottom: 20px;
@@ -16,6 +15,6 @@
 .UserRepCard{
 	background: #006286;
 }
-.theRepCard{
-	max-height: 100%;
-}
+/*.theRepCard{
+	min-width: 100%;
+}*/

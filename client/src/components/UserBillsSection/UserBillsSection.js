@@ -10,7 +10,7 @@
 	<div className="billCol">				
 
 		<Segment  style={{background:"#006286"}}>
-			<h2> Bills of Interest </h2>
+			<h2 className="headerBillsSec"> Bills of Interest </h2>
 				<div className = "scrollingDiv">
 					
 					{props.children}

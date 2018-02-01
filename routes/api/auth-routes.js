@@ -18,7 +18,9 @@ router.post('/signup', function(req, res) {
   } else {
     const newUser = new User({
       username: req.body.username,
-      password: req.body.password
+      password: req.body.password,
+      email: req.body.email,
+      name: req.body.name
     });
     newUser.save(function(err) {
       if(err) {
@@ -83,6 +85,33 @@ getToken = function(headers) {
     return null;
   }
 };
+router.post("/pic",, passport.authenticate('jwt',{session: false}), function(req, res){
+  var token = getToken(req.headers);
+  if(token){
+    User.findOneAndUpdate({ _id: req.params.id }, {$set: {"UserPic":req.body.picURL}}, function(err, doc){
+      if (err){
+        return res.json({success: false, msg: 'Failed. Try again.'});
+      }
+      res.json({success: true, msg:"Successful"});
+    });
+  } else {
+    return res.status(403).send({success: false, msg: 'Unathorized'});
+  }
+});
+
+router.get('/location', passport.authenticate('jwt',{session: false}), function(req, res){
+  var token = getToken(req.headers);
+  if(token){
+    User.findOne({ _id: req.params.id }, function(err, doc){
+      if (err){
+        return res.json({success: false, msg: 'Failed. Try again.'});
+      }
+      res.json({success: true, msg:"Successful"});
+    });
+  } else {
+    return res.status(403).send({success: false, msg: 'Unathorized'});
+  }
+});
 
 
 module.exports = router;

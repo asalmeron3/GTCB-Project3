@@ -6,16 +6,18 @@ import API from "../../utils/API";
 class Login extends Component {
   // Setting our component's initial state
   state = {
-    Lemail: "",
+    username: "",
     Lpassword: "",
     name: "",
     Semail: "",
     sPwd1: "",
-    sPwd2: ""
+    sPwd2: "",
+    msgHeader:"",
+    msgContent:""
   };
 
-  handleLEmailChange = (e) =>{
-    this.setState({Lemail: e.target.value});
+  handleUsernameChange = (e) =>{
+    this.setState({username: e.target.value});
   };
   handleLPasswordChange = (e) => {
     this.setState({Lpassword: e.target.value});
@@ -27,9 +29,13 @@ class Login extends Component {
     this.setState({Semail: e.target.value});
   };
   handlesPwd1= (e) => {
+    this.setState({msgHeader: ""});
+    this.setState({msgContent: ""});
     this.setState({sPwd1: e.target.value});
   };
   handlesPwd2= (e) => {
+    this.setState({msgHeader: ""});
+    this.setState({msgContent: ""});
     this.setState({sPwd2: e.target.value});
   };
 
@@ -37,40 +43,41 @@ class Login extends Component {
   handleLogin = event => {
     event.preventDefault();
     var info = {
-      email: this.state.Lemail,
-      password : this.state.Lpassword
+      username: this.state.username.trim(),
+      password : this.state.Lpassword.trim()
     };
     console.log(info);
+    API.loginUser(info);
+
 
   };
 
   handleSignUp = event => {
     event.preventDefault();
-    // fetch("/api/user/signup", {
-    //   method: "post",
-    //   headers: {'Content-Type':'application/json'},
-    //   body: {
-    //   "name": this.state.name,
-    //   "email": this.state.Semail,
-    //   "password":this.state.sPwd1
-    //    }
-    //  });
-    // };
-    var info = {
-      name: this.state.name,
-      email: this.state.Semail,
-      password : this.state.sPwd1
-    };
-    API.addUser(info)
-      .then(res => console.log("added the user?"))
-      .catch(err => console.log(info + " at login.js . error: " + err ));
+    if(this.state.sPwd1!=this.state.sPwd2){
+      this.setState({msgHeader: "Error"});
+      this.setState({msgContent: "Your Passwords do not match!"});
+    }
+    else{
+      var info = {
+        name: this.state.name.trim(),
+        email: this.state.Semail.trim(),
+        password : this.state.sPwd1.trim(),
+        username:this.state.Semail.split("@")[0]
+      };
+      console.log(info);
+      API.addUser(info);
+    }
+    
   };
   render() {
   	return(
   		<SignUp 
+        msgHeader = {this.state.msgHeader}
+        msgContent = {this.state.msgContent}
         handleLogin = {this.handleLogin} 
         handleSignUp = {this.handleSignUp}
-        handleLEmailChange = {this.handleLEmailChange}
+        handleUsernameChange = {this.handleUsernameChange}
         handleLPasswordChange = {this.handleLPasswordChange}
         handleNameChange = {this.handleNameChange}
         handleSEmailChange = {this.handleSEmailChange}

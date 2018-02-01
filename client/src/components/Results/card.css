@@ -23,6 +23,10 @@
     position: absolute;
 
 }*/
-.ui.card{
+/*.ui.card{
   min-width: 145px;
+}
+*/
+.resultCard{
+  min-width: 100%
 }

@@ -6,8 +6,7 @@
 
 //-------------- UserPageRepCard Div -----------------//
 	var userRep = props =>
-	
-		
+			
 			<Card className="theRepCard">
 				<div className = "RepCardDiv">
 					<Image src={props.imageSource} size='small' circular />			
@@ -19,6 +18,8 @@
 				 	<Card.Description> {props.repInfo}</Card.Description>
 			 	</Card.Content>
 			 </Card>
+		
+			 
 		
 	
 
