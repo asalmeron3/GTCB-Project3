@@ -110,7 +110,30 @@ class userPage extends Component {
 
   }
 
+  componentsWillMount: function() {
 
+  	var tid =
+
+  	aiox.get({
+  		method: 'Get',
+  		url: `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${tid}&count=10`,
+  		header:{'consumerKey': 'Jt9yYf668aUb6RxopZGaIbcu6',
+           'consumerSecret': 'YhC4qwiPjMe9XPsNavevK2sLZExqwdjXZsfmXdErM0Uo8uMa7b',
+           'access_token_key': '918600732126990336-Bd3bPVEOFTogb7yq4mf6xaYg0hj6zxM',
+           'access_token_secret': 'Lf3n1k06KcH6K8rLzmXd40FZN0ZhjrJ2YGxr6L6JMQhpg'
+		}
+
+  	})
+  	.then(function(results) {
+
+  		this.setState({
+  			tweets: result.data
+  		});
+  	})
+  	.catch((error){
+  		console.log("error")
+  	})
+  };
 
   componentDidMount() {
     API.search(query)
