@@ -38,7 +38,7 @@
 	);
 //----------------------------------------------------//
 
-var twit = new twitter(config/twitter.twitter)
+//var twit = new twitter(config/twitter.twitter)
 
 //--------------- Start the API server ---------------//
 	app.listen(PORT, function() {
