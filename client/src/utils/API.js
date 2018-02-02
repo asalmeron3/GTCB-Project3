@@ -3,6 +3,7 @@ const BASEURL = "https://www.googleapis.com/civicinfo/v2/representatives?levels=
 const APIKEY = "&key=AIzaSyA7DKuMXwSBV5QJqF2SLBYjf_8rZyNqCu4";
 const ArticleURL1= "https://newsapi.org/v2/everything?q=$";
 const ArticleURL2 = "&language=en&apiKey=15b928baec3648afbf5fe290acd1df58";
+
 export default {
   // Saves a user to the database
   addUser: function(userData) {
@@ -35,6 +36,17 @@ export default {
   },
   deleteBillFromDB:function(JustTheBillTitle){
     return axios.delete("/api/auth/bill",JustTheBillTitle);
+  },
+  //get info of senate
+  getSenate: function(state){
+    return axios.get("/members/senate/"+state)
+  },
+  //get info of house
+  getHouse: function(state, district){
+    return axios.get("/members/house/" +state+"/"+ district)
+  },
+  getProbills: function(member_id){
+    return axios.get("/bills/"+ member_id)
   }
 
 };

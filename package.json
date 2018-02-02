@@ -19,6 +19,7 @@
     "passport-auth0": "^0.6.1",
     "passport-jwt": "^3.0.1",
     "path": "^0.12.7",
+    "propublica-congress-node": "^0.1.2",
     "twitter": "^1.7.1"
   },
   "scripts": {
