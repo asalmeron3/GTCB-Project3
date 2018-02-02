@@ -12,7 +12,8 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer/Footer";
 import {Grid,Modal,Button,Row} from 'semantic-ui-react';
 import RepModal from "../RepModal"; 
-// import {getarticles, getbills, getsenate, gethouse, gettweets} from '../../../routes/api/dashboard.js'
+
+//import {getarticles, getbills, getsenate, gethouse, gettweets} from '../routes/api/dashboard.js';
 const query = "540%20Old%20Highway%203%20Hampton%20GA";
 
 class userPage extends Component {
@@ -98,6 +99,7 @@ class userPage extends Component {
 
   // fetchbills(){
 
+
   // 	getbills()
   // 		.then((res) => {
   // 			this.setState({ListOfBills:res.data.results.bills})
@@ -147,14 +149,15 @@ class userPage extends Component {
   // 	})
   // 	.then(function(results) {
 
-  // 		this.setState({
-  // 			tweets: result.data
-  // 		});
-  // 	})
-  // 	.catch((error){
-  // 		console.log("error")
-  // 	})
-  // };
+
+  		this.setState({
+  			tweets: result.data
+  		});
+  	})
+  	.catch((error){
+  		console.log("error")
+  	})
+  };*/
 
   componentDidMount() {
     API.search(query)
