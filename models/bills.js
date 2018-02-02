@@ -11,6 +11,6 @@ var BillSchema = new Schema({
     }
 });
 
-var Bill = mongoose.model("Bill", NoteSchema);
+var Bill = mongoose.model("Bill", BillSchema);
 
 module.exports = Bill;
