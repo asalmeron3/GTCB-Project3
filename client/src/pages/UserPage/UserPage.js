@@ -160,9 +160,13 @@ class userPage extends Component {
 	      UserPicDB:"",
 	      UserLocation:"",
 	      Name: "",
-	      District:[],
+	      DistrictState:"",
+	      DistrictNumber:"",
 	      UserPicFromModal:"",
 	      UserModalLocation:"",
+	      Senator1:"",
+	      Senator2:"",
+	      House1:""
 	    }
 	}
 
@@ -252,8 +256,8 @@ class userPage extends Component {
     API.search(query)
     .then((res) => {
       this.setState({govReps: res.data.officials});
-      this.setState({District:res.data.divisions});
-      console.log(res.data.divisions);
+      this.setState({DistrictNumber:res.data.offices[1].name.split("-")[1]});
+      this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
       this.setState({UserSavedBills: [{name:"UserBill 1", desc:"This will come from DATABASE",type:"userBill"},
 		{name:"UserBill 2", desc:"We need to make request to get all the bills the user has saved",type:"userBill"},
 		{name:"UserBill 3", desc:"the checkForUserPage() will compare if we GET or POST",type:"userBill"}
@@ -263,6 +267,24 @@ class userPage extends Component {
       console.log(error);
     })
 
+    API.getSenate(this.state.DistrictState)
+    .then((res)=>{
+    	console.log(res)
+    	// this.setState({Senator1:{Name:rep.results[0].name, id:rep.results.id}})
+    	// this.setState({Senator2:{Name:rep.results[1].name, id:rep.results.id}})
+    })
+    .catch((error)=>{
+    	console.log(error)
+    })
+
+    API.getSenate(this.state.DistrictState,this.state.DistrictNumber)
+    .then((res)=>{
+    	console.log(res)
+    	// this.setState({House1:{Name:rep.results[0].name, id:rep.results.id}})
+    })
+    .catch((error)=>{
+    	console.log(error)
+    })
     
   }
 
@@ -278,7 +300,8 @@ class userPage extends Component {
 				<UserCard
 					imageSource = {this.state.UserPicDB}
 					Name = {this.state.Name}
-					District = "Atlanta - District ???"
+					DistrictState = {this.state.DistrictState}
+					DistrictNumber={this.state.DistrictNumber}
 					Meta = "User"
 					addPhoto= {this.handleOpenTwo}
 					

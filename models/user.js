@@ -37,7 +37,7 @@
 		},
 		picURL:{
 			type:String,
-		}
+		},
 		saved: {
 			type: Boolean,
 			default: false
