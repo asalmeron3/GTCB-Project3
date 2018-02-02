@@ -12,6 +12,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer/Footer";
 import {Grid,Modal,Button,Row} from 'semantic-ui-react';
 import RepModal from "../RepModal"; 
+
 //import {getarticles, getbills, getsenate, gethouse, gettweets} from '../routes/api/dashboard.js';
 const query = "540%20Old%20Highway%203%20Hampton%20GA";
 
@@ -28,22 +29,40 @@ class userPage extends Component {
 
 
   handleOpen = (card,e) => {
+  	console.log(card);
   	this.setState({ modalOpen: true });
 	this.setState({modalName:card.name});
 	this.setState({modalImage:card.photoUrl});
 	this.setState({modalParty:card.party});
+	API.getArticles(card.name)
+	.then((response) => {
+		console.log(response.data.articles)
+    	this.setState({newsArticles:response.data.articles})
+  	})
+	.catch((error) => {
+      console.log(error);
+    })
+  	API.getTweets(card.channels[1].id)
+  	.then((response)=>{
+  		console.log(response.data)
+  		this.setState({tweets:response.data})
+  	}).catch((error) => {
+      console.log(error);
+    })
+
+
 	this.setState({ListOfBills: [{name:"Bill 1", desc:"This will come from api call",type:"fromList"},
 		{name:"Bill 2", desc:"There will be an array of object (hopefully)",type:"fromList"},
 		{name:"Bill 3", desc:"and we should use .map() to add them to the correct section",type:"fromList"}
 	]});
-  	this.setState({newsArticles: [{name:"Article 1", desc:"This will come from news api call"},
-		{name:"Article 2", desc:"Look at UserPage.js at componentDidMount()"},
-		{name:"Article 3", desc:"To See how to make the API call and get the data"}
-	]});
-	this.setState({tweets: [{name:"Tweet 1", desc:"This will come from twitter api call"},
-		{name:"Tweet 2", desc:"make sure to setState: to something like res.data.theTweets"},
-		{name:"Tweet 3", desc:"ask Arturo or Willina for help on this part. We are so close!"}
-	]});
+ //  	this.setState({newsArticles: [{name:"Article 1", desc:"This will come from news api call"},
+	// 	{name:"Article 2", desc:"Look at UserPage.js at componentDidMount()"},
+	// 	{name:"Article 3", desc:"To See how to make the API call and get the data"}
+	// ]});
+	// this.setState({tweets: [{name:"Tweet 1", desc:"This will come from twitter api call"},
+	// 	{name:"Tweet 2", desc:"make sure to setState: to something like res.data.theTweets"},
+	// 	{name:"Tweet 3", desc:"ask Arturo or Willina for help on this part. We are so close!"}
+	// ]});
 
  
 
@@ -73,75 +92,80 @@ class userPage extends Component {
 	      UserPic:"",
 	      UserLocation:"",
 	      Name: "",
+	      District:[]
 	    }
 	}
 
 
 
-  /*fetchbills(){
+  // fetchbills(){
 
-  	getbills()
-  		.then((res) => {
-  			this.setState({ListOfBills:res.data.results.bills})
-  		})
-  		.catch((error) => {
-  			console.log(error)
-  		})
-  }
 
-  fetcharticles() {
+  // 	getbills()
+  // 		.then((res) => {
+  // 			this.setState({ListOfBills:res.data.results.bills})
+  // 		})
+  // 		.catch((error) => {
+  // 			console.log(error)
+  // 		})
+  // }
 
-  	getarticles()
-  		.then((res) => {
-  			this.setState({newsArticles:res.data.article})
+  // fetcharticles() {
 
-  		})
-  		.catch((error) => {
-  			console.log(error)
-  		})
-  }
+  // 	getarticles()
+  // 		.then((res) => {
+  // 			this.setState({newsArticles:res.data.article})
 
-  fetchhouse() {
+  // 		})
+  // 		.catch((error) => {
+  // // 			console.log(error)
+  // // 		})
+  // // }
 
-  }
+  // fetchhouse() {
 
-  fetchsenate() {
+  // }
 
-  }
+  // fetchsenate() {
 
-  fetchtweets() {
+  // }
 
-  }
+  // fetchtweets() {
 
-  componentsWillMount: function() {
+  // }
 
-  	var tid =
+  // componentsWillMount =()=> {
 
-  	aiox.get({
-  		method: 'Get',
-  		url: `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${tid}&count=10`,
-  		header:{'consumerKey': 'Jt9yYf668aUb6RxopZGaIbcu6',
-           'consumerSecret': 'YhC4qwiPjMe9XPsNavevK2sLZExqwdjXZsfmXdErM0Uo8uMa7b',
-           'access_token_key': '918600732126990336-Bd3bPVEOFTogb7yq4mf6xaYg0hj6zxM',
-           'access_token_secret': 'Lf3n1k06KcH6K8rLzmXd40FZN0ZhjrJ2YGxr6L6JMQhpg'
-		}
+  // 	var tid =
 
-  	})
-  	.then(function(results) {
+  // 	aiox.get({
+  // 		method: 'Get',
+  // 		url: `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${tid}&count=10`,
+  // 		header:{'consumerKey': 'Jt9yYf668aUb6RxopZGaIbcu6',
+  //          'consumerSecret': 'YhC4qwiPjMe9XPsNavevK2sLZExqwdjXZsfmXdErM0Uo8uMa7b',
+  //          'access_token_key': '918600732126990336-Bd3bPVEOFTogb7yq4mf6xaYg0hj6zxM',
+  //          'access_token_secret': 'Lf3n1k06KcH6K8rLzmXd40FZN0ZhjrJ2YGxr6L6JMQhpg'
+		// }
 
-  		this.setState({
-  			tweets: result.data
-  		});
-  	})
-  	.catch((error){
-  		console.log("error")
-  	})
-  };*/
+  // 	})
+  // 	.then(function(results) {
+
+
+  // 		this.setState({
+  // 			tweets: result.data
+  // 		});
+  // 	})
+  // 	.catch((error){
+  // 		console.log("error")
+  // 	})
+  // };*/
 
   componentDidMount() {
     API.search(query)
     .then((res) => {
       this.setState({govReps: res.data.officials});
+      this.setState({District:res.data.divisions});
+      console.log(res.data.divisions);
       this.setState({UserSavedBills: [{name:"UserBill 1", desc:"This will come from DATABASE",type:"userBill"},
 		{name:"UserBill 2", desc:"We need to make request to get all the bills the user has saved",type:"userBill"},
 		{name:"UserBill 3", desc:"the checkForUserPage() will compare if we GET or POST",type:"userBill"}
@@ -274,6 +298,7 @@ class userPage extends Component {
 				              	key = {oneArticle.id}
 								billTitle={oneArticle.title}
 					            billDescription={oneArticle.description}
+					            url={oneArticle.url}
 				              /> )
 			            })}
 					</FeedColumn>

@@ -21,14 +21,14 @@ const CardExample = props => (
         </span>
       </Card.Meta>
       <Card.Description>
-      <a href={props.urls}>Profile</a>
+      <a href={props.urls} target="_blank">Profile</a>
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
-      <a  href={`https://www.twitter.com/${props.twitter}`}>
+      <a  href={`https://www.twitter.com/${props.twitter}`} target="_blank">
         <Icon name='twitter' />
       </a>
-      <a  href={`https://www.facebook.com/${props.facebook}`}>
+      <a  href={`https://www.facebook.com/${props.facebook}`} target="_blank">
         <Icon name='facebook' />
       </a>
     </Card.Content>
