@@ -85,7 +85,7 @@ getToken = function(headers) {
     return null;
   }
 };
-router.post("/pic",, passport.authenticate('jwt',{session: false}), function(req, res){
+router.post("/pic", passport.authenticate('jwt',{session: false}), function(req, res){
   var token = getToken(req.headers);
   if(token){
     User.findOneAndUpdate({ _id: req.params.id }, {$set: {"UserPic":req.body.picURL}}, function(err, doc){

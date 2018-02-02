@@ -12,7 +12,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer/Footer";
 import {Grid,Modal,Button,Row} from 'semantic-ui-react';
 import RepModal from "../RepModal"; 
-import {getarticles, getbills, getsenate, gethouse, gettweets} from '../routes/api/dashboard.js'
+// import {getarticles, getbills, getsenate, gethouse, gettweets} from '../../../routes/api/dashboard.js'
 const query = "540%20Old%20Highway%203%20Hampton%20GA";
 
 class userPage extends Component {
@@ -28,18 +28,36 @@ class userPage extends Component {
 
 
   handleOpen = (card,e) => {
+  	console.log(card);
   	this.setState({ modalOpen: true });
 	this.setState({modalName:card.name});
 	this.setState({modalImage:card.photoUrl});
 	this.setState({modalParty:card.party});
+	API.getArticles(card.name)
+	.then((response) => {
+		console.log(response.data.articles)
+    	this.setState({newsArticles:response.data.articles})
+  	})
+	.catch((error) => {
+      console.log(error);
+    })
+  	API.getTweets(card.channels[1].id)
+  	.then((response)=>{
+  		console.log(response.data)
+  		this.setState({tweets:response.data})
+  	}).catch((error) => {
+      console.log(error);
+    })
+
+
 	this.setState({ListOfBills: [{name:"Bill 1", desc:"This will come from api call",type:"fromList"},
 		{name:"Bill 2", desc:"There will be an array of object (hopefully)",type:"fromList"},
 		{name:"Bill 3", desc:"and we should use .map() to add them to the correct section",type:"fromList"}
 	]});
-  	this.setState({newsArticles: [{name:"Article 1", desc:"This will come from news api call"},
-		{name:"Article 2", desc:"Look at UserPage.js at componentDidMount()"},
-		{name:"Article 3", desc:"To See how to make the API call and get the data"}
-	]});
+ //  	this.setState({newsArticles: [{name:"Article 1", desc:"This will come from news api call"},
+	// 	{name:"Article 2", desc:"Look at UserPage.js at componentDidMount()"},
+	// 	{name:"Article 3", desc:"To See how to make the API call and get the data"}
+	// ]});
 	this.setState({tweets: [{name:"Tweet 1", desc:"This will come from twitter api call"},
 		{name:"Tweet 2", desc:"make sure to setState: to something like res.data.theTweets"},
 		{name:"Tweet 3", desc:"ask Arturo or Willina for help on this part. We are so close!"}
@@ -78,65 +96,65 @@ class userPage extends Component {
 
 
 
-  fetchbills(){
+  // fetchbills(){
 
-  	getbills()
-  		.then((res) => {
-  			this.setState({ListOfBills:res.data.results.bills})
-  		})
-  		.catch((error) => {
-  			console.log(error)
-  		})
-  }
+  // 	getbills()
+  // 		.then((res) => {
+  // 			this.setState({ListOfBills:res.data.results.bills})
+  // 		})
+  // 		.catch((error) => {
+  // 			console.log(error)
+  // 		})
+  // }
 
-  fetcharticles() {
+  // fetcharticles() {
 
-  	getarticles()
-  		.then((res) => {
-  			this.setState({newsArticles:res.data.article})
+  // 	getarticles()
+  // 		.then((res) => {
+  // 			this.setState({newsArticles:res.data.article})
 
-  		})
-  		.catch((error) => {
-  			console.log(error)
-  		})
-  }
+  // 		})
+  // 		.catch((error) => {
+  // // 			console.log(error)
+  // // 		})
+  // // }
 
-  fetchhouse() {
+  // fetchhouse() {
 
-  }
+  // }
 
-  fetchsenate() {
+  // fetchsenate() {
 
-  }
+  // }
 
-  fetchtweets() {
+  // fetchtweets() {
 
-  }
+  // }
 
-  componentsWillMount: function() {
+  // componentsWillMount =()=> {
 
-  	var tid =
+  // 	var tid =
 
-  	aiox.get({
-  		method: 'Get',
-  		url: `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${tid}&count=10`,
-  		header:{'consumerKey': 'Jt9yYf668aUb6RxopZGaIbcu6',
-           'consumerSecret': 'YhC4qwiPjMe9XPsNavevK2sLZExqwdjXZsfmXdErM0Uo8uMa7b',
-           'access_token_key': '918600732126990336-Bd3bPVEOFTogb7yq4mf6xaYg0hj6zxM',
-           'access_token_secret': 'Lf3n1k06KcH6K8rLzmXd40FZN0ZhjrJ2YGxr6L6JMQhpg'
-		}
+  // 	aiox.get({
+  // 		method: 'Get',
+  // 		url: `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${tid}&count=10`,
+  // 		header:{'consumerKey': 'Jt9yYf668aUb6RxopZGaIbcu6',
+  //          'consumerSecret': 'YhC4qwiPjMe9XPsNavevK2sLZExqwdjXZsfmXdErM0Uo8uMa7b',
+  //          'access_token_key': '918600732126990336-Bd3bPVEOFTogb7yq4mf6xaYg0hj6zxM',
+  //          'access_token_secret': 'Lf3n1k06KcH6K8rLzmXd40FZN0ZhjrJ2YGxr6L6JMQhpg'
+		// }
 
-  	})
-  	.then(function(results) {
+  // 	})
+  // 	.then(function(results) {
 
-  		this.setState({
-  			tweets: result.data
-  		});
-  	})
-  	.catch((error){
-  		console.log("error")
-  	})
-  };
+  // 		this.setState({
+  // 			tweets: result.data
+  // 		});
+  // 	})
+  // 	.catch((error){
+  // 		console.log("error")
+  // 	})
+  // };
 
   componentDidMount() {
     API.search(query)
