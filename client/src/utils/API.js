@@ -1,7 +1,7 @@
 import axios from "axios";
 const BASEURL = "https://www.googleapis.com/civicinfo/v2/representatives?levels=country&roles=legislatorUpperBody&roles=legislatorLowerBody&address=";
 const APIKEY = "&key=AIzaSyA7DKuMXwSBV5QJqF2SLBYjf_8rZyNqCu4";
-const ArticleURL1= "https://newsapi.org/v2/everything?q=$";
+const ArticleURL1= "https://newsapi.org/v2/everything?sources=cnn&q=$";
 const ArticleURL2 = "&language=en&apiKey=15b928baec3648afbf5fe290acd1df58";
 
 export default {
