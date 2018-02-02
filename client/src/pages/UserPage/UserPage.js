@@ -59,10 +59,10 @@ class userPage extends Component {
 	// 	{name:"Article 2", desc:"Look at UserPage.js at componentDidMount()"},
 	// 	{name:"Article 3", desc:"To See how to make the API call and get the data"}
 	// ]});
-	this.setState({tweets: [{name:"Tweet 1", desc:"This will come from twitter api call"},
-		{name:"Tweet 2", desc:"make sure to setState: to something like res.data.theTweets"},
-		{name:"Tweet 3", desc:"ask Arturo or Willina for help on this part. We are so close!"}
-	]});
+	// this.setState({tweets: [{name:"Tweet 1", desc:"This will come from twitter api call"},
+	// 	{name:"Tweet 2", desc:"make sure to setState: to something like res.data.theTweets"},
+	// 	{name:"Tweet 3", desc:"ask Arturo or Willina for help on this part. We are so close!"}
+	// ]});
 
  
 
@@ -92,6 +92,7 @@ class userPage extends Component {
 	      UserPic:"",
 	      UserLocation:"",
 	      Name: "",
+	      District:[]
 	    }
 	}
 
@@ -150,19 +151,21 @@ class userPage extends Component {
   // 	.then(function(results) {
 
 
-  		this.setState({
-  			tweets: result.data
-  		});
-  	})
-  	.catch((error){
-  		console.log("error")
-  	})
-  };*/
+  // 		this.setState({
+  // 			tweets: result.data
+  // 		});
+  // 	})
+  // 	.catch((error){
+  // 		console.log("error")
+  // 	})
+  // };*/
 
   componentDidMount() {
     API.search(query)
     .then((res) => {
       this.setState({govReps: res.data.officials});
+      this.setState({District:res.data.divisions});
+      console.log(res.data.divisions);
       this.setState({UserSavedBills: [{name:"UserBill 1", desc:"This will come from DATABASE",type:"userBill"},
 		{name:"UserBill 2", desc:"We need to make request to get all the bills the user has saved",type:"userBill"},
 		{name:"UserBill 3", desc:"the checkForUserPage() will compare if we GET or POST",type:"userBill"}
@@ -295,6 +298,7 @@ class userPage extends Component {
 				              	key = {oneArticle.id}
 								billTitle={oneArticle.title}
 					            billDescription={oneArticle.description}
+					            url={oneArticle.url}
 				              /> )
 			            })}
 					</FeedColumn>

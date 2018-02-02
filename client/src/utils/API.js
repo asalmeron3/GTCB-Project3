@@ -27,8 +27,8 @@ export default {
   getArticles:function(keyword){
     return axios.get(ArticleURL1 + keyword +ArticleURL2);
   },
-  getTweets: function(userid) {
-    return axios.get("/api/twitterfeed/" + userid);
+  getTweets:function(twitterHandle){
+    return axios.get("/twitterfeed/"+twitterHandle);
   }
 
 };
