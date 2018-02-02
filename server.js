@@ -39,7 +39,6 @@
 	);
 //----------------------------------------------------//
 
-
 var client = new Twitter({
   consumer_key: 'Jt9yYf668aUb6RxopZGaIbcu6',
   consumer_secret: 'YhC4qwiPjMe9XPsNavevK2sLZExqwdjXZsfmXdErM0Uo8uMa7b',

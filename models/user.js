@@ -4,6 +4,7 @@
 
 // ---- A reference to the Schema constructor ---//
 	var Schema  = mongoose.Schema;
+	var Bills = require("./bills");
 //-----------------------------------------------//
 
 // ---------------Adding bcrypt------------------//
@@ -37,6 +38,14 @@
 		picURL:{
 			type:String,
 		}
+		saved: {
+			type: Boolean,
+			default: false
+		},
+		bills: [{
+			type: Schema.Types.ObjectId,
+			ref: "Bills"
+		}]
 		
 	});
 //-----------------------------------------------//
