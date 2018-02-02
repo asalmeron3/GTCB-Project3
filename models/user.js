@@ -33,6 +33,9 @@
 		email: {
 			type: String,
 			required: true,
+		},
+		picURL:{
+			type:String,
 		}
 		
 	});

@@ -7,7 +7,7 @@
 //-------------- UserPageRepCard Div -----------------//
 	var userCard = props =>
 		
-			<Card>
+			<Card onClick={props.addPhoto}>
 
 				<div className = "cardDiv">
 					<Image src={props.imageSource} size='small' circular />

@@ -18,7 +18,7 @@ export default {
   loginUser: function(userLogin){
     return axios.post("/api/auth/login",userLogin);
   },
-  getAddressAndPic: function(){
+  UserInfoFromDB: function(){
     return axios.get("/api/auth/location");
   },
   addPic: function(picURL){
@@ -29,6 +29,12 @@ export default {
   },
   getTweets:function(twitterHandle){
     return axios.get("/twitterfeed/"+twitterHandle);
+  },
+  saveBillToDB:function(ObjectOfBillTitleAndDescription){
+    return axios.post("/api/auth/bill",ObjectOfBillTitleAndDescription);
+  },
+  deleteBillFromDB:function(JustTheBillTitle){
+    return axios.delete("/api/auth/bill",JustTheBillTitle);
   }
 
 };

@@ -63,7 +63,8 @@ class Login extends Component {
         name: this.state.name.trim(),
         email: this.state.Semail.trim(),
         password : this.state.sPwd1.trim(),
-        username:this.state.Semail.split("@")[0]
+        username:this.state.Semail.split("@")[0],
+        picURL:"www.shackmanlab.org/wp-content/uploads/2013/07/person-placeholder.jpg"
       };
       console.log(info);
       API.addUser(info);

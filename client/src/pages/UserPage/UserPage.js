@@ -10,7 +10,7 @@ import FeedColumn from "../../components/FeedColumn";
 import API from "../../utils/API";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer/Footer";
-import {Grid,Modal,Button,Row} from 'semantic-ui-react';
+import {Grid,Modal,Button,Row,Form} from 'semantic-ui-react';
 import RepModal from "../RepModal"; 
 
 //import {getarticles, getbills, getsenate, gethouse, gettweets} from '../routes/api/dashboard.js';
@@ -24,6 +24,8 @@ class userPage extends Component {
   	modalName: "",
   	modalImage: "",
   	modalParty:"",
+  	modalTwoOpen:"false",
+  	
   	
   }
 
@@ -70,16 +72,82 @@ class userPage extends Component {
 
   handleClose = () => this.setState({ modalOpen: false })
 
+	//--------Handles the Modal for the UserCard --------//
+	  handleOpenTwo = ()=> {
+	  	this.setState({modalTwoOpen:true})
+	  }
+	  handleCloseTwo =() => this.setState({modalTwoOpen:false});
+	  handleImageLink = (e) =>{
+	    this.setState({UserPicFromModal: e.target.value});
+	  };
+	  handleLocationChange= (e) =>{
+	    this.setState({UserModalLocation: e.target.value});
+	  };
+	  saveInfoToDB =()  =>{
+		  if(this.state.UserPicFromModal!=""){
+		  	API.addPic(this.state.UserPicFromModal)
+		  	.then((res) => {
+		      console.log(res);
+		  	}).catch((error) => {
+		      console.log(error);
+		    });
+		    this.setState({UserPicFromModal:""})
+		   console.log(this.state.UserPicFromModal);
+		   }
+
+		   if(this.state.UserModalLocation!=""){
+		   	console.log(this.state.UserModalLocation)
+		  	API.updateAddress(this.state.UserModalLocation)
+		  	.then((res) => {
+		      console.log(res);
+		  	}).catch((error) => {
+		      console.log(error);
+		    });
+		   }
+		   this.setState({UserModalLocation:""})
+		   console.log(this.state.UserModalLocation);
+	  }
+  	//------------------------------------------------//
+
+  
+// -----------------------Check which Bill we clicked and what to do --------------------//
+
+	// This section is checking if the user clicked on the bill
+	// from the modal (needs to save to DB) or if user clicked
+	// it from the user page (needs to delete from DB)
   checkForUserPage = (bill,e) =>{
   	if(bill.type=="userBill"){
+  		
   		//add the function or orperation for deleting this bill from the users saved bills
+  		
   		console.log("this is a userBills and we can get the name to delete from userDB");
+  		
+  		// -----------This is where we DELETE the bill FROM the DB ----------//
+  			// API.deleteBillFromDB(bill.billTitle)
+  			// .then((res) => {
+		    //    console.log(res);
+		  	// }).catch((error) => {
+		    //    console.log(error);
+		    //  });
+		//------------------------------------------------------------------//
   	}
   	else if(bill.type =="fromList"){
   		// add the function to save this bill to the user database
   		console.log("this is from a specific senator/api-call and we can use the name to save to the userDB")
+
+  		// -----------This is where we SAVE the bill TO the DB ----------//
+  			// API.saveBillToDB({billTitle: bill.billTitle, billDescription: bill.billDescription})
+  			// .then((res) => {
+		    //    console.log(res);
+		  	// }).catch((error) => {
+		    //    console.log(error);
+		    //  });
+		//------------------------------------------------------------------//
+
   	}
   }
+// --------------------------------------------------------------- --------------------//
+
 
 	constructor(props){
 	    super(props);
@@ -89,10 +157,12 @@ class userPage extends Component {
 	      newsArticles: [],
 	      tweets:[],
 	      UserSavedBills:[],
-	      UserPic:"",
+	      UserPicDB:"",
 	      UserLocation:"",
 	      Name: "",
-	      District:[]
+	      District:[],
+	      UserPicFromModal:"",
+	      UserModalLocation:"",
 	    }
 	}
 
@@ -161,6 +231,24 @@ class userPage extends Component {
   // };*/
 
   componentDidMount() {
+// --------------This is the call to DB for the user information ------//
+  
+  // For this call, the response needs to be an array with two responses
+  // the first response should be the USER info from the User Collection
+  // the second response should be the user's saved BILLs from the 2nd 
+  // DB collection ... I hope this makes sense 
+
+  //   API.UserInfoFromDB()
+  //   .then((res)=>{
+  //   	this.setState({UserPicDB:res.data[0].picURL});
+  //   	this.setState({UserLocation:res.data[0].location});
+  //	query= location.add.split(" ").join("%20");
+  // 	this.setState({Name:res.data[0].name});
+  //	this.setState({UserSavedBills:res.data[1]})
+  //   	}).catch((error) => {
+  //	console.log(error)})
+//---------------------------------------------------------------------//
+    
     API.search(query)
     .then((res) => {
       this.setState({govReps: res.data.officials});
@@ -174,13 +262,7 @@ class userPage extends Component {
     }).catch((error) => {
       console.log(error);
     })
-  //   API.getAddressAndPic()
-  //   .then((res)=>{
-  //   	this.setState({UserPic:res.data.picURL});
-  //   	this.setState({UserLocation:res.data.location});
-  // 	this.setState({Name:res.data.name});
-  //   	}).catch((error) => {
-  //	console.log(error)})
+
     
   }
 
@@ -194,10 +276,11 @@ class userPage extends Component {
 			<Grid centered padded>
 				
 				<UserCard
-					imageSource = "https://avatars0.githubusercontent.com/u/27255697?s=400&u=ed3a2731302e7cc0a83956c2248e17be0ff9b7d1&v=4"
-					Name = "Arturo Salmeron"
+					imageSource = {this.state.UserPicDB}
+					Name = {this.state.Name}
 					District = "Atlanta - District ???"
 					Meta = "User"
+					addPhoto= {this.handleOpenTwo}
 					
 				/>
 				
@@ -224,6 +307,58 @@ class userPage extends Component {
 				            handleOpen = {boundItemClick}
 			              /> )
 			            })}
+			              <Modal 
+							open={this.state.modalTwoOpen}
+							onClose={this.handleCloseTwo}
+							size = "small"
+						   >
+							<Modal.Content> 
+							<Grid verticalAlign="middle" container stackable columns={2}>
+							
+							<Grid.Column>
+						  <Form.Field>
+								<label> Image URL: </label>
+						        <Form.Input
+						          className = "form-control"
+						          placeholder = "Insert Image Link Here"
+						          id = "imageURL"
+						          type = "text"
+						          value = {this.state.UserPicFromModal}
+						          onChange = {this.handleImageLink}
+						        />
+						    </Form.Field>
+						    <Button type = "submit"
+								onClick = {this.saveInfoToDB}
+								className = "btn btn-success"> 
+
+								Update Your Photo 
+
+							</Button>
+							</Grid.Column>
+
+						<Grid.Column>
+						  <Form.Field required>
+								<label> New Location: </label>
+						        <Form.Input
+						          className = "form-control"
+						          placeholder = "Updated Location Here"
+						          id = "newLocation"
+						          type = "text"
+						          value = {this.state.UserModalLocation}
+						          onChange = {this.handleLocationChange}
+						        />
+						    </Form.Field>
+						    <Button type = "submit"
+								onClick = {this.saveInfoToDB}
+								className = "btn btn-success"> 
+
+								Update Your Address 
+
+							</Button>
+							</Grid.Column>
+							</Grid>
+						    </Modal.Content>
+						    </Modal>
 						
 					</UserRepsSection>
 				</Grid.Column >
@@ -252,7 +387,7 @@ class userPage extends Component {
 			<Modal 
 				open={this.state.modalOpen}
    				onClose={this.handleClose}
-   				size = "large"
+   				size = "fullscreen"
    			>
 			<Modal.Content> 
 			<Modal.Description>
