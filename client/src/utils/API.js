@@ -47,6 +47,12 @@ export default {
   },
   getProbills: function(member_id){
     return axios.get("/bills/"+ member_id)
+  },
+  getRecentbills: function(){
+    return axios.get("/recentbills")
+  },
+  getRecentvotes: function(){
+    return axios.get("/recentvotes")
   }
 
 };

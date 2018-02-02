@@ -143,6 +143,33 @@ app.get(`/bills/:member_id`, function(request, response){
   });
 })
 
+app.get(`/recentbills`, function(request, response){
+
+  client2.billsRecent({
+  	"chamber": "both",
+  	"congress-number": "115", 
+  	"bill-type": "introduced"
+  }).then(function(res) {
+    // console.log(res);
+    response.json(res.results)
+
+  });
+})
+
+app.get(`/recentvotes`, function(request, response){
+
+  client2.votesByDate({
+  	chamber:"both",
+  	year: '2018',
+  	month: '01'
+  }).then(function(res) {
+    // console.log(res);
+    response.json(res.results)
+    //
+
+  });
+})
+
 //--------------- Start the API server ---------------//
 	app.listen(PORT, function() {
 	  console.log(`🌎  ==> GoVoRep Server on PORT ${PORT}!`);
