@@ -149,15 +149,15 @@ class userPage extends Component {
   // 	})
   // 	.then(function(results) {
 
-
-  		this.setState({
-  			tweets: result.data
-  		});
-  	})
-  	.catch((error){
-  		console.log("error")
-  	})
-  };*/
+	//
+  	//	this.setState({
+  	//		tweets: result.data
+  	//	});
+  //	})
+  	//.catch((error){
+  	//	console.log("error")
+  	//})
+  //};
 
   componentDidMount() {
     API.search(query)

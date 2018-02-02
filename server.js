@@ -38,7 +38,7 @@
 	);
 //----------------------------------------------------//
 
-app.get('/twitterfeed/:userid', (req, res) => {
+app.get('twitterfeed/:userid', (req, res) => {
 	// 
 	const userid = req.params.userid
 
