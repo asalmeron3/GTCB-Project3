@@ -51,23 +51,40 @@ class userPage extends Component {
   	}).catch((error) => {
       console.log(error);
     })
+    this.checkWhichCongressman(card.name);
+
+  }
 
 
-	this.setState({ListOfBills: [{name:"Bill 1", desc:"This will come from api call",type:"fromList"},
-		{name:"Bill 2", desc:"There will be an array of object (hopefully)",type:"fromList"},
-		{name:"Bill 3", desc:"and we should use .map() to add them to the correct section",type:"fromList"}
-	]});
- //  	this.setState({newsArticles: [{name:"Article 1", desc:"This will come from news api call"},
-	// 	{name:"Article 2", desc:"Look at UserPage.js at componentDidMount()"},
-	// 	{name:"Article 3", desc:"To See how to make the API call and get the data"}
-	// ]});
-	// this.setState({tweets: [{name:"Tweet 1", desc:"This will come from twitter api call"},
-	// 	{name:"Tweet 2", desc:"make sure to setState: to something like res.data.theTweets"},
-	// 	{name:"Tweet 3", desc:"ask Arturo or Willina for help on this part. We are so close!"}
-	// ]});
-
- 
-
+  checkWhichCongressman =(congressmanName) =>{
+  	console.log(congressmanName);
+  	if (checkWhichCongressman==this.state.Senator1.name){
+	  	API.getProbills(this.state.Senator1.id)
+	  	.then((response)=>{
+	  		console.log(response.data)
+	  		this.setState({ListOfBills:response.data})
+	  	}).catch((error) => {
+	      console.log(error);
+	    })
+  	}
+  	else if (checkWhichCongressman==this.state.Senator2.name){
+	  	API.getProbills(this.state.Senator2.id)
+	  	.then((response)=>{
+	  		console.log(response.data)
+	  		this.setState({ListOfBills:response.data})
+	  	}).catch((error) => {
+	      console.log(error);
+	    })
+  	}
+  	else if (checkWhichCongressman==this.state.House1.name){
+	  	API.getProbills(this.state.House1.id)
+	  	.then((response)=>{
+	  		console.log(response.data)
+	  		this.setState({ListOfBills:response.data})
+	  	}).catch((error) => {
+	      console.log(error);
+	    })
+  	}
   }
 
   handleClose = () => this.setState({ modalOpen: false })
@@ -115,6 +132,7 @@ class userPage extends Component {
 	// This section is checking if the user clicked on the bill
 	// from the modal (needs to save to DB) or if user clicked
 	// it from the user page (needs to delete from DB)
+
   checkForUserPage = (bill,e) =>{
   	if(bill.type=="userBill"){
   		
@@ -123,12 +141,12 @@ class userPage extends Component {
   		console.log("this is a userBills and we can get the name to delete from userDB");
   		
   		// -----------This is where we DELETE the bill FROM the DB ----------//
-  			// API.deleteBillFromDB(bill.billTitle)
-  			// .then((res) => {
-		    //    console.log(res);
-		  	// }).catch((error) => {
-		    //    console.log(error);
-		    //  });
+  			API.deleteBillFromDB(bill.billTitle)
+  			.then((res) => {
+		       console.log(res);
+		  	}).catch((error) => {
+		       console.log(error);
+		     });
 		//------------------------------------------------------------------//
   	}
   	else if(bill.type =="fromList"){
@@ -136,12 +154,12 @@ class userPage extends Component {
   		console.log("this is from a specific senator/api-call and we can use the name to save to the userDB")
 
   		// -----------This is where we SAVE the bill TO the DB ----------//
-  			// API.saveBillToDB({billTitle: bill.billTitle, billDescription: bill.billDescription})
-  			// .then((res) => {
-		    //    console.log(res);
-		  	// }).catch((error) => {
-		    //    console.log(error);
-		    //  });
+  			API.saveBillToDB({billTitle: bill.billTitle, billDescription: bill.billDescription})
+  			.then((res) => {
+		       console.log(res);
+		  	}).catch((error) => {
+		       console.log(error);
+		     });
 		//------------------------------------------------------------------//
 
   	}
@@ -164,127 +182,66 @@ class userPage extends Component {
 	      DistrictNumber:"",
 	      UserPicFromModal:"",
 	      UserModalLocation:"",
-	      Senator1:"",
-	      Senator2:"",
-	      House1:""
+	      Senator1:{},
+	      Senator2:{},
+	      House1:{}
 	    }
 	}
 
 
-
-  // fetchbills(){
-
-
-  // 	getbills()
-  // 		.then((res) => {
-  // 			this.setState({ListOfBills:res.data.results.bills})
-  // 		})
-  // 		.catch((error) => {
-  // 			console.log(error)
-  // 		})
-  // }
-
-  // fetcharticles() {
-
-  // 	getarticles()
-  // 		.then((res) => {
-  // 			this.setState({newsArticles:res.data.article})
-
-  // 		})
-  // 		.catch((error) => {
-  // // 			console.log(error)
-  // // 		})
-  // // }
-
-  // fetchhouse() {
-
-  // }
-
-  // fetchsenate() {
-
-  // }
-
-  // fetchtweets() {
-
-  // }
-
-  // componentsWillMount =()=> {
-
-  // 	var tid =
-
-  // 	aiox.get({
-  // 		method: 'Get',
-  // 		url: `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${tid}&count=10`,
-  // 		header:{'consumerKey': 'Jt9yYf668aUb6RxopZGaIbcu6',
-  //          'consumerSecret': 'YhC4qwiPjMe9XPsNavevK2sLZExqwdjXZsfmXdErM0Uo8uMa7b',
-  //          'access_token_key': '918600732126990336-Bd3bPVEOFTogb7yq4mf6xaYg0hj6zxM',
-  //          'access_token_secret': 'Lf3n1k06KcH6K8rLzmXd40FZN0ZhjrJ2YGxr6L6JMQhpg'
-		// }
-
-  // 	})
-  // 	.then(function(results) {
-
-
-  // 		this.setState({
-  // 			tweets: result.data
-  // 		});
-  // 	})
-  // 	.catch((error){
-  // 		console.log("error")
-  // 	})
-  // };*/
-
   componentDidMount() {
-// --------------This is the call to DB for the user information ------//
+	// --------------This is the call to DB for the user information ------//
   
-  // For this call, the response needs to be an array with two responses
-  // the first response should be the USER info from the User Collection
-  // the second response should be the user's saved BILLs from the 2nd 
-  // DB collection ... I hope this makes sense 
+	  // For this call, the response needs to be an array with two responses
+	  // the first response should be the USER info from the User Collection
+	  // the second response should be the user's saved BILLs from the 2nd 
+	  // DB collection ... I hope this makes sense 
 
-  //   API.UserInfoFromDB()
-  //   .then((res)=>{
-  //   	this.setState({UserPicDB:res.data[0].picURL});
-  //   	this.setState({UserLocation:res.data[0].location});
-  //	query= location.add.split(" ").join("%20");
-  // 	this.setState({Name:res.data[0].name});
-  //	this.setState({UserSavedBills:res.data[1]})
-  //   	}).catch((error) => {
-  //	console.log(error)})
-//---------------------------------------------------------------------//
+	    API.UserInfoFromDB()
+	    .then((res)=>{
+	    this.setState({UserPicDB:res.data[0].picURL});
+	    this.setState({UserLocation:res.data[0].location});
+	  	query= location.add.split(" ").join("%20");
+	  	this.setState({Name:res.data[0].name});
+	  	this.setState({UserSavedBills:res.data[1]})
+	    	}).catch((error) => {
+	  	console.log(error)})
+	//---------------------------------------------------------------------//
     
-    API.search(query)
-    .then((res) => {
-      this.setState({govReps: res.data.officials});
-      this.setState({DistrictNumber:res.data.offices[1].name.split("-")[1]});
-      this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
-      this.setState({UserSavedBills: [{name:"UserBill 1", desc:"This will come from DATABASE",type:"userBill"},
-		{name:"UserBill 2", desc:"We need to make request to get all the bills the user has saved",type:"userBill"},
-		{name:"UserBill 3", desc:"the checkForUserPage() will compare if we GET or POST",type:"userBill"}
-	]});
+	// ----------------- This is the query for the officials ---------------//
+	    API.search(query)
+	    .then((res) => {
+	      this.setState({govReps: res.data.officials});
+	      this.setState({DistrictNumber:res.data.offices[1].name.split("-")[1]});
+	      this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
 
-    }).catch((error) => {
-      console.log(error);
-    })
+	    }).catch((error) => {
+	      console.log(error);
+	    })
+	//---------------------------------------------------------------------//
 
-    API.getSenate(this.state.DistrictState)
-    .then((res)=>{
-    	console.log(res)
-    	// this.setState({Senator1:{Name:rep.results[0].name, id:rep.results.id}})
-    	// this.setState({Senator2:{Name:rep.results[1].name, id:rep.results.id}})
-    })
-    .catch((error)=>{
-    	console.log(error)
-    })
 
-    API.getSenate(this.state.DistrictState,this.state.DistrictNumber)
-    .then((res)=>{
-    	console.log(res)
-    	// this.setState({House1:{Name:rep.results[0].name, id:rep.results.id}})
-    })
-    .catch((error)=>{
-    	console.log(error)
-    })
+	//-----These are the THREE (3) Calls to get the Reps' ID for Propubulica---------//
+
+	    API.getSenate(this.state.DistrictState)
+	    .then((res)=>{
+	    	console.log(res)
+	    	this.setState({Senator1:{Name:rep.results[0].name, id:rep.results.id}})
+	    	this.setState({Senator2:{Name:rep.results[1].name, id:rep.results.id}})
+	    })
+	    .catch((error)=>{
+	    	console.log(error)
+	    })
+
+	    API.getHouse(this.state.DistrictState,this.state.DistrictNumber)
+	    .then((res)=>{
+	    	console.log(res)
+	    	this.setState({House1:{Name:rep.results[0].name, id:rep.results.id}})
+	    })
+	    .catch((error)=>{
+	    	console.log(error)
+	    })
+	//---------------------------------------------------------------------//
     
   }
 
