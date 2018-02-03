@@ -90,17 +90,12 @@ router.post('/location', passport.authenticate('jwt',{session: false}), function
   res.redirect('/');
 });*/
 
-getToken = function(headers) {
-  if(headers && headers.authorization) {
-    return headers.authorization;
-  } else {
-    return null;
-  }
-};
+
 router.post("/pic", passport.authenticate('jwt',{session: false}), function(req, res){
   var token = getToken(req.headers);
   if(token){
-    User.findOneAndUpdate({ _id: req.params.id }, {$set: {"UserPic":req.body.picURL}}, function(err, doc){
+    const decode = jwt.decode(token, config.secret);
+    User.findOneAndUpdate({ name: decode.name }, {$set: {"UserPic":req.body.picURL}}, function(err, doc){
       if (err){
         return res.json({success: false, msg: 'Failed. Try again.'});
       }
@@ -114,7 +109,8 @@ router.post("/pic", passport.authenticate('jwt',{session: false}), function(req,
 router.get('/location', passport.authenticate('jwt',{session: false}), function(req, res){
   var token = getToken(req.headers);
   if(token){
-    User.findOne({ _id: req.params.id }, function(err, doc){
+    const decode = jwt.decode(token, config.secret);
+    User.findOne({ name: decode.name }, function(err, doc){
       if (err){
         return res.json({success: false, msg: 'Failed. Try again.'});
       }
@@ -139,6 +135,13 @@ router.get('/bills/:id', passport.authenticate('jwt',{session: false}), function
   }
 });
 
+getToken = function(headers) {
+  if(headers && headers.authorization) {
+    return headers.authorization;
+  } else {
+    return null;
+  }
+};
 // router.get("/twitterfeed/",function(req,res){
 //   var client = new Twitter({
 //   consumer_key: 'Jt9yYf668aUb6RxopZGaIbcu6',

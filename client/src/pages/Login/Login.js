@@ -79,10 +79,14 @@ class Login extends Component {
         //console.log(response);
         localStorage.setItem('jwtToken', response.data.token);
         localStorage.setItem(this.state.username);
-        this.context.router.history.push('/Landing');
+        goTo("Landing");
       });
     }   
   };
+
+  goTo(route) {
+    this.props.history.replace(`/${route}`)
+  }
 
   render() {
   	return(
