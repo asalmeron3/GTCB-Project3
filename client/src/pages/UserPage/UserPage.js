@@ -14,7 +14,7 @@ import {Grid,Modal,Button,Row,Form} from 'semantic-ui-react';
 import RepModal from "../RepModal"; 
 
 //import {getarticles, getbills, getsenate, gethouse, gettweets} from '../routes/api/dashboard.js';
-let query = "540%20Old%20Highway%203%20Hampton%20GA";
+let query = "540 Old Highway 3 Hampton GA";
 
 class userPage extends Component {
 	//Setting initial state
@@ -121,6 +121,7 @@ class userPage extends Component {
 		   }
 		   this.setState({UserModalLocation:""})
 		   console.log(this.state.UserModalLocation);
+		   this.updateQuery();
 	  }
   	//------------------------------------------------//
 
@@ -180,7 +181,7 @@ class userPage extends Component {
 	      DistrictState:"",
 	      DistrictNumber:"",
 	      UserPicFromModal:"",
-	      UserModalLocation:"",
+	      UserModalLocation:"540 Old Highway 3 Hampton GA",
 	      Senator1:{},
 	      Senator2:{},
 	      House1:{}
@@ -200,7 +201,7 @@ class userPage extends Component {
 	    .then((res)=>{
 	    this.setState({UserPicDB:res.data[0].picURL});
 	    //this.setState({UserLocation:res.data[0].location});
-	  	//query= location.add.split(" ").join("%20");
+	  	query= this.state.UserModalLocation.add.split(" ").join("%20");
 	  	this.setState({Name:res.data[0].name});
 	  	this.setState({UserSavedBills:res.data[1]})
 	    	}).catch((error) => {
@@ -213,7 +214,10 @@ class userPage extends Component {
 	      this.setState({govReps: res.data.officials});
 	      this.setState({DistrictNumber:res.data.offices[1].name.split("-")[1]});
 	      this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
-	      this.getSenateAndHouseInfo();
+	      this.setState({UserSavedBills: [{name:"UserBill 1", desc:"This will come from DATABASE",type:"userBill"},
+  		{name:"UserBill 2", desc:"We need to make request to get all the bills the user has saved",type:"userBill"},
+  		{name:"UserBill 3", desc:"the checkForUserPage() will compare if we GET or POST",type:"userBill"}]});
+		this.getSenateAndHouseInfo();
 	    }).catch((error) => {
 	      console.log(error);
 	    })
@@ -221,7 +225,23 @@ class userPage extends Component {
 
     
   }
-
+  	updateQuery = ()=>{
+  			// ----------------- This is the query for the officials ---------------//
+	    query= this.state.UserModalLocation.split(" ").join("%20")
+	    API.search(query)
+	    .then((res) => {
+	      this.setState({govReps: res.data.officials});
+	      this.setState({DistrictNumber:res.data.offices[1].name.split("-")[1]});
+	      this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
+	      this.setState({UserSavedBills: [{name:"UserBill 1", desc:"This will come from DATABASE",type:"userBill"},
+  		{name:"UserBill 2", desc:"We need to make request to get all the bills the user has saved",type:"userBill"},
+  		{name:"UserBill 3", desc:"the checkForUserPage() will compare if we GET or POST",type:"userBill"}]});
+		this.getSenateAndHouseInfo();
+	    }).catch((error) => {
+	      console.log(error);
+	    })
+	//---------------------------------------------------------------------//
+  	}
   	//-----These are the THREE (3) Calls to get the Reps' ID for Propubulica---------//
 	getSenateAndHouseInfo = () =>{
 		console.log("inside getSenateandHouse, DistrictState:")
@@ -271,7 +291,7 @@ class userPage extends Component {
 			<Grid centered padded>
 				
 				<UserCard
-					imageSource = {this.state.UserPicDB}
+					imageSource = {this.state.UserPicFromModal}
 					Name = {this.state.Name}
 					DistrictState = {this.state.DistrictState}
 					DistrictNumber={this.state.DistrictNumber}
@@ -298,8 +318,8 @@ class userPage extends Component {
 				            theColor = {govRep.party==="Republican"? "#cc3b49" : "#006286"}
 				            urls={govRep.urls}
 				            photoUrl = {govRep.photoUrl}
-				            facebook = {govRep.channels[0].id}
-				            twitter = {govRep.channels[1].id}
+				            facebook = {govRep.channels===undefined ?"":govRep.channels[0].id}
+				            twitter = {govRep.channels===undefined ?"":govRep.channels[1].id}
 				            handleOpen = {boundItemClick}
 			              /> )
 			            })}
