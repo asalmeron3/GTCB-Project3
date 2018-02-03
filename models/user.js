@@ -38,10 +38,6 @@
 		picURL:{
 			type:String,
 		},
-		saved: {
-			type: Boolean,
-			default: false
-		},
 		bills: [{
 			type: Schema.Types.ObjectId,
 			ref: "Bills"
@@ -50,37 +46,37 @@
 	});
 //-----------------------------------------------//
 
-// UserSchema.pre('save', function (next){
-// 	var user = this;
-// 	if (this.isModified('password') || this.isNew){
-// 		bcrypt.genSalt(10, function (err, salt) {
-// 			if(err){
-// 				return next(err);
-// 			}
-// 			bcrypt.hash(user.password, salt, null, function(err, hash){
-// 				if (err){
-// 					return next(err);
-// 				}
-// 				user.password = hash;
-// 				next();
-// 			});
-// 		});
-// 	} else {
-// 		return next();
-// 	}
-// });
+UserSchema.pre('save', function (next){
+	var user = this;
+	if (this.isModified('password') || this.isNew){
+		bcrypt.genSalt(10, function (err, salt) {
+			if(err){
+				return next(err);
+			}
+			bcrypt.hash(user.password, salt, null, function(err, hash){
+				if (err){
+					return next(err);
+				}
+				user.password = hash;
+				next();
+			});
+		});
+	} else {
+		return next();
+	}
+});
 
-// UserSchema.methods.comparePassword = function (passw, cb) {
-// 	bcrypt.compare(passw, this.password, function(err, isMatch){
-// 		if(err){
-// 			return cd(err);
-// 		}
-// 		cb(null, isMatch);
-// 	});
-// };
+UserSchema.methods.comparePassword = function (passw, cb) {
+	bcrypt.compare(passw, this.password, function(err, isMatch){
+		if(err){
+			return cd(err);
+		}
+		cb(null, isMatch);
+	});
+};
 
-// //-----------Create Model with Schema-------------//
-// 	var Users = mongoose.model("Users",UserSchema);
-// //-----------------------------------------------//
+//-----------Create Model with Schema-------------//
+	var Users = mongoose.model("Users",UserSchema);
+//-----------------------------------------------//
 
-// module.exports = Users;
+module.exports = Users;

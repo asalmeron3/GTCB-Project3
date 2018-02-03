@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SignUp from "../../components/SignUp";
 import API from "../../utils/API";
+import { Link } from 'react-router';
 
 
 class Login extends Component {
@@ -47,9 +48,11 @@ class Login extends Component {
       password : this.state.Lpassword.trim()
     };
     console.log(info);
-    API.loginUser(info);
-
-
+    API.loginUser(info)
+    .then((info) => {
+      localStorage.setItem('jwtToken', info.payload.data.token);
+      this.context.router.push('/UserPage');
+    });
   };
 
   handleSignUp = event => {
@@ -67,10 +70,14 @@ class Login extends Component {
         picURL:"www.shackmanlab.org/wp-content/uploads/2013/07/person-placeholder.jpg"
       };
       console.log(info);
-      API.addUser(info);
-    }
-    
+      API.addUser(info)
+      .then((info) => {
+        localStorage.setItem('jwtToken', info.payload.data.token);
+        this.context.router.push('/Landing');
+      });
+    }   
   };
+
   render() {
   	return(
   		<SignUp 
