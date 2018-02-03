@@ -55,7 +55,7 @@ class Login extends Component {
     .then((response) => {
       //console.log(response);
       localStorage.setItem('jwtToken', response.data.token);
-      this.props.history.replace('/Landing');
+      window.location.replace('/Landing');
     });
   };
 
@@ -80,7 +80,7 @@ class Login extends Component {
         //console.log(response);
         localStorage.setItem('jwtToken', response.data.token);
         localStorage.setItem(this.state.username);
-        this.props.history.replace('/Landing');
+        window.location.replace('/Landing');
       });
     }   
   };
