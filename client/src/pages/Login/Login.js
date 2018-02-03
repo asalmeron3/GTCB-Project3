@@ -50,7 +50,7 @@ class Login extends Component {
     };
     console.log(info);
     API.loginUser(info);
-    axios.post('api/login', info)
+    axios.post('api/auth/login', info)
     .then((response) => {
       localStorage.setItem('jwtToken', response.payload.data.token);
       this.context.router.push('/UserPage');

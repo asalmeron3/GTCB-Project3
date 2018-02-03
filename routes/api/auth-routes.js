@@ -26,7 +26,7 @@ router.post('/signup', function(req, res) {
       if(err) {
         return res.json({success: false, msg: 'Username already exists.'});
       }
-      var token = jwt.sign(newUser.toJSON(), config.secret);
+      var token = jwt.sign({data: newUser}, config.secret);
       res.json({success: true, msg: 'Successfully created new user.',token: 'JWT ' + token });
     });
   }
