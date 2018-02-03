@@ -14,7 +14,7 @@ import {Grid,Modal,Button,Row,Form} from 'semantic-ui-react';
 import RepModal from "../RepModal"; 
 
 //import {getarticles, getbills, getsenate, gethouse, gettweets} from '../routes/api/dashboard.js';
-const query = "540%20Old%20Highway%203%20Hampton%20GA";
+let query = "540%20Old%20Highway%203%20Hampton%20GA";
 
 class userPage extends Component {
 	//Setting initial state
@@ -25,9 +25,7 @@ class userPage extends Component {
   	modalImage: "",
   	modalParty:"",
   	modalTwoOpen:"false",
-  	
-  	
-  }
+  };
 
 
   handleOpen = (card,e) => {
@@ -56,9 +54,9 @@ class userPage extends Component {
   }
 
 
-  checkWhichCongressman =(congressmanName) =>{
+  checkWhichCongressman = (congressmanName) => {
   	console.log(congressmanName);
-  	if (checkWhichCongressman==this.state.Senator1.name){
+  	if (congressmanName == this.state.Senator1.name){
 	  	API.getProbills(this.state.Senator1.id)
 	  	.then((response)=>{
 	  		console.log(response.data)
@@ -67,7 +65,7 @@ class userPage extends Component {
 	      console.log(error);
 	    })
   	}
-  	else if (checkWhichCongressman==this.state.Senator2.name){
+  	else if (congressmanName == this.state.Senator2.name){
 	  	API.getProbills(this.state.Senator2.id)
 	  	.then((response)=>{
 	  		console.log(response.data)
@@ -76,7 +74,7 @@ class userPage extends Component {
 	      console.log(error);
 	    })
   	}
-  	else if (checkWhichCongressman==this.state.House1.name){
+  	else if (congressmanName == this.state.House1.name){
 	  	API.getProbills(this.state.House1.id)
 	  	.then((response)=>{
 	  		console.log(response.data)
@@ -174,7 +172,8 @@ class userPage extends Component {
 	      ListOfBills:[],
 	      newsArticles: [],
 	      tweets:[],
-	      UserSavedBills:[],
+		  UserSavedBills:[],
+		  reps:[],
 	      UserPicDB:"",
 	      UserLocation:"",
 	      Name: "",
@@ -200,8 +199,8 @@ class userPage extends Component {
 	    API.UserInfoFromDB()
 	    .then((res)=>{
 	    this.setState({UserPicDB:res.data[0].picURL});
-	    this.setState({UserLocation:res.data[0].location});
-	  	query= location.add.split(" ").join("%20");
+	    //this.setState({UserLocation:res.data[0].location});
+	  	//query= location.add.split(" ").join("%20");
 	  	this.setState({Name:res.data[0].name});
 	  	this.setState({UserSavedBills:res.data[1]})
 	    	}).catch((error) => {
@@ -226,8 +225,8 @@ class userPage extends Component {
 	    API.getSenate(this.state.DistrictState)
 	    .then((res)=>{
 	    	console.log(res)
-	    	this.setState({Senator1:{Name:rep.results[0].name, id:rep.results.id}})
-	    	this.setState({Senator2:{Name:rep.results[1].name, id:rep.results.id}})
+	    	this.setState({Senator1:{Name:res.results[0].name, id:res.results.id}})
+	    	this.setState({Senator2:{Name:res.results[1].name, id:res.results.id}})
 	    })
 	    .catch((error)=>{
 	    	console.log(error)
@@ -236,7 +235,7 @@ class userPage extends Component {
 	    API.getHouse(this.state.DistrictState,this.state.DistrictNumber)
 	    .then((res)=>{
 	    	console.log(res)
-	    	this.setState({House1:{Name:rep.results[0].name, id:rep.results.id}})
+	    	this.setState({House1:{Name:res.results[0].name, id:res.results.id}})
 	    })
 	    .catch((error)=>{
 	    	console.log(error)
