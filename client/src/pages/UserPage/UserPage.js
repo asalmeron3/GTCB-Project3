@@ -224,26 +224,36 @@ class userPage extends Component {
 
   	//-----These are the THREE (3) Calls to get the Reps' ID for Propubulica---------//
 	getSenateAndHouseInfo = () =>{
+		console.log("inside getSenateandHouse, DistrictState:")
+		console.log(this.state.DistrictState)
 	    API.getSenate(this.state.DistrictState)
 	    .then((res)=>{
 	    	console.log(res)
-	    	this.setState({Senator1:{Name:res.data.data[0].name, id:res.data.data[0].id}})
-	    	console.log("this should be the res.data.data array: " + res.data.data)
-	    	console.log("willina, I hope you see this.state.Senator1 object here: " + this.state.Senator1)
-	    	this.setState({Senator2:{Name:res.data.data[1].name, id:res.data.data[1].id}})
-	    	console.log("this should be the res.data.data array2: " + res.data.data)
-	    	console.log("this.state.Senator2 object here: " + this.state.Senator2)
+	    	this.setState({Senator1:{Name:res.data[0].name, id:res.data[0].id}})
+	    	console.log("setting state Senator1")
+	    	console.log("this should be the res.data array: ")
+	    	console.log(res.data)
+	    	console.log("willina, I hope you see this.state.Senator1 object here:")
+	    	console.log( this.state.Senator1);
+	    	this.setState({Senator2:{Name:res.data[1].name, id:res.data[1].id}})
+	    	console.log("and this.state.Senator2")
+	    	console.log(this.state.Senator2)
 	    })
 	    .catch((error)=>{
 	    	console.log(error)
 	    })
 
 	    API.getHouse(this.state.DistrictState,this.state.DistrictNumber)
+	    console.log("inside getSenateandHouse, DistrictNumber:")
+		console.log(this.state.DistrictNumber)
 	    .then((res)=>{
 	    	console.log(res)
-	    	this.setState({House1:{Name:res.data.data[0].name, id:res.data.data[0].id}})
-	    	console.log("this should be the res.data.data array: " + res.data.data)
-	    	console.log("this.state.House1 object here: " + this.state.House1)
+	    	console.log("setting state House1")
+	    	console.log("this should be the res.data array: ")
+	    	console.log(res.data)
+	    	console.log("I hope we see this.state.House1 object here:")
+	    	console.log( this.state.House1);
+	    	this.setState({House1:{Name:res.data[0].name, id:res.data[0].id}})
 	    })
 	    .catch((error)=>{
 	    	console.log(error)
