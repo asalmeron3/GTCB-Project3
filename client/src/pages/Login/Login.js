@@ -48,10 +48,11 @@ class Login extends Component {
       username: this.state.username.trim(),
       password : this.state.Lpassword.trim()
     };
-    console.log(info);
+    //console.log(info);
     API.loginUser(info);
     axios.post('api/auth/login', info)
     .then((response) => {
+      console.log(response);
       localStorage.setItem('jwtToken', response.payload.data.token);
       this.context.router.push('/UserPage');
     });
@@ -71,10 +72,11 @@ class Login extends Component {
         username:this.state.Semail.split("@")[0],
         picURL:"www.shackmanlab.org/wp-content/uploads/2013/07/person-placeholder.jpg"
       };
-      console.log(info);
+      //console.log(info);
       API.addUser(info);
       axios.post('api/auth/signup', info)
       .then((response) => {
+        console.log(response);
         localStorage.setItem('jwtToken', response.payload.data.token);
         localStorage.setItem(this.state.username);
         this.context.router.push('/Landing');
