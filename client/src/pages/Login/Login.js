@@ -3,6 +3,7 @@ import SignUp from "../../components/SignUp";
 import API from "../../utils/API";
 import { Link  } from 'react-router';
 import axios from 'axios';
+import LandingPage from "../LandingPage/LandingPage";
 
 
 class Login extends Component {
@@ -54,7 +55,7 @@ class Login extends Component {
     .then((response) => {
       //console.log(response);
       localStorage.setItem('jwtToken', response.data.token);
-     this.context.router.history.push('/Landing');
+     goTo(LandingPage)
     });
   };
 
@@ -79,13 +80,13 @@ class Login extends Component {
         //console.log(response);
         localStorage.setItem('jwtToken', response.data.token);
         localStorage.setItem(this.state.username);
-        goTo("Landing");
+        goTo(LandingPage);
       });
     }   
   };
 
-  goTo(route) {
-    this.props.history.replace(`/${route}`)
+  goTo = route => {
+    this.props.history.replace(`/${route}`);
   }
 
   render() {
