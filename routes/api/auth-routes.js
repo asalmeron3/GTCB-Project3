@@ -74,9 +74,8 @@ router.get('/userPage/:name', passport.authenticate('jwt',{session: false}), fun
 router.post('/location', passport.authenticate('jwt',{session: false}), function(req, res){
   var token = getToken(req.headers);
   if(token){
-    const decode = jwt.decode(token, config.secret);
-    console.log(decode);
-    User.findOneAndUpdate({ name:decode.name }, {$set: {"location":req.body.location}}, function(err, doc){
+    //console.log(decode);
+    User.findOneAndUpdate({ _id: req.params.id }, {$set: {"location":req.body.location}}, function(err, doc){
       if (err){
         return res.json({success: false, msg: 'Failed. Try again.'});
       }
