@@ -56,7 +56,7 @@ class userPage extends Component {
 
   checkWhichCongressman = (congressmanName) => {
   	console.log(congressmanName);
-  	if (congressmanName == this.state.Senator1.name){
+  	if (congressmanName == this.state.Senator1.Name){
 	  	API.getProbills(this.state.Senator1.id)
 	  	.then((response)=>{
 	  		console.log(response.data)
@@ -65,7 +65,7 @@ class userPage extends Component {
 	      console.log(error);
 	    })
   	}
-  	else if (congressmanName == this.state.Senator2.name){
+  	else if (congressmanName == this.state.Senator2.Name){
 	  	API.getProbills(this.state.Senator2.id)
 	  	.then((response)=>{
 	  		console.log(response.data)
@@ -74,7 +74,7 @@ class userPage extends Component {
 	      console.log(error);
 	    })
   	}
-  	else if (congressmanName == this.state.House1.name){
+  	else if (congressmanName == this.state.House1.Name){
 	  	API.getProbills(this.state.House1.id)
 	  	.then((response)=>{
 	  		console.log(response.data)

@@ -101,9 +101,9 @@ app.get(`/members/senate/:state`, function(request, response){
   const senateState = request.params.state;
 
   client2.membersCurrentByStateOrDistrict({
-    congressNumber: '115',
-    chamber: 'senate',
-    state: senateState
+    "congressNumber": '115',
+    "chamber": 'senate',
+    "state": senateState
   }).then(function(res) {
     // console.log(res.results[0].id);
     response.json(res.results)
@@ -118,10 +118,10 @@ app.get(`/members/house/:state/:district`, function(request, response){
 	const houseDistrict = request.params.district;
 
   client2.membersCurrentByStateOrDistrict({
-    congressNumber: '115',
-    chamber: 'house',
-    state: houseState,
-    district: houseDistrict
+    "congressNumber": '115',
+    "chamber": 'house',
+    "state": houseState,
+    "district": houseDistrict
   }).then(function(res) {
     // console.log(res.results[0].id);
     response.json(res.results)
@@ -159,9 +159,9 @@ app.get(`/recentbills`, function(request, response){
 app.get(`/recentvotes`, function(request, response){
 
   client2.votesByDate({
-  	chamber:"both",
-  	year: '2018',
-  	month: '01'
+  	"chamber":"both",
+  	"year": '2018',
+  	"month": '01'
   }).then(function(res) {
     // console.log(res);
     response.json(res.results)
