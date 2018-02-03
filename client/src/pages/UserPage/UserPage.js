@@ -225,8 +225,8 @@ class userPage extends Component {
 	    API.getSenate(this.state.DistrictState)
 	    .then((res)=>{
 	    	console.log(res)
-	    	this.setState({Senator1:{Name:res.results[0].name, id:res.results.id}})
-	    	this.setState({Senator2:{Name:res.results[1].name, id:res.results.id}})
+	    	this.setState({Senator1:{Name:res.data[0].name, id:res.data.id}})
+	    	this.setState({Senator2:{Name:res.data[1].name, id:res.data.id}})
 	    })
 	    .catch((error)=>{
 	    	console.log(error)
@@ -235,7 +235,7 @@ class userPage extends Component {
 	    API.getHouse(this.state.DistrictState,this.state.DistrictNumber)
 	    .then((res)=>{
 	    	console.log(res)
-	    	this.setState({House1:{Name:res.results[0].name, id:res.results.id}})
+	    	this.setState({House1:{Name:res.data[0].name, id:res.data.id}})
 	    })
 	    .catch((error)=>{
 	    	console.log(error)
