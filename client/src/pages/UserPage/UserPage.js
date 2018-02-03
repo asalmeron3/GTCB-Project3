@@ -227,8 +227,12 @@ class userPage extends Component {
 	    API.getSenate(this.state.DistrictState)
 	    .then((res)=>{
 	    	console.log(res)
-	    	this.setState({Senator1:{Name:res.data[0].name, id:res.data.id}})
-	    	this.setState({Senator2:{Name:res.data[1].name, id:res.data.id}})
+	    	this.setState({Senator1:{Name:res.data.data[0].name, id:res.data.data[0].id}})
+	    	console.log("this should be the res.data.data array: " + res.data.data)
+	    	console.log("willina, I hope you see this.state.Senator1 object here: " + this.state.Senator1)
+	    	this.setState({Senator2:{Name:res.data.data[1].name, id:res.data.data[1].id}})
+	    	console.log("this should be the res.data.data array2: " + res.data.data)
+	    	console.log("this.state.Senator2 object here: " + this.state.Senator2)
 	    })
 	    .catch((error)=>{
 	    	console.log(error)
@@ -237,7 +241,9 @@ class userPage extends Component {
 	    API.getHouse(this.state.DistrictState,this.state.DistrictNumber)
 	    .then((res)=>{
 	    	console.log(res)
-	    	this.setState({House1:{Name:res.data[0].name, id:res.data.id}})
+	    	this.setState({House1:{Name:res.data.data[0].name, id:res.data.data[0].id}})
+	    	console.log("this should be the res.data.data array: " + res.data.data)
+	    	console.log("this.state.House1 object here: " + this.state.House1)
 	    })
 	    .catch((error)=>{
 	    	console.log(error)
