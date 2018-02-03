@@ -9,15 +9,12 @@
 
 var RecentInfo = props => 
 
-
-    <Grid.Column>
+  <Grid.Column>
       <Segment raised>
-        <Label as='a' color={props.labelColor} size='large' ribbon>Recent Bill</Label>
-{props.children}
-     </Segment>
+        <Label as='a' color={'props.labelColor'}>{props.labeltext}</Label>
+        	{props.children}
+      </Segment>
     </Grid.Column>
-
-
 
 
 export default RecentInfo;
