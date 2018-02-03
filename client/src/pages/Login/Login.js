@@ -72,6 +72,7 @@ class Login extends Component {
       console.log(info);
       API.addUser(info)
       .then((info) => {
+        console.log(info.payload);
         localStorage.setItem('jwtToken', info.payload.data.token);
         this.context.router.push('/Landing');
       });

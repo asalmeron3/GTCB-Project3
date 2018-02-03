@@ -26,7 +26,7 @@ router.post('/signup', function(req, res) {
       if(err) {
         return res.json({success: false, msg: 'Username already exists.'});
       }
-      var token = jwt.sign(newUser, config.secret);
+      var token = jwt.sign(newUser.toJSON(), config.secret);
       res.json({success: true, msg: 'Successfully created new user.',token: 'JWT ' + token });
     });
   }
@@ -44,7 +44,7 @@ router.post('/login', function(req, res) {
       user.comparePassword(req.body.password, function(err, isMatch){
         if(isMatch && !err){
           //if user is found and password is right create a token
-          var token = jwt.sign(user, config.secret);
+          var token = jwt.sign(user.toJSON(), config.secret);
           //return the information including token as JSON
           res.json({success: true, token: 'JWT ' + token});
         } else {
