@@ -10,7 +10,7 @@ const Header = () =>
       <div className="navbar-header">
         <div className="ui left floated huge header" style = {{margin: "11px"}}>
           <a href="/UserPage" className="navbar-brand">
-            GoVoRep
+            GovRep
           </a>
         </div>
         <div className="ui right floated header" style = {{margin: "15px"}} >

@@ -2,8 +2,7 @@ import React from 'react'
 import { Container, Divider, Dropdown, Grid, Header, Image, List, Menu, Segment } from 'semantic-ui-react'
 const Footer = () => (
 
-<Grid.Row>
-      <Divider section/>
+<Grid.Row style={{background:"beige"}}>
       <div textAlign='center'>
         <List horizontal divided link>
           <List.Item as='a' href='#'>Site Map</List.Item>
