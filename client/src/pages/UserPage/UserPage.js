@@ -45,7 +45,7 @@ class userPage extends Component {
   	API.getTweets(card.channels[1].id)
   	.then((response)=>{
   		console.log(response.data)
-  		this.setState({tweets:response.data})
+  		this.setState({tweets:response.data.data})
   	}).catch((error) => {
       console.log(error);
     })
@@ -426,8 +426,8 @@ class userPage extends Component {
 			            	return (
 				              <NewsAndTweetCard
 				              	key = {oneTweet.id}
-								billTitle={oneTweet.name}
-					            billDescription={oneTweet.desc}
+								billTitle={oneTweet.text}
+					            billDescription={oneTweet.created_at}
 				              /> )
 			            })}
 					</FeedColumn>
