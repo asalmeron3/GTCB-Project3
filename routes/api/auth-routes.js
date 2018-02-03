@@ -20,7 +20,8 @@ router.post('/signup', function(req, res) {
       username: req.body.username,
       password: req.body.password,
       email: req.body.email,
-      name: req.body.name
+      name: req.body.name,
+      picURL:req.body.picURL
     });
     newUser.save(function(err) {
       if(err) {
@@ -89,7 +90,7 @@ getToken = function(headers) {
 router.post("/pic", passport.authenticate('jwt',{session: false}), function(req, res){
   var token = getToken(req.headers);
   if(token){
-    User.findOneAndUpdate({ _id: req.params.id }, {$set: {"UserPic":req.body.picURL}}, function(err, doc){
+    User.findOneAndUpdate({ _id: req.params.id }, {$set: {"picURL":req.body.picURL}}, function(err, doc){
       if (err){
         return res.json({success: false, msg: 'Failed. Try again.'});
       }
@@ -103,6 +104,8 @@ router.post("/pic", passport.authenticate('jwt',{session: false}), function(req,
 router.get('/location', passport.authenticate('jwt',{session: false}), function(req, res){
   var token = getToken(req.headers);
   if(token){
+    //check UserPage line 194 - 207 for the response format (should be an array)
+    // should have this format :  [{all User data}, {all Users saved Bills}]
     User.findOne({ _id: req.params.id }, function(err, doc){
       if (err){
         return res.json({success: false, msg: 'Failed. Try again.'});
