@@ -49,8 +49,8 @@ class Login extends Component {
     };
     console.log(info);
     API.loginUser(info)
-    .then((info) => {
-      localStorage.setItem('jwtToken', info.payload.data.token);
+    .then((response) => {
+      localStorage.setItem('jwtToken', response.payload.data.token);
       this.context.router.push('/UserPage');
     });
   };
@@ -71,9 +71,9 @@ class Login extends Component {
       };
       console.log(info);
       API.addUser(info)
-      .then((info) => {
-        console.log(info.payload);
-        localStorage.setItem('jwtToken', info.payload.data.token);
+      .then((response) => {
+        localStorage.setItem('jwtToken', response.payload.data.token);
+        localStorage.setItem(this.state.username);
         this.context.router.push('/Landing');
       });
     }   
