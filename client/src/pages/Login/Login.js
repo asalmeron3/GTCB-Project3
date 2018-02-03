@@ -55,7 +55,7 @@ class Login extends Component {
     .then((response) => {
       //console.log(response);
       localStorage.setItem('jwtToken', response.data.token);
-     goTo(LandingPage)
+      this.props.history.replace('/Landing');
     });
   };
 
@@ -80,14 +80,12 @@ class Login extends Component {
         //console.log(response);
         localStorage.setItem('jwtToken', response.data.token);
         localStorage.setItem(this.state.username);
-        goTo(LandingPage);
+        this.props.history.replace('/Landing');
       });
     }   
   };
 
-  goTo = route => {
-    this.props.history.replace(`/${route}`);
-  }
+  
 
   render() {
   	return(
