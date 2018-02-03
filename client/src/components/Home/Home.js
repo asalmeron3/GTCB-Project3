@@ -2,7 +2,7 @@
 	import React from "react"
 	import "./Home.css"
 	import { Image,Button } from 'semantic-ui-react'
-	import imgGVR from "./GoVoRep.png"
+	import imgGVR from "./GovRep.png"
 	import Login from "../../pages/Login";
 //--------------------------------------------//
 

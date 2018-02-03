@@ -23,7 +23,8 @@
 	padding-bottom: 20%;
 }
 .userPageDiv, .landingPageDiv{
-  background-image: url(http://blogs.reuters.com/great-debate/files/2013/08/mlk-march-on-dc-1024x788.jpg);
-  background-repeat: no-repeat;
+  /*background-image: url(http://blogs.reuters.com/great-debate/files/2013/08/mlk-march-on-dc-1024x788.jpg);
+  background-repeat: no-repeat;*/
   background-size: 100% 100%;
+  background: beige;
 }
