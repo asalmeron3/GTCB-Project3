@@ -10,7 +10,7 @@ import FeedColumn from "../../components/FeedColumn";
 import API from "../../utils/API";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer/Footer";
-import {Grid,Modal,Button,Row} from 'semantic-ui-react';
+import {Grid,Modal,Button,Row,Form} from 'semantic-ui-react';
 import RepModal from "../RepModal"; 
 
 //import {getarticles, getbills, getsenate, gethouse, gettweets} from '../routes/api/dashboard.js';
@@ -24,6 +24,8 @@ class userPage extends Component {
   	modalName: "",
   	modalImage: "",
   	modalParty:"",
+  	modalTwoOpen:"false",
+  	
   	
   }
 
@@ -49,37 +51,121 @@ class userPage extends Component {
   	}).catch((error) => {
       console.log(error);
     })
+    this.checkWhichCongressman(card.name);
+
+  }
 
 
-	this.setState({ListOfBills: [{name:"Bill 1", desc:"This will come from api call",type:"fromList"},
-		{name:"Bill 2", desc:"There will be an array of object (hopefully)",type:"fromList"},
-		{name:"Bill 3", desc:"and we should use .map() to add them to the correct section",type:"fromList"}
-	]});
- //  	this.setState({newsArticles: [{name:"Article 1", desc:"This will come from news api call"},
-	// 	{name:"Article 2", desc:"Look at UserPage.js at componentDidMount()"},
-	// 	{name:"Article 3", desc:"To See how to make the API call and get the data"}
-	// ]});
-	this.setState({tweets: [{name:"Tweet 1", desc:"This will come from twitter api call"},
-		{name:"Tweet 2", desc:"make sure to setState: to something like res.data.theTweets"},
-		{name:"Tweet 3", desc:"ask Arturo or Willina for help on this part. We are so close!"}
-	]});
-
- 
-
+  checkWhichCongressman =(congressmanName) =>{
+  	console.log(congressmanName);
+  	if (checkWhichCongressman==this.state.Senator1.name){
+	  	API.getProbills(this.state.Senator1.id)
+	  	.then((response)=>{
+	  		console.log(response.data)
+	  		this.setState({ListOfBills:response.data})
+	  	}).catch((error) => {
+	      console.log(error);
+	    })
+  	}
+  	else if (checkWhichCongressman==this.state.Senator2.name){
+	  	API.getProbills(this.state.Senator2.id)
+	  	.then((response)=>{
+	  		console.log(response.data)
+	  		this.setState({ListOfBills:response.data})
+	  	}).catch((error) => {
+	      console.log(error);
+	    })
+  	}
+  	else if (checkWhichCongressman==this.state.House1.name){
+	  	API.getProbills(this.state.House1.id)
+	  	.then((response)=>{
+	  		console.log(response.data)
+	  		this.setState({ListOfBills:response.data})
+	  	}).catch((error) => {
+	      console.log(error);
+	    })
+  	}
   }
 
   handleClose = () => this.setState({ modalOpen: false })
 
+	//--------Handles the Modal for the UserCard --------//
+	  handleOpenTwo = ()=> {
+	  	this.setState({modalTwoOpen:true})
+	  }
+	  handleCloseTwo =() => this.setState({modalTwoOpen:false});
+	  handleImageLink = (e) =>{
+	    this.setState({UserPicFromModal: e.target.value});
+	  };
+	  handleLocationChange= (e) =>{
+	    this.setState({UserModalLocation: e.target.value});
+	  };
+	  saveInfoToDB =()  =>{
+		  if(this.state.UserPicFromModal!=""){
+		  	API.addPic(this.state.UserPicFromModal)
+		  	.then((res) => {
+		      console.log(res);
+		  	}).catch((error) => {
+		      console.log(error);
+		    });
+		    this.setState({UserPicFromModal:""})
+		   console.log(this.state.UserPicFromModal);
+		   }
+
+		   if(this.state.UserModalLocation!=""){
+		   	console.log(this.state.UserModalLocation)
+		  	API.updateAddress(this.state.UserModalLocation)
+		  	.then((res) => {
+		      console.log(res);
+		  	}).catch((error) => {
+		      console.log(error);
+		    });
+		   }
+		   this.setState({UserModalLocation:""})
+		   console.log(this.state.UserModalLocation);
+	  }
+  	//------------------------------------------------//
+
+  
+// -----------------------Check which Bill we clicked and what to do --------------------//
+
+	// This section is checking if the user clicked on the bill
+	// from the modal (needs to save to DB) or if user clicked
+	// it from the user page (needs to delete from DB)
+
   checkForUserPage = (bill,e) =>{
   	if(bill.type=="userBill"){
+  		
   		//add the function or orperation for deleting this bill from the users saved bills
+  		
   		console.log("this is a userBills and we can get the name to delete from userDB");
+  		
+  		// -----------This is where we DELETE the bill FROM the DB ----------//
+  			API.deleteBillFromDB(bill.billTitle)
+  			.then((res) => {
+		       console.log(res);
+		  	}).catch((error) => {
+		       console.log(error);
+		     });
+		//------------------------------------------------------------------//
   	}
   	else if(bill.type =="fromList"){
   		// add the function to save this bill to the user database
   		console.log("this is from a specific senator/api-call and we can use the name to save to the userDB")
+
+  		// -----------This is where we SAVE the bill TO the DB ----------//
+  			API.saveBillToDB({billTitle: bill.billTitle, billDescription: bill.billDescription})
+  			.then((res) => {
+		       console.log(res);
+		  	}).catch((error) => {
+		       console.log(error);
+		     });
+		//------------------------------------------------------------------//
+
   	}
   }
+// --------------------------------------------------------------- --------------------//
+
 
 	constructor(props){
 	    super(props);
@@ -89,13 +175,21 @@ class userPage extends Component {
 	      newsArticles: [],
 	      tweets:[],
 	      UserSavedBills:[],
-	      UserPic:"",
+	      UserPicDB:"",
 	      UserLocation:"",
 	      Name: "",
+	      DistrictState:"",
+	      DistrictNumber:"",
+	      UserPicFromModal:"",
+	      UserModalLocation:"",
+	      Senator1:{},
+	      Senator2:{},
+	      House1:{}
 	    }
 	}
 
 
+<<<<<<< HEAD
 
   // fetchbills(){
 
@@ -159,25 +253,61 @@ class userPage extends Component {
   	//})
   //};
 
+=======
+>>>>>>> 60a99b4f3370ce06f77a2edd8a632b6f294290d5
   componentDidMount() {
-    API.search(query)
-    .then((res) => {
-      this.setState({govReps: res.data.officials});
-      this.setState({UserSavedBills: [{name:"UserBill 1", desc:"This will come from DATABASE",type:"userBill"},
-		{name:"UserBill 2", desc:"We need to make request to get all the bills the user has saved",type:"userBill"},
-		{name:"UserBill 3", desc:"the checkForUserPage() will compare if we GET or POST",type:"userBill"}
-	]});
+	// --------------This is the call to DB for the user information ------//
+  
+	  // For this call, the response needs to be an array with two responses
+	  // the first response should be the USER info from the User Collection
+	  // the second response should be the user's saved BILLs from the 2nd 
+	  // DB collection ... I hope this makes sense 
 
-    }).catch((error) => {
-      console.log(error);
-    })
-  //   API.getAddressAndPic()
-  //   .then((res)=>{
-  //   	this.setState({UserPic:res.data.picURL});
-  //   	this.setState({UserLocation:res.data.location});
-  // 	this.setState({Name:res.data.name});
-  //   	}).catch((error) => {
-  //	console.log(error)})
+	    API.UserInfoFromDB()
+	    .then((res)=>{
+	    this.setState({UserPicDB:res.data[0].picURL});
+	    this.setState({UserLocation:res.data[0].location});
+	  	query= location.add.split(" ").join("%20");
+	  	this.setState({Name:res.data[0].name});
+	  	this.setState({UserSavedBills:res.data[1]})
+	    	}).catch((error) => {
+	  	console.log(error)})
+	//---------------------------------------------------------------------//
+    
+	// ----------------- This is the query for the officials ---------------//
+	    API.search(query)
+	    .then((res) => {
+	      this.setState({govReps: res.data.officials});
+	      this.setState({DistrictNumber:res.data.offices[1].name.split("-")[1]});
+	      this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
+
+	    }).catch((error) => {
+	      console.log(error);
+	    })
+	//---------------------------------------------------------------------//
+
+
+	//-----These are the THREE (3) Calls to get the Reps' ID for Propubulica---------//
+
+	    API.getSenate(this.state.DistrictState)
+	    .then((res)=>{
+	    	console.log(res)
+	    	this.setState({Senator1:{Name:rep.results[0].name, id:rep.results.id}})
+	    	this.setState({Senator2:{Name:rep.results[1].name, id:rep.results.id}})
+	    })
+	    .catch((error)=>{
+	    	console.log(error)
+	    })
+
+	    API.getHouse(this.state.DistrictState,this.state.DistrictNumber)
+	    .then((res)=>{
+	    	console.log(res)
+	    	this.setState({House1:{Name:rep.results[0].name, id:rep.results.id}})
+	    })
+	    .catch((error)=>{
+	    	console.log(error)
+	    })
+	//---------------------------------------------------------------------//
     
   }
 
@@ -191,10 +321,12 @@ class userPage extends Component {
 			<Grid centered padded>
 				
 				<UserCard
-					imageSource = "https://avatars0.githubusercontent.com/u/27255697?s=400&u=ed3a2731302e7cc0a83956c2248e17be0ff9b7d1&v=4"
-					Name = "Arturo Salmeron"
-					District = "Atlanta - District ???"
+					imageSource = {this.state.UserPicDB}
+					Name = {this.state.Name}
+					DistrictState = {this.state.DistrictState}
+					DistrictNumber={this.state.DistrictNumber}
 					Meta = "User"
+					addPhoto= {this.handleOpenTwo}
 					
 				/>
 				
@@ -221,6 +353,58 @@ class userPage extends Component {
 				            handleOpen = {boundItemClick}
 			              /> )
 			            })}
+			              <Modal 
+							open={this.state.modalTwoOpen}
+							onClose={this.handleCloseTwo}
+							size = "small"
+						   >
+							<Modal.Content> 
+							<Grid verticalAlign="middle" container stackable columns={2}>
+							
+							<Grid.Column>
+						  <Form.Field>
+								<label> Image URL: </label>
+						        <Form.Input
+						          className = "form-control"
+						          placeholder = "Insert Image Link Here"
+						          id = "imageURL"
+						          type = "text"
+						          value = {this.state.UserPicFromModal}
+						          onChange = {this.handleImageLink}
+						        />
+						    </Form.Field>
+						    <Button type = "submit"
+								onClick = {this.saveInfoToDB}
+								className = "btn btn-success"> 
+
+								Update Your Photo 
+
+							</Button>
+							</Grid.Column>
+
+						<Grid.Column>
+						  <Form.Field required>
+								<label> New Location: </label>
+						        <Form.Input
+						          className = "form-control"
+						          placeholder = "Updated Location Here"
+						          id = "newLocation"
+						          type = "text"
+						          value = {this.state.UserModalLocation}
+						          onChange = {this.handleLocationChange}
+						        />
+						    </Form.Field>
+						    <Button type = "submit"
+								onClick = {this.saveInfoToDB}
+								className = "btn btn-success"> 
+
+								Update Your Address 
+
+							</Button>
+							</Grid.Column>
+							</Grid>
+						    </Modal.Content>
+						    </Modal>
 						
 					</UserRepsSection>
 				</Grid.Column >
@@ -249,7 +433,7 @@ class userPage extends Component {
 			<Modal 
 				open={this.state.modalOpen}
    				onClose={this.handleClose}
-   				size = "large"
+   				size = "fullscreen"
    			>
 			<Modal.Content> 
 			<Modal.Description>
@@ -295,6 +479,7 @@ class userPage extends Component {
 				              	key = {oneArticle.id}
 								billTitle={oneArticle.title}
 					            billDescription={oneArticle.description}
+					            url={oneArticle.url}
 				              /> )
 			            })}
 					</FeedColumn>

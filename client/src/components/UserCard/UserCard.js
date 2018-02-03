@@ -7,7 +7,7 @@
 //-------------- UserPageRepCard Div -----------------//
 	var userCard = props =>
 		
-			<Card>
+			<Card onClick={props.addPhoto}>
 
 				<div className = "cardDiv">
 					<Image src={props.imageSource} size='small' circular />
@@ -16,7 +16,7 @@
 				<Card.Content>
 					<Card.Header> {props.Name}</Card.Header>
 					<Card.Meta> {props.Meta} </Card.Meta>
-				 	<Card.Description> {props.District}</Card.Description>
+				 	<Card.Description>District: {props.DistrictState}-{props.DistrictNumber} </Card.Description>
 			 	</Card.Content>
 			 </Card>
 		
