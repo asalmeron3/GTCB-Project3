@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SignUp from "../../components/SignUp";
 import API from "../../utils/API";
 import { Link } from 'react-router';
+import axios from 'axios';
 
 
 class Login extends Component {
@@ -48,9 +49,10 @@ class Login extends Component {
       password : this.state.Lpassword.trim()
     };
     console.log(info);
-    API.loginUser(info)
-    .then((info) => {
-      localStorage.setItem('jwtToken', info.payload.data.token);
+    API.loginUser(info);
+    axios.post('api/login', info)
+    .then((response) => {
+      localStorage.setItem('jwtToken', response.payload.data.token);
       this.context.router.push('/UserPage');
     });
   };
@@ -70,10 +72,11 @@ class Login extends Component {
         picURL:"www.shackmanlab.org/wp-content/uploads/2013/07/person-placeholder.jpg"
       };
       console.log(info);
-      API.addUser(info)
-      .then((info) => {
-        console.log(info.payload);
-        localStorage.setItem('jwtToken', info.payload.data.token);
+      API.addUser(info);
+      axios.post('api/auth/signup', info)
+      .then((response) => {
+        localStorage.setItem('jwtToken', response.payload.data.token);
+        localStorage.setItem(this.state.username);
         this.context.router.push('/Landing');
       });
     }   
