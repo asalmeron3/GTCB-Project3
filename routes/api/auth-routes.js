@@ -55,10 +55,26 @@ router.post('/login', function(req, res) {
   });
 });
 
+router.get('/userPage/:name', passport.authenticate('jwt',{session: false}), function(req, res){
+  var token = getToken(req.headers);
+  if(token){
+    const decode = jwt.decode(token, config.secret);
+    User.findOne({ name:decode.name }, function(err, doc){
+      if (err){
+        return res.json({success: false, msg: 'Failed. Try again.'});
+      }
+      res.json({success: true, msg:"Successful"});
+    });
+  } else {
+    return res.status(403).send({success: false, msg: 'Unathorized'});
+  }
+});
+
 router.post('/location', passport.authenticate('jwt',{session: false}), function(req, res){
   var token = getToken(req.headers);
   if(token){
-    User.findOneAndUpdate({ _id: req.params.id }, {$set: {"location":req.body.location}}, function(err, doc){
+    const decode = jwt.decode(token, config.secret);
+    User.findOneAndUpdate({ name:decode.name }, {$set: {"location":req.body.location}}, function(err, doc){
       if (err){
         return res.json({success: false, msg: 'Failed. Try again.'});
       }
@@ -76,12 +92,7 @@ router.post('/location', passport.authenticate('jwt',{session: false}), function
 
 getToken = function(headers) {
   if(headers && headers.authorization) {
-    const parted = headers.authorization.split(' ');
-    if (parted.length === 2) {
-      return parted[1];
-    } else {
-      return null;
-    }
+    return headers.authorization;
   } else {
     return null;
   }
@@ -101,6 +112,20 @@ router.post("/pic", passport.authenticate('jwt',{session: false}), function(req,
 });
 
 router.get('/location', passport.authenticate('jwt',{session: false}), function(req, res){
+  var token = getToken(req.headers);
+  if(token){
+    User.findOne({ _id: req.params.id }, function(err, doc){
+      if (err){
+        return res.json({success: false, msg: 'Failed. Try again.'});
+      }
+      res.json({success: true, msg:"Successful"});
+    });
+  } else {
+    return res.status(403).send({success: false, msg: 'Unathorized'});
+  }
+});
+
+router.get('/bills/:id', passport.authenticate('jwt',{session: false}), function(req, res){
   var token = getToken(req.headers);
   if(token){
     User.findOne({ _id: req.params.id }, function(err, doc){
