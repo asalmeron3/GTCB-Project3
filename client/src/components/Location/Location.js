@@ -24,7 +24,7 @@ class Location extends Component {
       axios.post('api/auth/location', this.state.value)
       .then((response) => {
         //console.log(response);
-        localStorage.getItem('jwtToken', response.data.token);
+        localStorage.setItem('jwtToken', response.data.token);
         //localStorage.getItem(this.state.username);
         window.location.replace('/UserPage');
       });
