@@ -40,18 +40,12 @@
 	);
 //----------------------------------------------------//
 
-<<<<<<< HEAD
-app.get('twitterfeed/:userid', (req, res) => {
-	// 
-	const userid = req.params.userid
-=======
 var client = new Twitter({
   consumer_key: 'Jt9yYf668aUb6RxopZGaIbcu6',
   consumer_secret: 'YhC4qwiPjMe9XPsNavevK2sLZExqwdjXZsfmXdErM0Uo8uMa7b',
   access_token_key: '918600732126990336-Bd3bPVEOFTogb7yq4mf6xaYg0hj6zxM',
   access_token_secret: 'Lf3n1k06KcH6K8rLzmXd40FZN0ZhjrJ2YGxr6L6JMQhpg'
 });
->>>>>>> 60a99b4f3370ce06f77a2edd8a632b6f294290d5
 
 var client2 = new Congress('HXWtfd9ujNSStymX4icTqOxFPMrk2VZ4aMzvQe88');
  
@@ -175,10 +169,6 @@ app.get(`/recentvotes`, function(request, response){
 
   });
 })
-<<<<<<< HEAD
-
-=======
->>>>>>> 60a99b4f3370ce06f77a2edd8a632b6f294290d5
 
 //--------------- Start the API server ---------------//
 	app.listen(PORT, function() {
