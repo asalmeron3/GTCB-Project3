@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SignUp from "../../components/SignUp";
 import API from "../../utils/API";
-import { Link, browserHistory } from 'react-router';
+import { Link  } from 'react-router';
 import axios from 'axios';
 
 
@@ -54,7 +54,7 @@ class Login extends Component {
     .then((response) => {
       //console.log(response);
       localStorage.setItem('jwtToken', response.data.token);
-      browserHistory.push('/Landing');
+     this.context.router.history.push('/Landing');
     });
   };
 
@@ -79,7 +79,7 @@ class Login extends Component {
         //console.log(response);
         localStorage.setItem('jwtToken', response.data.token);
         localStorage.setItem(this.state.username);
-        browserHistory.push('/Landing');
+        this.context.router.history.push('/Landing');
       });
     }   
   };
