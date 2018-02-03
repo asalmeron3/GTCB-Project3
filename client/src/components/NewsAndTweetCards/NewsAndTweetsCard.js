@@ -9,7 +9,7 @@
 	var NewsAndTweetCard = props =>
 		<Grid.Row className="UserBills">
 			<a href={props.url} target="_blank">
-			<Card>
+			<Card className="billCard">
 		      <Card.Content>
 		        <Card.Header>{props.billTitle}</Card.Header>
 		        <Card.Description>{props.billDescription}</Card.Description>
