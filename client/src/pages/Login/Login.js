@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SignUp from "../../components/SignUp";
 import API from "../../utils/API";
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import axios from 'axios';
 
 
@@ -52,9 +52,9 @@ class Login extends Component {
     API.loginUser(info);
     axios.post('api/auth/login', info)
     .then((response) => {
-      console.log(response);
+      //console.log(response);
       localStorage.setItem('jwtToken', response.data.token);
-      this.context.router.transitionTo('/UserPage');
+      browserHistory.push('/Landing');
     });
   };
 
@@ -76,10 +76,10 @@ class Login extends Component {
       API.addUser(info);
       axios.post('api/auth/signup', info)
       .then((response) => {
-        console.log(response);
+        //console.log(response);
         localStorage.setItem('jwtToken', response.data.token);
         localStorage.setItem(this.state.username);
-        this.context.router.transitionTo('/Landing');
+        browserHistory.push('/Landing');
       });
     }   
   };
