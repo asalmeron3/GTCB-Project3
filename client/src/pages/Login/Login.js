@@ -53,8 +53,8 @@ class Login extends Component {
     axios.post('api/auth/login', info)
     .then((response) => {
       console.log(response);
-      localStorage.setItem('jwtToken', response.payload.data.token);
-      this.context.router.push('/UserPage');
+      localStorage.setItem('jwtToken', response.data.token);
+      this.context.router.transitionTo('/UserPage');
     });
   };
 
@@ -77,9 +77,9 @@ class Login extends Component {
       axios.post('api/auth/signup', info)
       .then((response) => {
         console.log(response);
-        localStorage.setItem('jwtToken', response.payload.data.token);
+        localStorage.setItem('jwtToken', response.data.token);
         localStorage.setItem(this.state.username);
-        this.context.router.push('/Landing');
+        this.context.router.transitionTo('/Landing');
       });
     }   
   };
