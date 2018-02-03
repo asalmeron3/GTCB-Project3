@@ -95,12 +95,8 @@ router.post('/location', passport.authenticate('jwt',{session: false}), function
 router.post("/pic", passport.authenticate('jwt',{session: false}), function(req, res){
   var token = getToken(req.headers);
   if(token){
-<<<<<<< HEAD
     const decode = jwt.decode(token, config.secret);
     User.findOneAndUpdate({ name: decode.name }, {$set: {"UserPic":req.body.picURL}}, function(err, doc){
-=======
-    User.findOneAndUpdate({ _id: req.params.id }, {$set: {"picURL":req.body.picURL}}, function(err, doc){
->>>>>>> f9369d3ac5618dadb337129f383808dfbc4f17b1
       if (err){
         return res.json({success: false, msg: 'Failed. Try again.'});
       }
