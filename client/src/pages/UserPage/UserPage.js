@@ -213,15 +213,17 @@ class userPage extends Component {
 	      this.setState({govReps: res.data.officials});
 	      this.setState({DistrictNumber:res.data.offices[1].name.split("-")[1]});
 	      this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
-
+	      this.getSenateAndHouseInfo();
 	    }).catch((error) => {
 	      console.log(error);
 	    })
 	//---------------------------------------------------------------------//
 
+    
+  }
 
-	//-----These are the THREE (3) Calls to get the Reps' ID for Propubulica---------//
-
+  	//-----These are the THREE (3) Calls to get the Reps' ID for Propubulica---------//
+	getSenateAndHouseInfo = () =>{
 	    API.getSenate(this.state.DistrictState)
 	    .then((res)=>{
 	    	console.log(res)
@@ -240,9 +242,8 @@ class userPage extends Component {
 	    .catch((error)=>{
 	    	console.log(error)
 	    })
+	}
 	//---------------------------------------------------------------------//
-    
-  }
 
 	render(){
 		return (
