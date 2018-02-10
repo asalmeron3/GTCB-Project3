@@ -53,6 +53,9 @@ export default {
   },
   getRecentvotes: function(){
     return axios.get("/recentvotes")
+  },
+  getMemberInfo: function(){
+    return axios.get("/members" + member_id)
   }
 
 };
