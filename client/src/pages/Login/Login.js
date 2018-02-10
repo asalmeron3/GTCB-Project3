@@ -55,6 +55,7 @@ class Login extends Component {
     .then((response) => {
       //console.log(response);
       localStorage.setItem('jwtToken', response.data.token);
+      localStorage.setItem('username', this.state.username);
       window.location.replace('/UserPage');
     });
   };
