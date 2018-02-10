@@ -6,7 +6,7 @@
          type: String
     },
      billTitle: {
-         type: Schema.Types.ObjectId,
+         type: String,
          ref: "Bill"
      }
  });
