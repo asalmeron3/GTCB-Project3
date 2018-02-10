@@ -95,13 +95,8 @@ router.post('/pic', function(req, res){
 });
 
 router.get('/location', function(req, res) {
-  User.findOne({ "location":req.body.location }, function(err, doc){
-    if(err){
-      return res.json(err);
-    } else{
-     res.json(doc);
-    }
-  }.populate('bills'));
+  User.findOne({ "location":req.body.location })
+  .populate('bills');
 });
 
 module.exports = router;
