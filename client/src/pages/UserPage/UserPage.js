@@ -424,7 +424,7 @@ class userPage extends Component {
 						
 						{this.state.ListOfBills.map(oneBillAtATime =>{
 			            	
-			            	let bindFuncToBill = this.checkForUserPage.bind(this, oneBillAtATime);
+			            	let bindFuncToBill = this.sendtoDB.bind(this, oneBillAtATime);
 			            	
 			            	return (
 				              <UserBills
@@ -435,7 +435,7 @@ class userPage extends Component {
 					            addToUserPage = {bindFuncToBill}
 								popupMsg = "Click to Save"
 								iconType = "checkmark"
-								iconFxn = {this.sendtoDB}
+								iconFxn = {bindFuncToBill}
 				              /> )
 			            })}
 					</FeedColumn>
