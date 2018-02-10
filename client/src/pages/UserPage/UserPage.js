@@ -100,7 +100,7 @@ class userPage extends Component {
 	  };
 	  saveInfoToDB =()  =>{
 		  if(this.state.UserPicFromModal!=""){
-		  	API.addPic(this.state.UserPicFromModal)
+		  	API.addPic({picURL:this.state.UserPicFromModal})
 		  	.then((res) => {
 		      console.log(res);
 		  	}).catch((error) => {
@@ -112,7 +112,7 @@ class userPage extends Component {
 
 		   if(this.state.UserModalLocation!=""){
 		   	console.log(this.state.UserModalLocation)
-		  	API.updateAddress(this.state.UserModalLocation)
+		  	API.updateAddress({location:this.state.UserModalLocation})
 		  	.then((res) => {
 		      console.log(res);
 		  	}).catch((error) => {
