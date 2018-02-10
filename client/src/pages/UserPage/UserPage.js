@@ -429,7 +429,8 @@ class userPage extends Component {
 			            	
 			            	return (
 				              <UserBills
-				              	key = {oneBillAtATime.id}
+								key = {oneBillAtATime.id}
+								type = "fromList"
 								billTitle={oneBillAtATime.short_title}
 					            billDescription={oneBillAtATime.summary}
 					            addToUserPage = {bindFuncToBill}
