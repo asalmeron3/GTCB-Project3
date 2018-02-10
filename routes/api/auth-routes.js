@@ -85,7 +85,7 @@ router.post('/location', function(req, res) {
 });
 
 router.post('/pic', function(req, res){
-  User.findOneAndUpdate({ username: globalUser }, {$set: {"UserPic": req.body.picURL}}, function(err, doc){
+  User.findOneAndUpdate({ username: globalUser }, {$set: {"picURL": req.body.picURL}}, function(err, doc){
     if(err){
       return res.json(err);
     } else{
