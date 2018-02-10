@@ -151,7 +151,8 @@ class userPage extends Component {
 	}
 	sendtoDB = (bill, e) => {
   		// add the function to save this bill to the user database
-  		console.log("this is from a specific senator/api-call and we can use the name to save to the userDB")
+		  console.log(bill.short_title)
+		  console.log(bill.summary)
 
   		// -----------This is where we SAVE the bill TO the DB ----------//
   			API.saveBillToDB({billTitle: bill.short_title, billDescription: bill.summary})
