@@ -154,7 +154,7 @@ class userPage extends Component {
   		console.log("this is from a specific senator/api-call and we can use the name to save to the userDB")
 
   		// -----------This is where we SAVE the bill TO the DB ----------//
-  			API.saveBillToDB({billTitle: bill.billTitle, billDescription: bill.billDescription})
+  			API.saveBillToDB({billTitle: bill.short_title, billDescription: bill.summary})
   			.then((res) => {
 		       console.log(res);
 		  	}).catch((error) => {
