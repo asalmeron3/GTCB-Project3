@@ -32,10 +32,10 @@ export default {
     return axios.get("/twitterfeed/"+twitterHandle);
   },
   saveBillToDB:function(ObjectOfBillTitleAndDescription){
-    return axios.post("/api/bill/bill",ObjectOfBillTitleAndDescription);
+    return axios.post("/api/bill",ObjectOfBillTitleAndDescription);
   },
   deleteBillFromDB:function(JustTheBillTitle){
-    return axios.delete("/api/bill/bill",JustTheBillTitle);
+    return axios.delete("/api/bill",JustTheBillTitle);
   },
   //get info of senate
   getSenate: function(state){

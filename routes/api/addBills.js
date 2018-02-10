@@ -2,7 +2,7 @@ const router = require("express").Router();
 const billController = require("../../controllers/billsController");
 
 
-router.route("/bill")
+router.route("/")
   .get(billController.findAll)
   .post(billController.create);
 

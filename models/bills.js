@@ -2,14 +2,10 @@
  var Schema = mongoose.Schema;
 
  var BillSchema = new Schema({
-     body: {
+     billDescription: {
          type: String
     },
-    saved: {
-        type: Boolean,
-        default: false
-    },
-     bill: {
+     billTitle: {
          type: Schema.Types.ObjectId,
          ref: "Bill"
      }
