@@ -53,10 +53,10 @@ class userPage extends Component {
 
   }
 
-
   checkWhichCongressman = (congressmanName) => {
   	console.log(congressmanName);
   	if (congressmanName == this.state.Senator1.Name){
+
 	  	API.getProbills(this.state.Senator1.id)
 
 	  	.then((response)=>{
@@ -65,8 +65,8 @@ class userPage extends Component {
 	  	}).catch((error) => {
 	      console.log(error);
 	    })
-
-	    API.getMemberInfo(this.state.Senator1.id){
+	
+	    API.getMemberInfo(this.state.Senator1.id)
 	    	.then((response) => {
 	    		console.log("testing getMemberInfo")
 	    		console.log(response.data)
@@ -74,7 +74,8 @@ class userPage extends Component {
 	    	}).catch((error) => {
 	    		console.log(error);
 	    	})
-	    }
+	    
+
   	}
   	else if (congressmanName == this.state.Senator2.Name){
 	  	API.getProbills(this.state.Senator2.id)
@@ -85,14 +86,14 @@ class userPage extends Component {
 	      console.log(error);
 	    })
 
-	    API.getMemberInfo(this.state.Senator2.id){
+	    API.getMemberInfo(this.state.Senator2.id)
 	    	.then((response) => {
 	    		console.log(response.data)
 	    		this.setState({MemberInfo: response.data})
 	    	}).catch((error) => {
 	    		console.log(error);
 	    	})
-	    }
+	    
   	}
   	else if (congressmanName == this.state.House1.Name){
 	  	API.getProbills(this.state.House1.id)
@@ -103,7 +104,7 @@ class userPage extends Component {
 	      console.log(error);
 	    })
 
-	    API.getMemberInfo(this.state.House1.id){
+	    API.getMemberInfo(this.state.House1.id)
 	    	.then((response) => {
 	    		console.log(response.data)
 	    		this.setState({MemberInfo: response.data})
@@ -111,7 +112,7 @@ class userPage extends Component {
 	    		console.log(error);
 	    	})
 	    }
-  	}
+  	
   }
 
 
@@ -351,13 +352,15 @@ class userPage extends Component {
 				            photoUrl = {govRep.photoUrl}
 				            facebook = {govRep.channels===undefined ?"":govRep.channels[0].id}
 				            twitter = {govRep.channels===undefined ?"":govRep.channels[1].id}
-				            seniority = {MemberInfo.seniority}
-				            expiration = {MemberInfo.expiration}
-				            sponsoredBills = {MemberInfo.sponsored}
-				            votemissed = {MemberInfo.votemissed} + "%"
+				            // seniority = {MemberInfo.seniority}
+				            // expiration = {MemberInfo.expiration}
+				            // sponsoredBills = {MemberInfo.sponsored}
+				            // votemissed = {MemberInfo.votemissed}
 				            handleOpen = {boundItemClick}
 			              /> )
+
 			            })}
+			            
 			              <Modal 
 							open={this.state.modalTwoOpen}
 							onClose={this.handleCloseTwo}

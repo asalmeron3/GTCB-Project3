@@ -114,17 +114,15 @@ app.get(`/bills/:member_id`, function(request, response){
 //----------------------------------------------------//
 
 //--------------- Get Member's Information -----------//
-app.get('/members/:member_id', function(request, response){
+app.get(`/members/:member_id`, function(request, response){
 
 	const member_id = request.params.member_id;
 
 	client2.memberBioAndRoles({
-
 	"member-id": member_id
-
 	}).then(function(res) {
 
-		response.json(res.results[0].roles)
+		response.json(res.results[0].roles[0])
 	})
 })
 

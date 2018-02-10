@@ -1,5 +1,25 @@
-.button {
-    padding: 10px;
+@import url('https://fonts.googleapis.com/css?family=Lato|Raleway:900');
+
+#red{
+	font-family: 'Raleway', sans-serif;
+	font-size: 45px;
+	color: #cc3a49;
+}
+#blue{
+	font-family: 'Raleway', sans-serif;
+	font-size: 45px;
+	color: #006286;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Lato|Raleway:900');
+#login{
+	font-family: 'Raleway', sans-serif;
+	color: #1b1c1d;
+}
+
+
+
+.button {
+    padding: 10px;
+    color: black;
+}
+
