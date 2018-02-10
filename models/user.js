@@ -40,7 +40,7 @@
 		},
 		bills: [{
 			type: Schema.Types.ObjectId,
-			ref: "Bills"
+			ref: "Bill"
 		}]
 		
 	});

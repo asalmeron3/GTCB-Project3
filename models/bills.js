@@ -7,7 +7,6 @@
     },
      billTitle: {
          type: String,
-         ref: "Bill"
      }
  });
 
