@@ -147,8 +147,9 @@ class userPage extends Component {
 		       console.log(error);
 		     });
 		//------------------------------------------------------------------//
-  	}
-  	else if(bill.type =="fromList"){
+	  }
+	}
+	sendtoDB = (bill, e) => {
   		// add the function to save this bill to the user database
   		console.log("this is from a specific senator/api-call and we can use the name to save to the userDB")
 
@@ -160,8 +161,6 @@ class userPage extends Component {
 		       console.log(error);
 		     });
 		//------------------------------------------------------------------//
-
-  	}
   }
 // --------------------------------------------------------------- --------------------//
 
@@ -434,7 +433,9 @@ class userPage extends Component {
 								billTitle={oneBillAtATime.short_title}
 					            billDescription={oneBillAtATime.summary}
 					            addToUserPage = {bindFuncToBill}
-					            popupMsg = "Click to Save"
+								popupMsg = "Click to Save"
+								iconType = "checkmark"
+								iconFxn = {this.sendtoDB}
 				              /> )
 			            })}
 					</FeedColumn>
