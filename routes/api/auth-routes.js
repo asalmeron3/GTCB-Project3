@@ -8,6 +8,7 @@ const User = require('../../models/user');
 const billController = require('../../controllers/billsController');
 require('../../config/passport')(passport);
 
+let globalUser = "";
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
@@ -46,6 +47,7 @@ router.post('/login', function(req, res) {
       user.comparePassword(req.body.password, function(err, isMatch){
         if(isMatch && !err){
           //if user is found and password is right create a token
+          globalUser = req.body.username;
           var token = jwt.sign({data: user}, config.secret, { expiresIn: 604800});
           //return the information including token as JSON
           res.json({success: true, token: 'JWT ' + token});
@@ -73,7 +75,7 @@ router.get('/userPage/:name', passport.authenticate('jwt',{session: false}), fun
 });
 
 router.post('/location', function(req, res) {
-  User.findOneAndUpdate({ _id: req.params.id }, {$set: {"location": req.body.location}}, function(err, doc){
+  User.findOneAndUpdate({ username: globalUser }, {$set: {"location": req.body.location}}, function(err, doc){
     if(err){
       return res.json(err);
     } else{
@@ -83,7 +85,7 @@ router.post('/location', function(req, res) {
 });
 
 router.post('/pic', function(req, res){
-  User.findOneAndUpdate({ _id: req.params.id }, {$set: {"UserPic": req.body.picURL}}, function(err, doc){
+  User.findOneAndUpdate({ username: globalUser }, {$set: {"UserPic": req.body.picURL}}, function(err, doc){
     if(err){
       return res.json(err);
     } else{
@@ -93,7 +95,7 @@ router.post('/pic', function(req, res){
 });
 
 router.get('/location', function(req, res) {
-  User.findOne({ _id: req.params.id }, function(err, doc){
+  User.findOne({ username: globalUser }, function(err, doc){
     if(err){
       return res.json(err);
     } else{
