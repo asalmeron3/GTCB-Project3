@@ -132,9 +132,7 @@ class userPage extends Component {
 	// from the modal (needs to save to DB) or if user clicked
 	// it from the user page (needs to delete from DB)
 
-  checkForUserPage = (bill,e) =>{
-  	if(bill.type=="userBill"){
-  		
+  deleteFromDB = (bill,e) =>{
   		//add the function or orperation for deleting this bill from the users saved bills
   		
   		console.log("this is a userBills and we can get the name to delete from userDB");
@@ -147,7 +145,6 @@ class userPage extends Component {
 		       console.log(error);
 		     });
 		//------------------------------------------------------------------//
-	  }
 	}
 	sendtoDB = (bill, e) => {
   		// add the function to save this bill to the user database
@@ -199,11 +196,11 @@ class userPage extends Component {
 
 	    API.UserInfoFromDB()
 	    .then((res)=>{
-	    this.setState({UserPicDB:res.data[0].picURL});
-	    this.setState({UserLocation:res.data[0].location});
+	    this.setState({UserPicDB:res.data.picURL});
+	    this.setState({UserLocation:res.data.location});
 	  	query= this.state.UserModalLocation.add.split(" ").join("%20");
-	  	this.setState({Name:res.data[0].name});
-	  	this.setState({UserSavedBills:res.data[1]})
+	  	this.setState({Name:res.data.name});
+	  	this.setState({UserSavedBills:res.data.bills})
 	    	}).catch((error) => {
 	  	console.log(error)})
 	//---------------------------------------------------------------------//
@@ -382,7 +379,7 @@ class userPage extends Component {
 					<UserBillsSection>
 						{this.state.UserSavedBills.map(oneSavedBill =>{
 				            	
-				            	let bindFuncToBill = this.checkForUserPage.bind(this, oneSavedBill);
+				            	let bindFuncToBill = this.deleteFromDB.bind(this, oneSavedBill);
 				            	
 				            	return (
 					              <UserBills
@@ -390,7 +387,9 @@ class userPage extends Component {
 									billTitle={oneSavedBill.name}
 						            billDescription={oneSavedBill.desc}
 						            addToUserPage = {bindFuncToBill}
-						            popupMsg = "Click to Remove"
+									popupMsg = "Click to Remove"
+									iconType = "remove"
+									iconFxn = {bindFuncToBill}
 					              /> )
 				            })}
 
@@ -435,7 +434,7 @@ class userPage extends Component {
 					            billDescription={oneBillAtATime.summary}
 					            addToUserPage = {bindFuncToBill}
 								popupMsg = "Click to Save"
-								iconType = "checkmark"
+								iconType = "plus"
 								iconFxn = {bindFuncToBill}
 				              /> )
 			            })}

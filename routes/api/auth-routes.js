@@ -87,7 +87,7 @@ router.post('/pic', function(req, res){
     if(err){
       return res.json(err);
     } else{
-     res.json({success: true, msg:"Successful"});
+     res.json(doc);
     }
   });
 });
@@ -97,7 +97,7 @@ router.get('/location', function(req, res) {
     if(err){
       return res.json(err);
     } else{
-     res.json();
+     res.json(doc);
     }
   });
 });
