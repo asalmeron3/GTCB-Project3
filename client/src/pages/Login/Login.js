@@ -55,7 +55,7 @@ class Login extends Component {
     .then((response) => {
       //console.log(response);
       localStorage.setItem('jwtToken', response.data.token);
-      window.location.replace('/Landing');
+      window.location.replace('/UserPage');
     });
   };
 
@@ -79,8 +79,8 @@ class Login extends Component {
       .then((response) => {
         //console.log(response);
         localStorage.setItem('jwtToken', response.data.token);
-        localStorage.setItem(this.state.username);
-        window.location.replace('/Landing');
+        localStorage.setItem('username', this.state.username);
+        window.location.replace('/UserPage');
       });
     }   
   };

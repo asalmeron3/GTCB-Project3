@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const config = require('../../config/database');
 const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
+const billController = require('../../controllers/billsController');
 require('../../config/passport')(passport);
 
 /* GET home page. */
@@ -71,94 +72,34 @@ router.get('/userPage/:name', passport.authenticate('jwt',{session: false}), fun
   }
 });
 
-router.post('/location', passport.authenticate('jwt',{session: false}), function(req, res){
-  var token = getToken(req.headers);
-  if(token){
-    //console.log(decode);
-    User.findOneAndUpdate({ _id: req.params.id }, {$set: {"location":req.body.location}}, function(err, doc){
-      if (err){
-        return res.json({success: false, msg: 'Failed. Try again.'});
-      }
-      res.json({success: true, msg:"Successful"});
-    });
-  } else {
-    return res.status(403).send({success: false, msg: 'Unathorized'});
-  }
+router.post('/location', function(req, res) {
+  User.findOneAndUpdate({ _id: req.params.id }, {$set: {"location": req.body.location}}, function(err, doc){
+    if(err){
+      return res.json(err);
+    } else{
+     res.json({success: true, msg:"Successful"});
+    }
+  });
 });
 
-/*router.get('/logout', function(req, res) {
-  req.logout();
-  res.redirect('/');
-});*/
-
-
-router.post("/pic", passport.authenticate('jwt',{session: false}), function(req, res){
-  var token = getToken(req.headers);
-  if(token){
-    const decode = jwt.decode(token, config.secret);
-    User.findOneAndUpdate({ name: decode.name }, {$set: {"UserPic":req.body.picURL}}, function(err, doc){
-      if (err){
-        return res.json({success: false, msg: 'Failed. Try again.'});
-      }
-      res.json({success: true, msg:"Successful"});
-    });
-  } else {
-    return res.status(403).send({success: false, msg: 'Unathorized'});
-  }
+router.post('/pic', function(req, res){
+  User.findOneAndUpdate({ _id: req.params.id }, {$set: {"UserPic": req.body.picURL}}, function(err, doc){
+    if(err){
+      return res.json(err);
+    } else{
+     res.json({success: true, msg:"Successful"});
+    }
+  });
 });
 
-router.get('/location', passport.authenticate('jwt',{session: false}), function(req, res){
-  var token = getToken(req.headers);
-  if(token){
-    const decode = jwt.decode(token, config.secret);
-    User.findOne({ name: decode.name }, function(err, doc){
-      if (err){
-        return res.json({success: false, msg: 'Failed. Try again.'});
-      }
-      res.json({success: true, msg:"Successful"});
-    });
-  } else {
-    return res.status(403).send({success: false, msg: 'Unathorized'});
-  }
+router.get('/location', function(req, res) {
+  User.findOne({ _id: req.params.id }, function(err, doc){
+    if(err){
+      return res.json(err);
+    } else{
+     res.json();
+    }
+  });
 });
-
-router.get('/bills/:id', passport.authenticate('jwt',{session: false}), function(req, res){
-  var token = getToken(req.headers);
-  if(token){
-    User.findOne({ _id: req.params.id }, function(err, doc){
-      if (err){
-        return res.json({success: false, msg: 'Failed. Try again.'});
-      }
-      res.json({success: true, msg:"Successful"});
-    });
-  } else {
-    return res.status(403).send({success: false, msg: 'Unathorized'});
-  }
-});
-
-getToken = function(headers) {
-  if(headers && headers.authorization) {
-    return headers.authorization;
-  } else {
-    return null;
-  }
-};
-// router.get("/twitterfeed/",function(req,res){
-//   var client = new Twitter({
-//   consumer_key: 'Jt9yYf668aUb6RxopZGaIbcu6',
-//   consumer_secret: 'YhC4qwiPjMe9XPsNavevK2sLZExqwdjXZsfmXdErM0Uo8uMa7b',
-//   access_token_key: '918600732126990336-Bd3bPVEOFTogb7yq4mf6xaYg0hj6zxM',
-//   access_token_secret: 'Lf3n1k06KcH6K8rLzmXd40FZN0ZhjrJ2YGxr6L6JMQhpg'
-// });
-//   var params = {screen_name: req.body.twitterHandle};
-//   client.get('statuses/user_timeline', params, function(error, tweets, response) {
-//     if (!error) {
-//       console.log(tweets);
-//       res.json({data:tweets});
-//     }
-//   });
-
-
-// });
 
 module.exports = router;
