@@ -9,12 +9,15 @@ const Header = () =>
     <div className="container-fluid">
       <div className="navbar-header">
         <div className="ui left floated huge header" style = {{margin: "11px"}}>
-          <a href="/UserPage" className="navbar-brand">
-            GovRep
+          <a href="/UserPage" className="navbar-brand" id="red">
+            Gov
+          </a>
+          <a href="/UserPage" className="navbar-brand" id="blue">
+            Rep
           </a>
         </div>
         <div className="ui right floated header" style = {{margin: "15px"}} >
-        <Button><a href="/">Logout</a></Button>
+        <Button basic color="black" size="Large" id="login"><a href="/">Logout</a></Button>
         </div>
         <div className="ui clearing divider"></div>
       </div>
@@ -24,7 +27,7 @@ const Header = () =>
   </div>
 
  // <div>
- //  <Menu fixed='top' inverted>
+ //  <Menu fixed='top'>
  //    <Container>
  //      <Menu.Item as = 'a' header>
  //        <Image 
