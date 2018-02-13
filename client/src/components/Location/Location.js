@@ -33,6 +33,13 @@ class Location extends Component {
     render() {
       return (
         <form onSubmit={this.handleSubmit}>
+
+        <div>
+          <h2>Find out who represents you in Congress and what bills they have sponsored !</h2>
+          <h3>Enter your address below. We will find your congressional district.</h3>
+          <br/>
+        </div>
+
         <div className="ui action input">
           <label>
             Address: 

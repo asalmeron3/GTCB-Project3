@@ -40,6 +40,7 @@
 	);
 //----------------------------------------------------//
 
+//-------------------- Set API Keys -------------------//
 var client = new Twitter({
   consumer_key: 'Jt9yYf668aUb6RxopZGaIbcu6',
   consumer_secret: 'YhC4qwiPjMe9XPsNavevK2sLZExqwdjXZsfmXdErM0Uo8uMa7b',
@@ -47,55 +48,23 @@ var client = new Twitter({
   access_token_secret: 'Lf3n1k06KcH6K8rLzmXd40FZN0ZhjrJ2YGxr6L6JMQhpg'
 });
 
-var client2 = new Congress('HXWtfd9ujNSStymX4icTqOxFPMrk2VZ4aMzvQe88');
- 
+var client2 = new Congress('HXWtfd9ujNSStymX4icTqOxFPMrk2VZ4aMzvQe88'); 
+//----------------------------------------------------//
 
+//-------------------- Get Twitter -------------------//
 app.get('/twitterfeed/:userid', (req, res) => {
-// 	// 
-// 	const userid = req.params.userid
-
-// 	axios({
-//   method: 'Get',
-//   url: `https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=${userid}&count=10`,
-//   headers: {'consumerKey': ,
-//            'consumerSecret': '',
-//            'access_token_key': '',
-//            'access_token_secret': ''}
-
-// })
-//   .then(function (response) {
-//   	console.log(response);
-//     res.send(response)
-
-    
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   });
-
 
 var params = {screen_name: req.params.userid,count:10};
+
 client.get('statuses/user_timeline', params, function(error, tweets, response) {
   if (!error) {
-    console.log(tweets);
     res.json({data:tweets});
   }
 });
 })
+//----------------------------------------------------//
 
-// app.get(`/members/house`, (req, res) => {
-
-//   client2.memberLists({
-//     congressNumber: '115',
-//     chamber: 'house'
-//     state: req.body.data
-//   }).then(function(res) {
-//     console.log(res);
-//     res.json({data:results.members})
-//   });
-
-// })
-
+//-------------------- Get Bills -------------------//
 app.get(`/members/senate/:state`, function(request, response){
 
   const senateState = request.params.state;
@@ -105,7 +74,7 @@ app.get(`/members/senate/:state`, function(request, response){
     chamber: 'senate',
     state: senateState
   }).then(function(res) {
-    // console.log(res.results[0].id);
+
     response.json(res.results)
 
   })
@@ -123,7 +92,7 @@ app.get(`/members/house/:state/:district`, function(request, response){
     state: houseState,
     district: houseDistrict
   }).then(function(res) {
-    // console.log(res.results[0].id);
+
     response.json(res.results)
 
   });
@@ -137,11 +106,28 @@ app.get(`/bills/:member_id`, function(request, response){
   	"member-id": member_id,
   	"bill-type": "introduced"
   }).then(function(res) {
-    // console.log(res);
+
     response.json(res.results[0].bills)
 
   });
 })
+//----------------------------------------------------//
+
+//--------------- Get Member's Information -----------//
+app.get(`/members/:member_id`, function(request, response){
+
+	const member_id = request.params.member_id;
+
+	client2.memberBioAndRoles({
+	"member-id": member_id
+	}).then(function(res) {
+
+		response.json(res.results[0].roles[0])
+	})
+})
+
+//----------------------------------------------------//
+
 
 //--------------- Start the API server ---------------//
 	app.listen(PORT, function() {
