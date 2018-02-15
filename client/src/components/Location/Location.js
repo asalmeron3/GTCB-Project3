@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import API from "../../utils/API";
+import axios from 'axios';
 import './Location.css';
 
 
@@ -20,11 +21,25 @@ class Location extends Component {
       console.log(this.state.value);
       event.preventDefault();
       const newLocal = API.updateAddress(this.state.value);
+      axios.post('api/auth/location', this.state.value)
+      .then((response) => {
+        //console.log(response);
+        localStorage.setItem('jwtToken', response.data.token);
+        //localStorage.getItem(this.state.username);
+        window.location.replace('/UserPage');
+      });
     }
   
     render() {
       return (
         <form onSubmit={this.handleSubmit}>
+
+        <div>
+          <h2>Find out who represents you in Congress and what bills they have sponsored !</h2>
+          <h3>Enter your address below. We will find your congressional district.</h3>
+          <br/>
+        </div>
+
         <div className="ui action input">
           <label>
             Address: 
