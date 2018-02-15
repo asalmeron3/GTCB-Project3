@@ -197,11 +197,13 @@ class userPage extends Component {
   getAllBills = () => {
   	API.getAllUserBills()
       .then(res =>
-        this.setState({ UserSavedBills: res.data.bills})
+        this.setState({ UserSavedBills: res.data})
         console.log("Are these the userbills from userDB? should be a response:");
-        console.log(res.data.bills);
+        console.log(res.data);
         console.log("this should be the state after getting all bills: ");
         console.log(this.state.UserSavedBills);
+        console.log("the full response:")
+        console.log(res)
       )
       .catch(err => console.log(err));
   }
