@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const config = require('../../config/database');
 const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
+const billController = require('../../controllers/billsController');
 require('../../config/passport')(passport);
 
 /* GET home page. */
@@ -56,10 +57,11 @@ router.post('/login', function(req, res) {
   });
 });
 
-router.post('/location', passport.authenticate('jwt',{session: false}), function(req, res){
+router.get('/userPage/:name', passport.authenticate('jwt',{session: false}), function(req, res){
   var token = getToken(req.headers);
   if(token){
-    User.findOneAndUpdate({ _id: req.params.id }, {$set: {"location":req.body.location}}, function(err, doc){
+    const decode = jwt.decode(token, config.secret);
+    User.findOne({ name:decode.name }, function(err, doc){
       if (err){
         return res.json({success: false, msg: 'Failed. Try again.'});
       }
@@ -70,69 +72,34 @@ router.post('/location', passport.authenticate('jwt',{session: false}), function
   }
 });
 
-/*router.get('/logout', function(req, res) {
-  req.logout();
-  res.redirect('/');
-});*/
-
-getToken = function(headers) {
-  if(headers && headers.authorization) {
-    const parted = headers.authorization.split(' ');
-    if (parted.length === 2) {
-      return parted[1];
-    } else {
-      return null;
+router.post('/location', function(req, res) {
+  User.findOneAndUpdate({ _id: req.params.id }, {$set: {"location": req.body.location}}, function(err, doc){
+    if(err){
+      return res.json(err);
+    } else{
+     res.json({success: true, msg:"Successful"});
     }
-  } else {
-    return null;
-  }
-};
-router.post("/pic", passport.authenticate('jwt',{session: false}), function(req, res){
-  var token = getToken(req.headers);
-  if(token){
-    User.findOneAndUpdate({ _id: req.params.id }, {$set: {"picURL":req.body.picURL}}, function(err, doc){
-      if (err){
-        return res.json({success: false, msg: 'Failed. Try again.'});
-      }
-      res.json({success: true, msg:"Successful"});
-    });
-  } else {
-    return res.status(403).send({success: false, msg: 'Unathorized'});
-  }
+  });
 });
 
-router.get('/location', passport.authenticate('jwt',{session: false}), function(req, res){
-  var token = getToken(req.headers);
-  if(token){
-    //check UserPage line 194 - 207 for the response format (should be an array)
-    // should have this format :  [{all User data}, {all Users saved Bills}]
-    User.findOne({ _id: req.params.id }, function(err, doc){
-      if (err){
-        return res.json({success: false, msg: 'Failed. Try again.'});
-      }
-      res.json({success: true, msg:"Successful"});
-    });
-  } else {
-    return res.status(403).send({success: false, msg: 'Unathorized'});
-  }
+router.post('/pic', function(req, res){
+  User.findOneAndUpdate({ _id: req.params.id }, {$set: {"UserPic": req.body.picURL}}, function(err, doc){
+    if(err){
+      return res.json(err);
+    } else{
+     res.json({success: true, msg:"Successful"});
+    }
+  });
 });
 
-// router.get("/twitterfeed/",function(req,res){
-//   var client = new Twitter({
-//   consumer_key: 'Jt9yYf668aUb6RxopZGaIbcu6',
-//   consumer_secret: 'YhC4qwiPjMe9XPsNavevK2sLZExqwdjXZsfmXdErM0Uo8uMa7b',
-//   access_token_key: '918600732126990336-Bd3bPVEOFTogb7yq4mf6xaYg0hj6zxM',
-//   access_token_secret: 'Lf3n1k06KcH6K8rLzmXd40FZN0ZhjrJ2YGxr6L6JMQhpg'
-// });
-//   var params = {screen_name: req.body.twitterHandle};
-//   client.get('statuses/user_timeline', params, function(error, tweets, response) {
-//     if (!error) {
-//       console.log(tweets);
-//       res.json({data:tweets});
-//     }
-//   });
-
-
-// });
+router.get('/location', function(req, res) {
+  User.findOne({ _id: req.params.id }, function(err, doc){
+    if(err){
+      return res.json(err);
+    } else{
+     res.json();
+    }
+  });
+});
 
 module.exports = router;
