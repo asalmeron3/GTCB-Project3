@@ -369,10 +369,10 @@ class userPage extends Component {
 				            photoUrl = {govRep.photoUrl}
 				            facebook = {govRep.channels===undefined ?"":govRep.channels[0].id}
 				            twitter = {govRep.channels===undefined ?"":govRep.channels[1].id}
-				            // seniority = {MemberInfo.seniority}
-				            // expiration = {MemberInfo.expiration}
-				            // sponsoredBills = {MemberInfo.sponsored}
-				            // votemissed = {MemberInfo.votemissed}
+				            seniority = {MemberInfo.seniority}
+				            expiration = {MemberInfo.end_date}
+				            sponsoredBills = {MemberInfo.bills_sponsored}
+				            votemissed = {MemberInfo.missed_votes_pct}
 				            handleOpen = {boundItemClick}
 			              /> )
 
