@@ -231,9 +231,8 @@ class userPage extends Component {
 	    this.setState({UserPicDB:res.data.picURL});
 	    this.setState({UserLocation:res.data.location});
 	  	query= this.state.UserModalLocation.add.split(" ").join("%20");
-		  this.setState({Name:res.data.name});
-		  console.log(res.data);
-	  	this.setState({UserSavedBills:res.data.bills})
+		this.setState({Name:res.data.name});
+	  	this.setState({UserSavedBills:res.data.bills});
 	    	}).catch((error) => {
 	  	console.log(error)})
 	//---------------------------------------------------------------------//
@@ -244,7 +243,7 @@ class userPage extends Component {
 	      this.setState({govReps: res.data.officials});
 	      this.setState({DistrictNumber:res.data.offices[1].name.split("-")[1]});
 		  this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
-		  this.setState({UserSavedBills:res.data.bills});
+		  //this.setState({UserSavedBills:res.data.bills});
 	      /*this.setState({UserSavedBills: [{name:"UserBill 1", desc:"This will come from DATABASE",type:"userBill"},
   		{name:"UserBill 2", desc:"We need to make request to get all the bills the user has saved",type:"userBill"},
   		{name:"UserBill 3", desc:"the checkForUserPage() will compare if we GET or POST",type:"userBill"}]});*/
@@ -261,10 +260,11 @@ class userPage extends Component {
 	    query= this.state.UserModalLocation.split(" ").join("%20")
 	    API.search(query)
 	    .then((res) => {
+			console.log(res);
 	      this.setState({govReps: res.data.officials});
 	      this.setState({DistrictNumber:res.data.offices[1].name.split("-")[1]});
 		  this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
-		  this.setState({UserSavedBills:res.data.bills});
+		  //this.setState({UserSavedBills:res.data.bills});
 	      /*this.setState({UserSavedBills: [{name:"UserBill 1", desc:"This will come from DATABASE",type:"userBill"},
   		{name:"UserBill 2", desc:"We need to make request to get all the bills the user has saved",type:"userBill"},
   		{name:"UserBill 3", desc:"the checkForUserPage() will compare if we GET or POST",type:"userBill"}]});*/
@@ -280,15 +280,15 @@ class userPage extends Component {
 		console.log(this.state.DistrictState)
 	    API.getSenate(this.state.DistrictState)
 	    .then((res)=>{
-	    	console.log(res)
+	    	//console.log(res)
 	    	this.setState({Senator1:{Name:res.data[0].name, id:res.data[0].id}})
-	    	console.log("setting state Senator1")
-	    	console.log("this should be the res.data array: ")
-	    	console.log(res.data)
-	    	console.log("willina, I hope you see this.state.Senator1 object here:")
-	    	console.log( this.state.Senator1);
+	    	//console.log("setting state Senator1")
+	    	//console.log("this should be the res.data array: ")
+	    	//console.log(res.data)
+	    	//console.log("willina, I hope you see this.state.Senator1 object here:")
+	    	//console.log( this.state.Senator1);
 	    	this.setState({Senator2:{Name:res.data[1].name, id:res.data[1].id}})
-	    	console.log("and this.state.Senator2")
+	    	//console.log("and this.state.Senator2")
 	    	console.log(this.state.Senator2)
 	    })
 	    .catch((error)=>{
@@ -299,12 +299,12 @@ class userPage extends Component {
 	    console.log("inside getSenateandHouse, DistrictNumber:")
 		console.log(this.state.DistrictNumber)
 	    .then((res)=>{
-	    	console.log(res)
+	    	/*console.log(res)
 	    	console.log("setting state House1")
 	    	console.log("this should be the res.data array: ")
 	    	console.log(res.data)
 	    	console.log("I hope we see this.state.House1 object here:")
-	    	console.log( this.state.House1);
+	    	console.log( this.state.House1);*/
 	    	this.setState({House1:{Name:res.data[0].name, id:res.data[0].id}})
 	    })
 	    .catch((error)=>{
