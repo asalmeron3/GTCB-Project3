@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const config = require('../../config/database');
 const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
-const billController = require('../../controllers/billsController');
 require('../../config/passport')(passport);
 
 let globalUser = "";
@@ -86,6 +85,36 @@ router.post('/location', function(req, res) {
 
 router.post('/pic', function(req, res){
   User.findOneAndUpdate({ username: globalUser }, {$set: {"UserPic": req.body.picURL}}, function(err, doc){
+    if(err){
+      return res.json(err);
+    } else{
+     res.json(doc);
+    }
+  });
+});
+
+router.post('/bills', function(req, res){
+  User.findOneAndUpdate({ username: globalUser }, {$set: {"bills": req.body.bills}}, function(err, doc){
+    if(err){
+      return res.json(err);
+    } else{
+     res.json(doc);
+    }
+  });
+});
+
+router.get('/bills', function(req, res) {
+  User.findOne({ "bills": req.body.bills }, function(err, doc){
+    if(err){
+      return res.json(err);
+    } else{
+     res.json(doc);
+    }
+  });
+});
+
+router.get('/pic', function(req, res) {
+  User.findOne({ "picURL": req.body.picURL }, function(err, doc){
     if(err){
       return res.json(err);
     } else{

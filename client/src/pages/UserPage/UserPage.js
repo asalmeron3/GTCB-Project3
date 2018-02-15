@@ -231,7 +231,8 @@ class userPage extends Component {
 	    this.setState({UserPicDB:res.data.picURL});
 	    this.setState({UserLocation:res.data.location});
 	  	query= this.state.UserModalLocation.add.split(" ").join("%20");
-	  	this.setState({Name:res.data.name});
+		  this.setState({Name:res.data.name});
+		  console.log(res.data);
 	  	this.setState({UserSavedBills:res.data.bills})
 	    	}).catch((error) => {
 	  	console.log(error)})
@@ -242,7 +243,8 @@ class userPage extends Component {
 	    .then((res) => {
 	      this.setState({govReps: res.data.officials});
 	      this.setState({DistrictNumber:res.data.offices[1].name.split("-")[1]});
-	      this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
+		  this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
+		  this.setState({UserSavedBills:res.data.bills});
 	      /*this.setState({UserSavedBills: [{name:"UserBill 1", desc:"This will come from DATABASE",type:"userBill"},
   		{name:"UserBill 2", desc:"We need to make request to get all the bills the user has saved",type:"userBill"},
   		{name:"UserBill 3", desc:"the checkForUserPage() will compare if we GET or POST",type:"userBill"}]});*/
@@ -261,7 +263,8 @@ class userPage extends Component {
 	    .then((res) => {
 	      this.setState({govReps: res.data.officials});
 	      this.setState({DistrictNumber:res.data.offices[1].name.split("-")[1]});
-	      this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
+		  this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
+		  this.setState({UserSavedBills:res.data.bills});
 	      /*this.setState({UserSavedBills: [{name:"UserBill 1", desc:"This will come from DATABASE",type:"userBill"},
   		{name:"UserBill 2", desc:"We need to make request to get all the bills the user has saved",type:"userBill"},
   		{name:"UserBill 3", desc:"the checkForUserPage() will compare if we GET or POST",type:"userBill"}]});*/

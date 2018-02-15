@@ -25,6 +25,12 @@ export default {
   addPic: function(picURL){
     return axios.post("/api/auth/pic", picURL);
   },
+  getBillsfromDB:function(selectedBill){
+    return axios.get('/api/auth/bills', selectedBill)
+  },
+  saveBilltoUser:function(postedBill){
+    return axios.post('/api/auth/bills', postedBill)
+  },
   getArticles:function(keyword){
     return axios.get(ArticleURL1 + keyword +ArticleURL2);
   },
