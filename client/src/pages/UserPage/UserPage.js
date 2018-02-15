@@ -185,7 +185,8 @@ class userPage extends Component {
   		// -----------This is where we SAVE the bill TO the DB ----------//
   			API.saveBillToDB({billTitle: bill.short_title, billDescription: bill.summary})
   			.then((res) => {
-		       console.log(res);
+			   console.log(res);
+			   
 		  	}).catch((error) => {
 		       console.log(error);
 		     });
