@@ -172,6 +172,7 @@ class userPage extends Component {
   			API.deleteBillFromDB(bill.billTitle)
   			.then((res) => {
 		       console.log(res);
+		       this.getAllBills();
 		  	}).catch((error) => {
 		       console.log(error);
 		     });
@@ -186,11 +187,23 @@ class userPage extends Component {
   			API.saveBillToDB({billTitle: bill.short_title, billDescription: bill.summary})
   			.then((res) => {
 			   console.log(res);
-			   
+			   this.getAllBills();
 		  	}).catch((error) => {
 		       console.log(error);
 		     });
 		//------------------------------------------------------------------//
+  }
+
+  getAllBills = () => {
+  	API.getAllUserBills()
+      .then(res =>
+        this.setState({ UserSavedBills: res.data.bills})
+        console.log("Are these the userbills from userDB? should be a response:");
+        console.log(res.data.bills);
+        console.log("this should be the state after getting all bills: ");
+        console.log(this.state.UserSavedBills);
+      )
+      .catch(err => console.log(err));
   }
 // --------------------------------------------------------------- --------------------//
 

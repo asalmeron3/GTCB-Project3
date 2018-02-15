@@ -62,6 +62,9 @@ export default {
   },
   getMemberInfo: function(member_id){
     return axios.get("/members/" + member_id)
+  },
+  getAllUserBills: function(){
+    return axios.get("/api/bill")
   }
 
 };
