@@ -25,6 +25,12 @@ export default {
   addPic: function(picURL){
     return axios.post("/api/auth/pic", picURL);
   },
+  getBillsfromDB:function(selectedBill){
+    return axios.get('/api/auth/bills', selectedBill)
+  },
+  saveBilltoUser:function(postedBill){
+    return axios.post('/api/auth/bills', postedBill)
+  },
   getArticles:function(keyword){
     return axios.get(ArticleURL1 + keyword +ArticleURL2);
   },
@@ -32,10 +38,10 @@ export default {
     return axios.get("/twitterfeed/"+twitterHandle);
   },
   saveBillToDB:function(ObjectOfBillTitleAndDescription){
-    return axios.post("/api/auth/bill",ObjectOfBillTitleAndDescription);
+    return axios.post("/api/bill",ObjectOfBillTitleAndDescription);
   },
   deleteBillFromDB:function(JustTheBillTitle){
-    return axios.delete("/api/auth/bill",JustTheBillTitle);
+    return axios.delete("/api/bill",JustTheBillTitle);
   },
   //get info of senate
   getSenate: function(state){

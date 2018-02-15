@@ -1,26 +1,25 @@
 //-------------- Imports ----------------------//
-	import React from "react"
-	import "./UserBills.css"
-	import { Image , Grid,Card,Popup,Icon} from 'semantic-ui-react'
+import React from "react"
+import "./UserBills.css"
+import { Image , Grid,Card,Popup,Icon} from 'semantic-ui-react'
 //--------------------------------------------//
 
 //-------------- UserPageRepCard Div -----------------//
-	var userBills = props =>
+var userBills = props =>
 		<Grid.Row className="UserBills">
-			<Card className="billCard">
-			<Popup 
-				content = {props.popupMsg}
-				trigger = {
-					<Icon name={props.iconType} size='big' float = "right" onClick = {props.iconFxn}/>	
-				}
-			/>
-			
-				      	
-		      <Card.Content>
-		      <a href ={props.addToUserPage} target="_blank">
-		        <Card.Header>{props.billTitle}</Card.Header>
-		        <Card.Description>{props.billDescription}</Card.Description>
-		      </Card.Content>
-		    </Card>
+				<Card className="billCard">
+				<Popup 
+						content = {props.popupMsg}
+						trigger = {
+								<Icon name={props.iconType} size='big' float = "right" onClick = {props.iconFxn}/>    
+						}
+				/>
+				
+											
+					<Card.Content onClick={props.addToUserPage}>
+						<Card.Header>{props.billTitle}</Card.Header>
+						<Card.Description>{props.billDescription}</Card.Description>
+					</Card.Content>
+				</Card>
 		</Grid.Row>
-	export default userBills;
+export default userBills;

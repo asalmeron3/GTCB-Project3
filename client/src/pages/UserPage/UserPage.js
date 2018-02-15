@@ -131,7 +131,7 @@ class userPage extends Component {
 	  };
 	  saveInfoToDB =()  =>{
 		  if(this.state.UserPicFromModal!=""){
-		  	API.addPic(this.state.UserPicFromModal)
+		  	API.addPic({picURL:this.state.UserPicFromModal})
 		  	.then((res) => {
 		      console.log(res);
 		  	}).catch((error) => {
@@ -143,7 +143,7 @@ class userPage extends Component {
 
 		   if(this.state.UserModalLocation!=""){
 		   	console.log(this.state.UserModalLocation)
-		  	API.updateAddress(this.state.UserModalLocation)
+		  	API.updateAddress({location:this.state.UserModalLocation})
 		  	.then((res) => {
 		      console.log(res);
 		  	}).catch((error) => {
@@ -163,9 +163,7 @@ class userPage extends Component {
 	// from the modal (needs to save to DB) or if user clicked
 	// it from the user page (needs to delete from DB)
 
-  checkForUserPage = (bill,e) =>{
-  	if(bill.type=="userBill"){
-  		
+  deleteFromDB = (bill,e) =>{
   		//add the function or orperation for deleting this bill from the users saved bills
   		
   		console.log("this is a userBills and we can get the name to delete from userDB");
@@ -178,21 +176,21 @@ class userPage extends Component {
 		       console.log(error);
 		     });
 		//------------------------------------------------------------------//
-  	}
-  	else if(bill.type =="fromList"){
+	}
+	sendtoDB = (bill, e) => {
   		// add the function to save this bill to the user database
-  		console.log("this is from a specific senator/api-call and we can use the name to save to the userDB")
+		  console.log(bill.short_title)
+		  console.log(bill.summary)
 
   		// -----------This is where we SAVE the bill TO the DB ----------//
-  			API.saveBillToDB({billTitle: bill.billTitle, billDescription: bill.billDescription})
+  			API.saveBillToDB({billTitle: bill.short_title, billDescription: bill.summary})
   			.then((res) => {
-		       console.log(res);
+			   console.log(res);
+			   
 		  	}).catch((error) => {
 		       console.log(error);
 		     });
 		//------------------------------------------------------------------//
-
-  	}
   }
 // --------------------------------------------------------------- --------------------//
 
@@ -231,11 +229,11 @@ class userPage extends Component {
 
 	    API.UserInfoFromDB()
 	    .then((res)=>{
-	    this.setState({UserPicDB:res.data[0].picURL});
-	    //this.setState({UserLocation:res.data[0].location});
+	    this.setState({UserPicDB:res.data.picURL});
+	    this.setState({UserLocation:res.data.location});
 	  	query= this.state.UserModalLocation.add.split(" ").join("%20");
-	  	this.setState({Name:res.data[0].name});
-	  	this.setState({UserSavedBills:res.data[1]})
+		this.setState({Name:res.data.name});
+	  	this.setState({UserSavedBills:res.data.bills});
 	    	}).catch((error) => {
 	  	console.log(error)})
 	//---------------------------------------------------------------------//
@@ -245,10 +243,12 @@ class userPage extends Component {
 	    .then((res) => {
 	      this.setState({govReps: res.data.officials});
 	      this.setState({DistrictNumber:res.data.offices[1].name.split("-")[1]});
-	      this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
-	      this.setState({UserSavedBills: [{name:"UserBill 1", desc:"This will come from DATABASE",type:"userBill"},
+		  this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
+		  console.log(res.data);
+		  //this.setState({UserSavedBills:res.data.bills});
+	      /*this.setState({UserSavedBills: [{name:"UserBill 1", desc:"This will come from DATABASE",type:"userBill"},
   		{name:"UserBill 2", desc:"We need to make request to get all the bills the user has saved",type:"userBill"},
-  		{name:"UserBill 3", desc:"the checkForUserPage() will compare if we GET or POST",type:"userBill"}]});
+  		{name:"UserBill 3", desc:"the checkForUserPage() will compare if we GET or POST",type:"userBill"}]});*/
 		this.getSenateAndHouseInfo();
 	    }).catch((error) => {
 	      console.log(error);
@@ -262,12 +262,14 @@ class userPage extends Component {
 	    query= this.state.UserModalLocation.split(" ").join("%20")
 	    API.search(query)
 	    .then((res) => {
+		console.log(res.data);
 	      this.setState({govReps: res.data.officials});
 	      this.setState({DistrictNumber:res.data.offices[1].name.split("-")[1]});
-	      this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
-	      this.setState({UserSavedBills: [{name:"UserBill 1", desc:"This will come from DATABASE",type:"userBill"},
+		  this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
+		  //this.setState({UserSavedBills:res.data.bills});
+	      /*this.setState({UserSavedBills: [{name:"UserBill 1", desc:"This will come from DATABASE",type:"userBill"},
   		{name:"UserBill 2", desc:"We need to make request to get all the bills the user has saved",type:"userBill"},
-  		{name:"UserBill 3", desc:"the checkForUserPage() will compare if we GET or POST",type:"userBill"}]});
+  		{name:"UserBill 3", desc:"the checkForUserPage() will compare if we GET or POST",type:"userBill"}]});*/
 		this.getSenateAndHouseInfo();
 	    }).catch((error) => {
 	      console.log(error);
@@ -280,15 +282,15 @@ class userPage extends Component {
 		console.log(this.state.DistrictState)
 	    API.getSenate(this.state.DistrictState)
 	    .then((res)=>{
-	    	console.log(res)
+	    	//console.log(res)
 	    	this.setState({Senator1:{Name:res.data[0].name, id:res.data[0].id}})
-	    	console.log("setting state Senator1")
-	    	console.log("this should be the res.data array: ")
-	    	console.log(res.data)
-	    	console.log("willina, I hope you see this.state.Senator1 object here:")
-	    	console.log( this.state.Senator1);
+	    	//console.log("setting state Senator1")
+	    	//console.log("this should be the res.data array: ")
+	    	//console.log(res.data)
+	    	//console.log("willina, I hope you see this.state.Senator1 object here:")
+	    	//console.log( this.state.Senator1);
 	    	this.setState({Senator2:{Name:res.data[1].name, id:res.data[1].id}})
-	    	console.log("and this.state.Senator2")
+	    	//console.log("and this.state.Senator2")
 	    	console.log(this.state.Senator2)
 	    })
 	    .catch((error)=>{
@@ -299,12 +301,12 @@ class userPage extends Component {
 	    console.log("inside getSenateandHouse, DistrictNumber:")
 		console.log(this.state.DistrictNumber)
 	    .then((res)=>{
-	    	console.log(res)
+	    	/*console.log(res)
 	    	console.log("setting state House1")
 	    	console.log("this should be the res.data array: ")
 	    	console.log(res.data)
 	    	console.log("I hope we see this.state.House1 object here:")
-	    	console.log( this.state.House1);
+	    	console.log( this.state.House1);*/
 	    	this.setState({House1:{Name:res.data[0].name, id:res.data[0].id}})
 	    })
 	    .catch((error)=>{
@@ -420,7 +422,7 @@ class userPage extends Component {
 					<UserBillsSection>
 						{this.state.UserSavedBills.map(oneSavedBill =>{
 				            	
-				            	let bindFuncToBill = this.checkForUserPage.bind(this, oneSavedBill);
+				            	let bindFuncToBill = this.deleteFromDB.bind(this, oneSavedBill);
 				            	
 				            	return (
 					              <UserBills
@@ -428,7 +430,9 @@ class userPage extends Component {
 									billTitle={oneSavedBill.name}
 						            billDescription={oneSavedBill.desc}
 						            addToUserPage = {bindFuncToBill}
-						            popupMsg = "Click to Remove"
+									popupMsg = "Click to Remove"
+									iconType = "remove"
+									iconFxn = {bindFuncToBill}
 					              /> )
 				            })}
 
@@ -463,15 +467,18 @@ class userPage extends Component {
 						
 						{this.state.ListOfBills.map(oneBillAtATime =>{
 			            	
-			            	let bindFuncToBill = this.checkForUserPage.bind(this, oneBillAtATime);
+			            	let bindFuncToBill = this.sendtoDB.bind(this, oneBillAtATime);
 			            	
 			            	return (
 				              <UserBills
-				              	key = {oneBillAtATime.id}
+								key = {oneBillAtATime.id}
+								type = "fromList"
 								billTitle={oneBillAtATime.short_title}
 					            billDescription={oneBillAtATime.summary}
 					            addToUserPage = {bindFuncToBill}
-					            popupMsg = "Click to Save"
+								popupMsg = "Click to Save"
+								iconType = "plus"
+								iconFxn = {bindFuncToBill}
 				              /> )
 			            })}
 					</FeedColumn>
