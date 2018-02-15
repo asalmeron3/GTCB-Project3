@@ -243,6 +243,7 @@ class userPage extends Component {
 	      this.setState({govReps: res.data.officials});
 	      this.setState({DistrictNumber:res.data.offices[1].name.split("-")[1]});
 		  this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
+		  console.log(res.data);
 		  //this.setState({UserSavedBills:res.data.bills});
 	      /*this.setState({UserSavedBills: [{name:"UserBill 1", desc:"This will come from DATABASE",type:"userBill"},
   		{name:"UserBill 2", desc:"We need to make request to get all the bills the user has saved",type:"userBill"},
@@ -260,7 +261,7 @@ class userPage extends Component {
 	    query= this.state.UserModalLocation.split(" ").join("%20")
 	    API.search(query)
 	    .then((res) => {
-			console.log(res);
+		console.log(res.data);
 	      this.setState({govReps: res.data.officials});
 	      this.setState({DistrictNumber:res.data.offices[1].name.split("-")[1]});
 		  this.setState({DistrictState:res.data.offices[1].name.split("-")[0].split(" ").slice(-1)[0]});
