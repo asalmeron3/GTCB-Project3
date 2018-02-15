@@ -200,10 +200,10 @@ class userPage extends Component {
         this.setState({ UserSavedBills: res.data})
         console.log("Are these the userbills from userDB? should be a response:");
         console.log(res.data);
-        console.log("this should be the state after getting all bills: ");
-        console.log(this.state.UserSavedBills);
-        console.log("the full response:")
-        console.log(res)
+        // console.log("this should be the state after getting all bills: ");
+        // console.log(this.state.UserSavedBills);
+        // console.log("the full response:")
+        // console.log(res)
       )
       .catch(err => console.log(err));
   }
@@ -244,11 +244,11 @@ class userPage extends Component {
 
 	    API.UserInfoFromDB()
 	    .then((res)=>{
+	    this.getAllBills();
 	    this.setState({UserPicDB:res.data.picURL});
 	    this.setState({UserLocation:res.data.location});
 	  	query= this.state.UserModalLocation.add.split(" ").join("%20");
 		this.setState({Name:res.data.name});
-	  	this.setState({UserSavedBills:res.data.bills});
 	    	}).catch((error) => {
 	  	console.log(error)})
 	//---------------------------------------------------------------------//
@@ -442,8 +442,8 @@ class userPage extends Component {
 				            	return (
 					              <UserBills
 					              	key = {oneSavedBill.id}
-									billTitle={oneSavedBill.name}
-						            billDescription={oneSavedBill.desc}
+									billTitle={oneSavedBill.billTitle}
+						            billDescription={oneSavedBill.billDescription}
 						            addToUserPage = {bindFuncToBill}
 									popupMsg = "Click to Remove"
 									iconType = "remove"
