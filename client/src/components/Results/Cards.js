@@ -21,10 +21,10 @@ const CardExample = props => (
         </span>
       </Card.Meta>
       <Card.Description>
-        <p>Seniority: {props.seniority} </p>
-        <p>Expiration Date:  {props.expiration} </p>
-        <p>Number of Sponsored Bills:  {props.sponsored} </p>
-        <p>Missing Votes:  {props.votemissed} %</p>
+        // <p>Seniority: {props.seniority} </p>
+        // <p>Expiration Date:  {props.expiration} </p>
+        // <p>Number of Sponsored Bills:  {props.sponsored} </p>
+        // <p>Missing Votes:  {props.votemissed} %</p>
         <p><a href={props.urls} target="_blank"><Icon name='home' />HomePage</a></p>
         <p><a href={props.contact} target="_blank"> <Icon name='mail outline'/>Contact</a></p>
       </Card.Description>
